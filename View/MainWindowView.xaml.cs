@@ -12,5 +12,18 @@ namespace Reserve_iT.View
 		{
 			InitializeComponent();
 		}
-	}
+
+		private void Window_Loaded(object sender, RoutedEventArgs e)
+		{
+			var view = new DashboardView();
+			view.DataContext = DataContext;
+			((MainWindowViewModel)DataContext).MainFrame = MainFrame; // Mainframe aus XAML in ViewModel durchreichen
+			MainFrame.Navigate(view);
+		}
+
+    private void MainFrame_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
+    {
+
+        }
+    }
 }
