@@ -169,33 +169,34 @@ namespace Reserve_iT.ViewModel
     {
       if (StartDate >= EndDate)
       {
-        Debug.WriteLine("Das Anreisedatum muss vor dem Abreisedatum liegen.");
+        MessageBox.Show("Das Anreisedatum muss vor dem Abreisedatum liegen", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         return;
       }
 
       if (!(Standard || Premium || Luxury))
       {
-        Debug.WriteLine("Bitte wählen Sie eine Zimmerkategorie (Standard, Premium oder Luxus).");
+        MessageBox.Show("Bitte wählen Sie eine Zimmerkategorie", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
         return;
       }
 
       if (!(SingleRoom || DoubleRoom))
       {
-        Debug.WriteLine("Bitte wählen Sie eine Zimmerart (Einzelzimmer oder Doppelzimmer).");
+        MessageBox.Show("Bitte wählen Sie eine Zimmerart", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         return;
       }
 
       var bookingService = new BookingService();
       bool isAvailable = bookingService.CheckAvailability(StartDate, EndDate, Standard, Premium, Luxury, SingleRoom, DoubleRoom);
-      //bool isAvailable = true;
+      //bool isAvailable = true; TODO: Ist zum Testen da, kann später entfernt werden
       if (isAvailable)
       {
-        Debug.WriteLine("Zimmer verfügbar!");
+        MessageBox.Show("Zimmer verfügbar", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
         NavigateToBookingConfirmationView();
       }
       else
       {
-        Debug.WriteLine("Kein Zimmer verfügbar.");
+        MessageBox.Show("Es ist kein Zimmer verfügbar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
       }
     }
     
