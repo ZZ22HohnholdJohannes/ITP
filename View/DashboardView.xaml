@@ -4,14 +4,15 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Reserve_iT.View"
+      xmlns:conv="clr-namespace:Reserve_iT.Converter"
       mc:Ignorable="d" 
       d:DesignHeight="550" d:DesignWidth="1000"
       Title="DashboardView">
 
   <Grid>
-    <Grid.Background>
+    <!--Grid.Background>
       <ImageBrush ImageSource="pack://application:,,,/Images/hotel_bar.jpg" Stretch="UniformToFill"/>
-    </Grid.Background>
+    </Grid.Background-->
     <Grid.Effect>
       <BlurEffect Radius="10"/>
     </Grid.Effect>
@@ -50,7 +51,7 @@
             <Button Content="Bewertungen" Width="200" Height="80" Margin="20,100,20,10" Grid.Column="2"/>
           </Grid>
 
-          <Button Content="Buchung stornieren" Visibility="{Binding IsAdminLoggedIn, Converter={StaticResource BoolToVisibilityConverter}}" Width="200" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="2" Margin="5,0,5,10"/>
+          <Button Content="Buchung stornieren" Width="200" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="2" Margin="5,0,5,10"/>
         </Grid>
       </Border>
     </StackPanel>
