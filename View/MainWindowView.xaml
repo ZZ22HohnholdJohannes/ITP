@@ -9,7 +9,39 @@
         Title="MainWindowView" Height="550" Width="1000"
         Loaded="Window_Loaded">
 
-  <Grid Background="Black">
+  <Window.Resources>
+    <Style x:Key="RoundedButtonStyle" TargetType="Button">
+      <Setter Property="Background" Value="#4e4f50"/>
+      <Setter Property="Foreground" Value="White"/>
+      <Setter Property="Padding" Value="10,5"/>
+      <Setter Property="FontSize" Value="16"/>
+      <Setter Property="BorderThickness" Value="0"/>
+      <Setter Property="FontFamily" Value="Consolas"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Grid>
+              <Border Background="{TemplateBinding Background}" 
+                CornerRadius="10" 
+                BorderThickness="{TemplateBinding BorderThickness}" 
+                BorderBrush="{TemplateBinding BorderBrush}">
+                <Border.Effect>
+                  <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="0" Opacity="0.5"/>
+                </Border.Effect>
+              </Border>
+              <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+      <Style.Triggers>
+        <Trigger Property="IsMouseOver" Value="True">
+          <Setter Property="Background" Value="#746c70"/>
+        </Trigger>
+      </Style.Triggers>
+      </Style>
+  </Window.Resources>
+  <Grid Background="#e2ded0">
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="*" />
       <ColumnDefinition Width="Auto" />
@@ -21,13 +53,15 @@
 
     <!-- Vertical Panel on the Right -->
     <StackPanel Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10" Orientation="Vertical">
-      <Border Background="#333" Width="80" Height="80" CornerRadius="5" Padding="5" VerticalAlignment="Top">
-        <Image Source="pack://application:,,,/Images/Logo_Dark.png" Height="40" HorizontalAlignment="Center"/>
+      <Border Background="#333" Width="80" Height="100" CornerRadius="5" Padding="5" VerticalAlignment="Top">
+        <StackPanel>
+          <Image Source="pack://application:,,,/Images/Logo_Light.png" Height="60" 
+                 HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,5,0,0"/>
+          <Button Content="zurück" Command="{Binding NavigateBackCommand}"
+                  Padding="10" Cursor="Hand" VerticalAlignment="Bottom" Margin="0,2,0,10"
+                  Style="{StaticResource RoundedButtonStyle}"/>
+        </StackPanel>
       </Border>
-
-      <Button Content="zurück" FontSize="24" Command="{Binding NavigateBackCommand}"
-                    Background="Transparent" Foreground="White" BorderBrush="Transparent"
-                    Padding="10" Cursor="Hand" VerticalAlignment="Top"/>
     </StackPanel>
 
     <!-- Frame that will display dynamic views -->
