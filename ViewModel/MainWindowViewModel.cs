@@ -101,6 +101,7 @@ namespace Reserve_iT.ViewModel
       NavigateToDashboardViewCommand = new RelayCommand(NavigateToDashboardView);
       NavigateToBookingSearchViewCommand = new RelayCommand(NavigateToBookingSearchView);
       NavigateToConfirmationViewCommand = new RelayCommand(NavigateToConfirmationView);
+      NavigateBackCommand = new RelayCommand(NavigateBack);
       //Booking Service
       CheckAvailabilityCommand = new RelayCommand(CheckAvailability);
     }
@@ -113,17 +114,23 @@ namespace Reserve_iT.ViewModel
     public ICommand NavigateToConfirmationViewCommand { get; private set; }
     //Booking Service
     public ICommand CheckAvailabilityCommand { get; private set; }
+    public ICommand NavigateBackCommand { get; private set; }
 
     #endregion Commands
-    
+
     #region Methods
-    
+
     #region Navigation
     // Methoden zur Navigation (DataContext ist das zentrale UserViewModel)
     private void NavigateToDashboardView() => MainFrame?.Navigate(new DashboardView());
     private void NavigateToBookingSearchView() => MainFrame?.Navigate(new BookingSearchView());
     private void NavigateToBookingBookingConfirmationView() => MainFrame?.Navigate(new BookingConfirmationView() { DataContext = this });
     private void NavigateToConfirmationView() => MainFrame?.Navigate(new BookingConfirmationView());
+    private void NavigateBack()
+    {
+      if (MainFrame.NavigationService.CanGoBack)
+        MainFrame.NavigationService.GoBack();
+    }
 
     #endregion Navigation
 

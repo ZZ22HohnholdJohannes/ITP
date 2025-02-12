@@ -25,7 +25,7 @@
         <Image Source="pack://application:,,,/Images/Logo_Dark.png" Height="40" HorizontalAlignment="Center"/>
       </Border>
 
-      <Button Content="zurück" FontSize="24" Command="{Binding GoBackCommand}"
+      <Button Content="zurück" FontSize="24" Command="{Binding NavigateBackCommand}"
                     Background="Transparent" Foreground="White" BorderBrush="Transparent"
                     Padding="10" Cursor="Hand" VerticalAlignment="Top"/>
     </StackPanel>
