@@ -155,7 +155,7 @@ namespace Reserve_iT.ViewModel
 
     public void Login()
     { 
-      if(AdminPassword == "Administrator")
+      if(AdminPassword == "Admin")
       {
         isAdminLoggedIn = true;
       }
