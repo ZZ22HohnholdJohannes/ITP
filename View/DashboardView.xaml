@@ -47,7 +47,7 @@
               <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Button Content="Zimmer buchen" Command="{Binding ShowBookingSearchViewCommand}" Width="200" Height="80" Margin="20,100,20,10"/>
+            <Button Content="Zimmer buchen" Command="{Binding NavigateToBookingSearchViewCommand}" Width="200" Height="80" Margin="20,100,20,10"/>
             <Button Content="Bewertungen" Width="200" Height="80" Margin="20,100,20,10" Grid.Column="2"/>
           </Grid>
 

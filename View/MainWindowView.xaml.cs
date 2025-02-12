@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using Reserve_iT.ViewModel;
-using Reserve_iT.View;
 
 namespace Reserve_iT.View
 {
