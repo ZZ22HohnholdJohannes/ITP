@@ -68,17 +68,17 @@
       <Button Content="Zurück" 
             Margin="0,10,0,0" 
             Width="100"
-    Command="{Binding DataContext.GoToDashboardCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
-      <!--="{Binding GoToDashboardCommand}"/-->
     </StackPanel>
 
     <!-- Unterer Bereich (Row 1): Button "Verfügbarkeit prüfen" rechts ausgerichtet -->
     <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
       <Button Content="Verfügbarkeit prüfen" 
-            Command="{Binding CheckAvailabilityCommand}"
+            Command="{Binding NavigateToBookingConfirmationView}"
+              
             Width="150" Height="40" 
             HorizontalAlignment="Right" VerticalAlignment="Center"
             Margin="10"/>
     </Grid>
   </Grid>
 </Page>
+<!--"{Binding CheckAvailabilityCommand}"-->

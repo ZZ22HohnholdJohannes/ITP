@@ -98,9 +98,16 @@ namespace Reserve_iT.ViewModel
       //Login
       LoginCommand = new RelayCommand(Login);
       //Navigation
+      //Navigation zur Buchung
       NavigateToDashboardViewCommand = new RelayCommand(NavigateToDashboardView);
       NavigateToBookingSearchViewCommand = new RelayCommand(NavigateToBookingSearchView);
-      NavigateToConfirmationViewCommand = new RelayCommand(NavigateToConfirmationView);
+      NavigateToBookingConfirmationViewCommand = new RelayCommand(NavigateToBookingConfirmationView);
+      NavigateToBookingPaymentViewCommand = new RelayCommand(NavigateToBookingPaymentView);
+      //Navigation zu Bewertung
+      NavigateToReviewViewCommand = new RelayCommand(NavigateToReviewView);
+      //Navigation zur Administation
+      NavigateToAdminViewCommand = new RelayCommand(NavigateToAdminView);
+      //Navigation zurück
       NavigateBackCommand = new RelayCommand(NavigateBack);
       //Booking Service
       CheckAvailabilityCommand = new RelayCommand(CheckAvailability);
@@ -109,23 +116,35 @@ namespace Reserve_iT.ViewModel
     //Login
     public ICommand LoginCommand { get; private set; }
     //Navigation
+    //Navigation zur Buchung
     public ICommand NavigateToDashboardViewCommand { get; private set; }
     public ICommand NavigateToBookingSearchViewCommand { get; private set; }
-    public ICommand NavigateToConfirmationViewCommand { get; private set; }
+    public ICommand NavigateToBookingConfirmationViewCommand { get; private set; }
+    public ICommand NavigateToBookingPaymentViewCommand { get; private set; }
+    //Navigation zu Bewertung
+    public ICommand NavigateToReviewViewCommand { get; private set; }
+    //Navigation zur Administation
+    public ICommand NavigateToAdminViewCommand { get; private set; }
+    //Navigation zurück
+    public ICommand NavigateBackCommand { get; private set; }
     //Booking Service
     public ICommand CheckAvailabilityCommand { get; private set; }
-    public ICommand NavigateBackCommand { get; private set; }
 
     #endregion Commands
 
     #region Methods
 
     #region Navigation
-    // Methoden zur Navigation (DataContext ist das zentrale UserViewModel)
-    private void NavigateToDashboardView() => MainFrame?.Navigate(new DashboardView());
-    private void NavigateToBookingSearchView() => MainFrame?.Navigate(new BookingSearchView());
-    private void NavigateToBookingBookingConfirmationView() => MainFrame?.Navigate(new BookingConfirmationView() { DataContext = this });
-    private void NavigateToConfirmationView() => MainFrame?.Navigate(new BookingConfirmationView());
+    //Navigation zur Buchung
+    private void NavigateToDashboardView() => MainFrame?.Navigate(new DashboardView()); //Initiales Laden der Anwendung
+    private void NavigateToBookingSearchView() => MainFrame?.Navigate(new BookingSearchView()); //Naviagation nach Button Zimmer buchen
+    private void NavigateToBookingConfirmationView() => MainFrame?.Navigate(new BookingConfirmationView()); //{ DataContext = this });
+    private void NavigateToBookingPaymentView() => MainFrame?.Navigate(new BookingPaymentView());
+    //Navigation zu Bewertung
+    private void NavigateToReviewView() => MainFrame?.Navigate(new ReviewView());
+    //Navigation zur Administation
+    private void NavigateToAdminView() => MainFrame?.Navigate(new AdminView());
+    //Navigation zurück
     private void NavigateBack()
     {
       if (MainFrame.NavigationService.CanGoBack)
@@ -166,11 +185,13 @@ namespace Reserve_iT.ViewModel
         return;
       }
 
-      //bool isAvailable = bookingService.CheckAvailability(StartDate, EndDate, Standard, Premium, Luxury, SingleRoom, DoubleRoom);
-      bool isAvailable = true;
+      var bookingService = new BookingService();
+      bool isAvailable = bookingService.CheckAvailability(StartDate, EndDate, Standard, Premium, Luxury, SingleRoom, DoubleRoom);
+      //bool isAvailable = true;
       if (isAvailable)
       {
         Debug.WriteLine("Zimmer verfügbar!");
+        NavigateToBookingConfirmationView();
       }
       else
       {
