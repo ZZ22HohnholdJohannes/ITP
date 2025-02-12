@@ -68,8 +68,7 @@
       <Image Source="pack://application:,,,/Images/Logo_Dark.png" Height="100" Width="100" Stretch="Uniform"/>
       <Button Content="Zurück" 
               Margin="0,10,0,0" 
-              Width="100"
-      Command="{Binding DataContext.GoToDashboardCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+              Width="100"/>
       <!--="{Binding GoToDashboardCommand}"/-->
     </StackPanel>
 
