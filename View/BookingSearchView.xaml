@@ -6,9 +6,79 @@
       xmlns:local="clr-namespace:Reserve_iT.View"
       mc:Ignorable="d" 
       d:DesignHeight="550" d:DesignWidth="1000"
-      Title="Page1">
+      Title="BookingSearchView">
 
-    <Grid>
-        
+  <Grid>
+    <Grid.RowDefinitions>
+      <!-- Hauptinhalt (Zeile 0) -->
+      <RowDefinition Height="*" />
+      <!-- Unterer Bereich (Zeile 1) -->
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+
+    <Grid.ColumnDefinitions>
+      <!-- Linke Spalte: Hauptinhalt -->
+      <ColumnDefinition Width="3*" />
+      <!-- Rechte Spalte: Logo und Zurück-Button -->
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+
+    <!-- Hauptinhalt (Row 0, Column 0): Optionen -->
+    <StackPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10">
+      <!-- Zeitraum-Abschnitt -->
+      <StackPanel Orientation="Vertical" Margin="0,0,0,20">
+        <TextBlock Text="Zeitraum:" FontWeight="Bold" FontSize="16" Margin="0,0,0,5"/>
+        <StackPanel Orientation="Horizontal">
+          <!-- Anreise -->
+          <StackPanel Orientation="Vertical" Margin="0,0,10,0">
+            <TextBlock Text="Anreise:" />
+            <DatePicker Width="120" SelectedDate="{Binding StartDate}"/>
+          </StackPanel>
+          <!-- Abreise -->
+          <StackPanel Orientation="Vertical">
+            <TextBlock Text="Abreise:" />
+            <DatePicker Width="120" SelectedDate="{Binding EndDate}"/>
+          </StackPanel>
+        </StackPanel>
+      </StackPanel>
+
+      <!-- Kategorie-Abschnitt -->
+      <StackPanel Orientation="Vertical" Margin="0,0,0,20">
+        <TextBlock Text="Kategorie:" FontWeight="Bold" FontSize="16" Margin="0,0,0,5"/>
+        <StackPanel Orientation="Horizontal">
+          <RadioButton Content="Standard" GroupName="Kategorie" IsChecked="{Binding Standard}" Margin="0,0,10,0"/>
+          <RadioButton Content="Premium" GroupName="Kategorie" IsChecked="{Binding Premium}" Margin="0,0,10,0"/>
+          <RadioButton Content="Luxus" GroupName="Kategorie" IsChecked="{Binding Luxury}"/>
+        </StackPanel>
+      </StackPanel>
+
+      <!-- Zimmerart-Abschnitt -->
+      <StackPanel Orientation="Vertical">
+        <TextBlock Text="Zimmerart:" FontWeight="Bold" FontSize="16" Margin="0,0,0,5"/>
+        <StackPanel Orientation="Horizontal">
+          <RadioButton Content="Einzelzimmer" GroupName="Zimmerart" IsChecked="{Binding SingleRoom}" Margin="0,0,10,0"/>
+          <RadioButton Content="Doppelzimmer" GroupName="Zimmerart" IsChecked="{Binding DoubleRoom}"/>
+        </StackPanel>
+      </StackPanel>
+    </StackPanel>
+
+    <!-- Rechter Bereich (Row 0, Column 1): Logo und Zurück-Button -->
+    <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10">
+      <Image Source="pack://application:,,,/Images/Logo_Dark.png" Height="100" Width="100" Stretch="Uniform"/>
+      <Button Content="Zurück" 
+            Margin="0,10,0,0" 
+            Width="100"
+    Command="{Binding DataContext.GoToDashboardCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+      <!--="{Binding GoToDashboardCommand}"/-->
+    </StackPanel>
+
+    <!-- Unterer Bereich (Row 1): Button "Verfügbarkeit prüfen" rechts ausgerichtet -->
+    <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+      <Button Content="Verfügbarkeit prüfen" 
+            Command="{Binding CheckAvailabilityCommand}"
+            Width="150" Height="40" 
+            HorizontalAlignment="Right" VerticalAlignment="Center"
+            Margin="10"/>
     </Grid>
+  </Grid>
 </Page>
