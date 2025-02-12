@@ -8,41 +8,54 @@
       d:DesignHeight="550" d:DesignWidth="1000"
       Title="BookingPaymentView">
 
-    <Grid>
-    <StackPanel Orientation="Vertical" Margin="20">
-      <Grid Margin="10">
+  <Grid>
+    <Border BorderThickness="2" BorderBrush="Black" Margin="10" Padding="10">
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="Auto"/>
-          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="2*"/>
           <ColumnDefinition Width="Auto"/>
-          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Text="Geschlecht:" Grid.Column="0" VerticalAlignment="Center"/>
-        <TextBox Text="" Grid.Column="1" Margin="5" Width="50"/>
-        <TextBlock Text="Nachname:" Grid.Column="2" VerticalAlignment="Center"/>
-        <TextBox Text="" Grid.Column="3" Margin="5" Width="200"/>
+        <TextBlock Text="Geschlecht:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Margin="5" Width="150"/>
 
-        <TextBlock Text="Geburtsdatum:" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center"/>
-        <TextBox Text="" Grid.Column="1" Grid.Row="1" Margin="5" Width="100"/>
-        <TextBlock Text="Hausnummer:" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center"/>
-        <TextBox Text="" Grid.Column="3" Grid.Row="1" Margin="5" Width="50"/>
+        <TextBlock Text="Nachname:" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" Margin="5"/>
+        <TextBox Grid.Row="0" Grid.Column="3" Margin="5" Width="200"/>
 
-        <TextBlock Text="Vorname:" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center"/>
-        <TextBox Text="" Grid.Column="1" Grid.Row="2" Margin="5" Width="200"/>
-        <TextBlock Text="PLZ:" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center"/>
-        <TextBox Text="" Grid.Column="3" Grid.Row="2" Margin="5" Width="100"/>
+        <TextBlock Text="Geburtsdatum:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Margin="5" Width="150"/>
 
-        <TextBlock Text="Straße:" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center"/>
-        <TextBox Text="" Grid.Column="1" Grid.Row="3" Margin="5" Width="200"/>
-        <TextBlock Text="Ort:" Grid.Column="2" Grid.Row="3" VerticalAlignment="Center"/>
-        <TextBox Text="" Grid.Column="3" Grid.Row="3" Margin="5" Width="200"/>
+        <TextBlock Text="Hausnummer:" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" Margin="5"/>
+        <TextBox Grid.Row="1" Grid.Column="3" Margin="5" Width="100"/>
 
-        <TextBlock Text="Land:" Grid.Column="0" Grid.Row="4" VerticalAlignment="Center"/>
-        <TextBox Text="" Grid.Column="1" Grid.Row="4" Margin="5" Width="200"/>
+        <TextBlock Text="Vorname:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Margin="5" Width="200"/>
+
+        <TextBlock Text="PLZ:" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" Margin="5"/>
+        <TextBox Grid.Row="2" Grid.Column="3" Margin="5" Width="100"/>
+
+        <TextBlock Text="Straße:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Margin="5" Width="200"/>
+
+        <TextBlock Text="Ort:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+        <TextBox Grid.Row="4" Grid.Column="1" Margin="5" Width="200"/>
+
+        <TextBlock Text="Land:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="5"/>
+        <TextBox Grid.Row="5" Grid.Column="1" Margin="5" Width="200"/>
       </Grid>
+    </Border>
 
-      <Button Content="Kostenpflichtig bestellen" HorizontalAlignment="Right" Width="200"/>
-    </StackPanel>
+    <Button Content="Kostenpflichtig bestellen" HorizontalAlignment="Right" Width="250" Margin="0,20,10,10" VerticalAlignment="Bottom"/>
   </Grid>
 </Page>

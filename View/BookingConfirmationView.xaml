@@ -8,7 +8,45 @@
       d:DesignHeight="550" d:DesignWidth="1000"
       Title="BookingConfirmationView">
 
-    <Grid>
-        
-    </Grid>
+  <Grid>
+    <StackPanel Orientation="Vertical" Margin="20">
+      <Border BorderThickness="1" BorderBrush="Black" Height="200" VerticalAlignment="Top" Margin="0,0,0,20">
+        <TextBlock Text="Bild von Zimmer" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
+      </Border>
+
+      <Grid Margin="10" HorizontalAlignment="Stretch">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="2*"/>
+          <ColumnDefinition Width="3*"/>
+          <ColumnDefinition Width="2*"/>
+          <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="Anreise:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
+        <TextBox Text="TT.MM.JJJJ" Grid.Row="0" Grid.Column="1" Margin="5" Width="200"/>
+        <TextBlock Text="Preis pro Nacht:" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center"/>
+        <TextBox Text="XXX €" Grid.Row="0" Grid.Column="3" Margin="5" Width="200"/>
+
+        <TextBlock Text="Abreise:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
+        <TextBox Text="TT.MM.JJJJ" Grid.Row="1" Grid.Column="1" Margin="5" Width="200"/>
+        <TextBlock Text="Preis gesamt:" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center"/>
+        <TextBox Text="XXX €" Grid.Row="1" Grid.Column="3" Margin="5" Width="200"/>
+
+        <TextBlock Text="Kategorie:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
+        <TextBox Text="Standard" Grid.Row="2" Grid.Column="1" Margin="5" Width="200"/>
+        <TextBlock Text="Zimmerart:" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center"/>
+        <TextBox Text="Einzelzimmer" Grid.Row="2" Grid.Column="3" Margin="5" Width="200"/>
+      </Grid>
+
+      <Button Content="Weiter zur Bestellung" Command="{Binding NavigateToBookingPaymentViewCommand}" HorizontalAlignment="Right" Width="200" Margin="20,40,0,0"/>
+    </StackPanel>
+  </Grid>
 </Page>

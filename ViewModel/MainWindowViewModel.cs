@@ -138,7 +138,7 @@ namespace Reserve_iT.ViewModel
     //Navigation zur Buchung
     private void NavigateToDashboardView() => MainFrame?.Navigate(new DashboardView()); //Initiales Laden der Anwendung
     private void NavigateToBookingSearchView() => MainFrame?.Navigate(new BookingSearchView() { DataContext = this }); //Naviagation nach Button Zimmer buchen
-    private void NavigateToBookingConfirmationView() => MainFrame?.Navigate(new BookingConfirmationView()); //{ DataContext = this });
+    private void NavigateToBookingConfirmationView() => MainFrame?.Navigate(new BookingConfirmationView(){ DataContext = this });
     private void NavigateToBookingPaymentView() => MainFrame?.Navigate(new BookingPaymentView());
     //Navigation zu Bewertung
     private void NavigateToReviewView() => MainFrame?.Navigate(new ReviewView());
