@@ -1,13 +1,10 @@
 ﻿<Page x:Class="Reserve_iT.View.BookingSearchView"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Reserve_iT.View"
-      mc:Ignorable="d" 
-      d:DesignHeight="550" d:DesignWidth="1000"
-      Title="BookingSearchView">
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:Reserve_iT.ViewModel"
+             Margin="10">
 
+  <!-- Übergeordneter Grid: Zwei Zeilen -->
   <Grid>
     <Grid.RowDefinitions>
       <!-- Hauptinhalt (Zeile 0) -->
@@ -66,19 +63,19 @@
     <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="10">
       <Image Source="pack://application:,,,/Images/Logo_Dark.png" Height="100" Width="100" Stretch="Uniform"/>
       <Button Content="Zurück" 
-            Margin="0,10,0,0" 
-            Width="100"
+              Margin="0,10,0,0" 
+              Width="100"
+      Command="{Binding DataContext.GoToDashboardCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+      <!--="{Binding GoToDashboardCommand}"/-->
     </StackPanel>
 
     <!-- Unterer Bereich (Row 1): Button "Verfügbarkeit prüfen" rechts ausgerichtet -->
     <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
       <Button Content="Verfügbarkeit prüfen" 
-            Command="{Binding NavigateToBookingConfirmationView}"
-              
-            Width="150" Height="40" 
-            HorizontalAlignment="Right" VerticalAlignment="Center"
-            Margin="10"/>
+              Command="{Binding CheckAvailabilityCommand}"
+              Width="150" Height="40" 
+              HorizontalAlignment="Right" VerticalAlignment="Center"
+              Margin="10"/>
     </Grid>
   </Grid>
 </Page>
-<!--"{Binding CheckAvailabilityCommand}"-->
