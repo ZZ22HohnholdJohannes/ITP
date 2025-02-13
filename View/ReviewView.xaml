@@ -11,6 +11,61 @@
 
   <Page.Resources>
     <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    <Style x:Key="RoundedButtonStyle" TargetType="Button">
+      <Setter Property="Background" Value="#4e4f50"/>
+      <Setter Property="Foreground" Value="White"/>
+      <Setter Property="Padding" Value="10,5"/>
+      <Setter Property="FontSize" Value="16"/>
+      <Setter Property="BorderThickness" Value="0"/>
+      <Setter Property="FontFamily" Value="Consolas"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Grid>
+              <Border Background="{TemplateBinding Background}" 
+              CornerRadius="10" 
+              BorderThickness="{TemplateBinding BorderThickness}" 
+              BorderBrush="{TemplateBinding BorderBrush}">
+                <Border.Effect>
+                  <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="0" Opacity="0.5"/>
+                </Border.Effect>
+              </Border>
+              <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+      <Style.Triggers>
+        <Trigger Property="IsMouseOver" Value="True">
+          <Setter Property="Background" Value="#746c70"/>
+        </Trigger>
+      </Style.Triggers>
+    </Style>
+    <Style x:Key="RoundedTextBoxStyle" TargetType="TextBox">
+      <Setter Property="Background" Value="White"/>
+      <Setter Property="Foreground" Value="Black"/>
+      <Setter Property="Padding" Value="8"/>
+      <Setter Property="FontSize" Value="12"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="BorderBrush" Value="#746c70"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="TextBox">
+            <Border Background="{TemplateBinding Background}" 
+            CornerRadius="5" 
+            BorderThickness="{TemplateBinding BorderThickness}" 
+            BorderBrush="{TemplateBinding BorderBrush}">
+              <ScrollViewer x:Name="PART_ContentHost"/>
+            </Border>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <Style x:Key="RoundedTextBlockStyle" TargetType="TextBlock">
+      <Setter Property="Background" Value="Transparent"/>
+      <Setter Property="Foreground" Value="#4e4f50"/>
+      <Setter Property="FontFamily" Value="Consolas"/>
+    </Style>
   </Page.Resources>
   <Grid Margin="10">
     <Grid.RowDefinitions>
@@ -24,8 +79,10 @@
     <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="5">
       <TextBox Width="400" Height="50" Text="Bewertungen"/>
       <StackPanel Orientation="Vertical" Margin="5">
-        <Button Content="Y" Width="30" Height="30" Background="Orange"  Visibility="{Binding isAdminLoggedIn, Converter={StaticResource BoolToVisibilityConverter}}"/>
-        <Button Content="N" Width="30" Height="30" Background="Orange"  Visibility="{Binding isAdminLoggedIn, Converter={StaticResource BoolToVisibilityConverter}}"/>
+        <Button Content="Y" Width="30" Height="30"  Visibility="{Binding isAdminLoggedIn, Converter={StaticResource BoolToVisibilityConverter}}"
+                Style="{StaticResource RoundedButtonStyle}"/>
+        <Button Content="N" Width="30" Height="30"  Visibility="{Binding isAdminLoggedIn, Converter={StaticResource BoolToVisibilityConverter}}"
+                Style="{StaticResource RoundedButtonStyle}"/>
       </StackPanel>
     </StackPanel>
 
@@ -33,21 +90,35 @@
     <ListView ItemsSource="{Binding Reviews}">
       <ListView.ItemTemplate>
         <DataTemplate>
-          <StackPanel Orientation="Vertical" Margin="5">
-            <TextBlock Text="Review ID:" FontWeight="Bold"/>
-            <TextBlock Text="{Binding ReviewID}" />
+          <Grid Margin="5">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*"/>
+              <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Vertical" Margin="5" Grid.Column="0">
+              <TextBlock Text="Review ID:" FontWeight="Bold" Visibility="{Binding DataContext.isAdminLoggedIn, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource BoolToVisibilityConverter}}"/>
+              <TextBlock Text="{Binding ReviewID}" Visibility="{Binding DataContext.isAdminLoggedIn, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource BoolToVisibilityConverter}}"/>
 
-            <TextBlock Text="Order ID:" FontWeight="Bold" Margin="0,5,0,0"/>
-            <TextBlock Text="{Binding OrderID}" />
+              <TextBlock Text="Order ID:" FontWeight="Bold" Margin="0,5,0,0" Visibility="{Binding DataContext.isAdminLoggedIn, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource BoolToVisibilityConverter}}"/>
+              <TextBlock Text="{Binding OrderID}" Visibility="{Binding DataContext.isAdminLoggedIn, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource BoolToVisibilityConverter}}"/>
 
-            <TextBlock Text="Review Text:" FontWeight="Bold" Margin="0,5,0,0"/>
-            <TextBlock Text="{Binding ReviewText}" TextWrapping="Wrap"/>
+              <TextBlock Text="Review Text:" FontWeight="Bold" Margin="0,5,0,0" Visibility="{Binding DataContext.isAdminLoggedIn, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource BoolToVisibilityConverter}}"/>
+              <TextBlock Text="{Binding ReviewText}" TextWrapping="Wrap"/>
 
-            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-              <TextBlock Text="Published:" FontWeight="Bold"/>
-              <CheckBox IsChecked="{Binding Published}" IsEnabled="False" Margin="5,0,0,0"/>
+              <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                <TextBlock Text="Published:" FontWeight="Bold" Visibility="{Binding DataContext.isAdminLoggedIn, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                <CheckBox IsChecked="{Binding Published}" IsEnabled="False" Margin="5,0,0,0" Visibility="{Binding DataContext.isAdminLoggedIn, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource BoolToVisibilityConverter}}"/>
+              </StackPanel>
             </StackPanel>
-          </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Column="1" Margin="10,0,0,0" HorizontalAlignment="Right">
+              <Button Content="Y" Width="30" Height="30"
+                            Style="{StaticResource RoundedButtonStyle}"
+                            Visibility="{Binding DataContext.isAdminLoggedIn, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource BoolToVisibilityConverter}}"/>
+              <Button Content="N" Width="30" Height="30"
+                            Style="{StaticResource RoundedButtonStyle}"
+                            Visibility="{Binding DataContext.isAdminLoggedIn, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource BoolToVisibilityConverter}}"/>
+            </StackPanel>
+          </Grid>
         </DataTemplate>
       </ListView.ItemTemplate>
     </ListView>
