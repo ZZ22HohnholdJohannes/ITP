@@ -29,14 +29,29 @@
       </StackPanel>
     </StackPanel>
 
-    <!-- Zweite Bewertungsbox -->
-    <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5">
-      <TextBox Width="400" Height="50" Text="Bewertungen"/>
-      <StackPanel Orientation="Vertical" Margin="5">
-        <Button Content="Y" Width="30" Height="30" Background="Orange" Visibility="{Binding isAdminLoggedIn, Converter={StaticResource BoolToVisibilityConverter}}"/>
-        <Button Content="N" Width="30" Height="30" Background="Orange" Visibility="{Binding isAdminLoggedIn, Converter={StaticResource BoolToVisibilityConverter}}"/>
-      </StackPanel>
-    </StackPanel>
+    <!-- Datenbankverbindung Anfang-->
+    <ListView ItemsSource="{Binding Reviews}">
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <StackPanel Orientation="Vertical" Margin="5">
+            <TextBlock Text="Review ID:" FontWeight="Bold"/>
+            <TextBlock Text="{Binding ReviewID}" />
+
+            <TextBlock Text="Order ID:" FontWeight="Bold" Margin="0,5,0,0"/>
+            <TextBlock Text="{Binding OrderID}" />
+
+            <TextBlock Text="Review Text:" FontWeight="Bold" Margin="0,5,0,0"/>
+            <TextBlock Text="{Binding ReviewText}" TextWrapping="Wrap"/>
+
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+              <TextBlock Text="Published:" FontWeight="Bold"/>
+              <CheckBox IsChecked="{Binding Published}" IsEnabled="False" Margin="5,0,0,0"/>
+            </StackPanel>
+          </StackPanel>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+    <!-- Datenbankverbindung Ende -->
 
     <!-- Dritte Bewertungsbox -->
     <TextBox Grid.Row="2" Width="400" Height="50" Margin="5"/>

@@ -16,6 +16,7 @@ using System.Windows.Threading;
 using Reserve_iT.Essentials;
 using Reserve_iT.Services;
 using Reserve_iT.View;
+using Reserve_iT.Model;
 
 namespace Reserve_iT.ViewModel
 {
@@ -71,13 +72,19 @@ namespace Reserve_iT.ViewModel
     }
     //AdminLogin
     public bool isAdminLoggedIn
-      {
+    {
       get => Get<bool>();
       set => Set(value);
     }
     public string AdminPassword
     {
       get => Get<string>();
+      set => Set(value);
+    }
+    //Alles für Review
+    public ObservableCollection<ReviewModel> Reviews
+    {
+      get => Get<ObservableCollection<ReviewModel>>();
       set => Set(value);
     }
     #endregion Properties
@@ -91,7 +98,7 @@ namespace Reserve_iT.ViewModel
       CreateCommands();
     }
     #endregion Constructors
-    
+
     #region Commands
     private void CreateCommands()
     {
@@ -117,6 +124,7 @@ namespace Reserve_iT.ViewModel
       AddReviewCommand = new RelayCommand(AddReview);
       BookOrderCommand = new RelayCommand(BookOrder);
       DeleteOrderCommand = new RelayCommand(DeleteOrder);
+      LoadReviewsCommand = new RelayCommand(LoadReviews);
     }
 
     //Login
@@ -141,6 +149,7 @@ namespace Reserve_iT.ViewModel
     public ICommand AddReviewCommand { get; private set; }
     public ICommand BookOrderCommand { get; private set; }
     public ICommand DeleteOrderCommand { get; private set; }
+    public ICommand LoadReviewsCommand { get; private set; }
 
     #endregion Commands
 
@@ -150,10 +159,10 @@ namespace Reserve_iT.ViewModel
     //Navigation zur Buchung
     private void NavigateToDashboardView() => MainFrame?.Navigate(new DashboardView()); //Initiales Laden der Anwendung
     private void NavigateToBookingSearchView() => MainFrame?.Navigate(new BookingSearchView() { DataContext = this }); //Naviagation nach Button Zimmer buchen
-    private void NavigateToBookingConfirmationView() => MainFrame?.Navigate(new BookingConfirmationView(){ DataContext = this }); //Navigation von BookingSearchView zu BookingConfirmationView
+    private void NavigateToBookingConfirmationView() => MainFrame?.Navigate(new BookingConfirmationView() { DataContext = this }); //Navigation von BookingSearchView zu BookingConfirmationView
     private void NavigateToBookingPaymentView() => MainFrame?.Navigate(new BookingPaymentView());
     //Navigation zu Bewertung
-    private void NavigateToReviewView() => MainFrame?.Navigate(new ReviewView() { DataContext = this});
+    private void NavigateToReviewView() => MainFrame?.Navigate(new ReviewView() { DataContext = this } );
     //Navigation zur Administation
     private void NavigateToAdminView() => MainFrame?.Navigate(new AdminView());
     //Navigation zurück
@@ -166,8 +175,8 @@ namespace Reserve_iT.ViewModel
     #endregion Navigation
 
     public void Login()
-    { 
-      if(AdminPassword == "Admin")
+    {
+      if (AdminPassword == "Admin")
       {
         isAdminLoggedIn = true;
       }
@@ -212,8 +221,15 @@ namespace Reserve_iT.ViewModel
       }
     }
 
+    public void LoadReviews()
+    {
+      var reviewService = new ReviewService();
+      Reviews = reviewService.LoadReviews(); // Hier wird die ObservableCollection<ReviewModel> in der ViewModel-Property aktualisiert.
+      NavigateToReviewView();
+    }
     public void AcceptReview()
     {
+
 
     }
 
@@ -236,7 +252,7 @@ namespace Reserve_iT.ViewModel
     {
 
     }
-    
+
     #endregion Methods
 
   }

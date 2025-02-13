@@ -10,13 +10,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Model\**" />
-    <EmbeddedResource Remove="Model\**" />
-    <None Remove="Model\**" />
-    <Page Remove="Model\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="Images\hotel_bar.jpg" />
     <None Remove="Images\Logo_Dark.png" />
     <None Remove="Images\Logo_Light.png" />
