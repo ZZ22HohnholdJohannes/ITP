@@ -8,45 +8,144 @@
       d:DesignHeight="550" d:DesignWidth="1000"
       Title="BookingConfirmationView">
 
+  <Page.Resources>
+    <Style x:Key="RoundedButtonStyle" TargetType="Button">
+      <Setter Property="Background" Value="#4e4f50"/>
+      <Setter Property="Foreground" Value="White"/>
+      <Setter Property="Padding" Value="10,5"/>
+      <Setter Property="FontSize" Value="16"/>
+      <Setter Property="BorderThickness" Value="0"/>
+      <Setter Property="FontFamily" Value="Consolas"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Grid>
+              <Border Background="{TemplateBinding Background}" 
+                CornerRadius="10" 
+                BorderThickness="{TemplateBinding BorderThickness}" 
+                BorderBrush="{TemplateBinding BorderBrush}">
+                <Border.Effect>
+                  <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="0" Opacity="0.5"/>
+                </Border.Effect>
+              </Border>
+              <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+      <Style.Triggers>
+        <Trigger Property="IsMouseOver" Value="True">
+          <Setter Property="Background" Value="#746c70"/>
+        </Trigger>
+      </Style.Triggers>
+    </Style>
+    <Style x:Key="RoundedTextBoxStyle" TargetType="TextBox">
+      <Setter Property="Background" Value="White"/>
+      <Setter Property="Foreground" Value="Black"/>
+      <Setter Property="Padding" Value="3,1,0,1"/>
+      <Setter Property="FontSize" Value="12"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="BorderBrush" Value="#746c70"/>
+      <Setter Property="IsReadOnly" Value="True"/>
+      <Setter Property="IsHitTestVisible" Value="False"/>
+      <Setter Property="Focusable" Value="False"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="TextBox">
+            <Border Background="{TemplateBinding Background}" 
+              CornerRadius="5" 
+              BorderThickness="{TemplateBinding BorderThickness}" 
+              BorderBrush="{TemplateBinding BorderBrush}">
+              <ScrollViewer x:Name="PART_ContentHost"/>
+            </Border>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <Style x:Key="RoundedTextBlockStyle" TargetType="TextBlock">
+      <Setter Property="Background" Value="Transparent"/>
+      <Setter Property="Foreground" Value="#4e4f50"/>
+      <Setter Property="FontFamily" Value="Consolas"/>
+    </Style>
+    <Style x:Key="RadioButtonStyle" TargetType="RadioButton">
+      <Setter Property="FontFamily" Value="Consolas"/>
+      <Setter Property="Foreground" Value="#4e4f50"/>
+      <Setter Property="Background" Value="Transparent"/>
+    </Style>
+  </Page.Resources>
+
   <Grid>
-    <StackPanel Orientation="Vertical" Margin="20">
-      <Border BorderThickness="1" BorderBrush="Black" Height="200" VerticalAlignment="Top" Margin="0,0,0,20">
-        <TextBlock Text="Bild von Zimmer" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
+    <Grid>
+      <Grid.Background>
+        <ImageBrush ImageSource="pack://application:,,,/Images/hotel_hallway.jpg" Stretch="UniformToFill"/>
+      </Grid.Background>
+      <Grid.Effect>
+        <BlurEffect Radius="10"/>
+      </Grid.Effect>
+    </Grid>
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+      <Border Background="White" HorizontalAlignment="Center" VerticalAlignment="Center" Width="800" Height="420" CornerRadius="20">
+        <Border.Effect>
+          <DropShadowEffect Color="Black" BlurRadius="20" ShadowDepth="0" Opacity="0.5"/>
+        </Border.Effect>
       </Border>
+      <Border Background="White" Width="800" Height="420" CornerRadius="20">
+        <Grid>
+          <StackPanel Orientation="Vertical" Margin="20">
+            <Border BorderThickness="1" BorderBrush="Black" Height="200" VerticalAlignment="Top" Margin="0,0,0,20">
+              <TextBlock Text="Bild von Zimmer" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
+            </Border>
 
-      <Grid Margin="10" HorizontalAlignment="Stretch">
-        <Grid.RowDefinitions>
-          <RowDefinition Height="Auto"/>
-          <RowDefinition Height="Auto"/>
-          <RowDefinition Height="Auto"/>
-          <RowDefinition Height="Auto"/>
-          <RowDefinition Height="Auto"/>
-          <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="2*"/>
-          <ColumnDefinition Width="3*"/>
-          <ColumnDefinition Width="2*"/>
-          <ColumnDefinition Width="3*"/>
-        </Grid.ColumnDefinitions>
+            <Grid Margin="10" HorizontalAlignment="Stretch">
+              <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+              </Grid.RowDefinitions>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+              </Grid.ColumnDefinitions>
 
-        <TextBlock Text="Anreise:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
-        <TextBox Text="TT.MM.JJJJ" Grid.Row="0" Grid.Column="1" Margin="5" Width="200"/>
-        <TextBlock Text="Preis pro Nacht:" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center"/>
-        <TextBox Text="XXX €" Grid.Row="0" Grid.Column="3" Margin="5" Width="200"/>
+              <TextBlock Text="Anreise:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"
+                         Style="{StaticResource RoundedTextBlockStyle}"/>
+              <TextBox Text="TT.MM.JJJJ" Grid.Row="0" Grid.Column="1" Margin="5" Width="200"
+                       Style="{StaticResource RoundedTextBoxStyle}"/>
+              <TextBlock Text="Preis pro Nacht:" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center"
+                         Style="{StaticResource RoundedTextBlockStyle}"/>
+              <TextBox Text="XXX €" Grid.Row="0" Grid.Column="3" Margin="5" Width="200"
+                       Style="{StaticResource RoundedTextBoxStyle}"/>
 
-        <TextBlock Text="Abreise:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
-        <TextBox Text="TT.MM.JJJJ" Grid.Row="1" Grid.Column="1" Margin="5" Width="200"/>
-        <TextBlock Text="Preis gesamt:" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center"/>
-        <TextBox Text="XXX €" Grid.Row="1" Grid.Column="3" Margin="5" Width="200"/>
+              <TextBlock Text="Abreise:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"
+                         Style="{StaticResource RoundedTextBlockStyle}"/>
+              <TextBox Text="TT.MM.JJJJ" Grid.Row="1" Grid.Column="1" Margin="5" Width="200"
+                       Style="{StaticResource RoundedTextBoxStyle}"/>
+              <TextBlock Text="Preis gesamt:" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center"
+                         Style="{StaticResource RoundedTextBlockStyle}"/>
+              <TextBox Text="XXX €" Grid.Row="1" Grid.Column="3" Margin="5" Width="200"
+                       Style="{StaticResource RoundedTextBoxStyle}"/>
 
-        <TextBlock Text="Kategorie:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
-        <TextBox Text="Standard" Grid.Row="2" Grid.Column="1" Margin="5" Width="200"/>
-        <TextBlock Text="Zimmerart:" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center"/>
-        <TextBox Text="Einzelzimmer" Grid.Row="2" Grid.Column="3" Margin="5" Width="200"/>
-      </Grid>
+              <TextBlock Text="Kategorie:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"
+                         Style="{StaticResource RoundedTextBlockStyle}"/>
+              <TextBox Text="Standard" Grid.Row="2" Grid.Column="1" Margin="5" Width="200"
+                       Style="{StaticResource RoundedTextBoxStyle}"/>
+              <TextBlock Text="Zimmerart:" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center"
+                         Style="{StaticResource RoundedTextBlockStyle}"/>
+              <TextBox Text="Einzelzimmer" Grid.Row="2" Grid.Column="3" Margin="5" Width="200"
+                       Style="{StaticResource RoundedTextBoxStyle}"/>
+            </Grid>
 
-      <Button Content="Weiter zur Bestellung" Command="{Binding NavigateToBookingPaymentViewCommand}" HorizontalAlignment="Right" Width="200" Margin="20,40,0,0"/>
-    </StackPanel>
+            <Button Content="Weiter zur Bestellung" Command="{Binding NavigateToBookingPaymentViewCommand}" 
+                    HorizontalAlignment="Right" Width="220" Height="40" Margin="20,10,0,0"
+                    Style="{StaticResource RoundedButtonStyle}"/>
+          </StackPanel>
+        </Grid>
+      </Border>
+    </Grid>
   </Grid>
 </Page>

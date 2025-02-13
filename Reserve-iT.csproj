@@ -11,12 +11,16 @@
 
   <ItemGroup>
     <None Remove="Images\hotel_bar.jpg" />
+    <None Remove="Images\hotel_hallway.jpg" />
+    <None Remove="Images\hotel_outside.jpg" />
     <None Remove="Images\Logo_Dark.png" />
     <None Remove="Images\Logo_Light.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Images\hotel_bar.jpg" />
+    <Resource Include="Images\hotel_hallway.jpg" />
+    <Resource Include="Images\hotel_outside.jpg" />
     <Resource Include="Images\Logo_Dark.png" />
     <Resource Include="Images\Logo_Light.png" />
   </ItemGroup>
