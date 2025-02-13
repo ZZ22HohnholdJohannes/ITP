@@ -8,7 +8,50 @@
       d:DesignHeight="550" d:DesignWidth="1000"
       Title="AdminView">
 
-    <Grid>
-        
+  <Grid Margin="10">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+
+    <!-- Suchfeld -->
+    <TextBox Grid.Row="0" Height="30" Margin="10" Text="Suchfeld (Auftrag_ID)"/>
+
+    <Grid Grid.Row="1" Margin="10">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+      </Grid.RowDefinitions>
+
+      <!-- Labels und Eingabefelder -->
+      <TextBlock Text="Vorname" Grid.Row="0" Grid.Column="0" Margin="5"/>
+      <TextBox Grid.Row="0" Grid.Column="1" Width="150"/>
+
+      <TextBlock Text="Nachname" Grid.Row="0" Grid.Column="2" Margin="5"/>
+      <TextBox Grid.Row="0" Grid.Column="3" Width="150"/>
+
+      <TextBlock Text="Start" Grid.Row="1" Grid.Column="0" Margin="5"/>
+      <DatePicker Grid.Row="1" Grid.Column="1" Width="150"/>
+
+      <TextBlock Text="Ende" Grid.Row="1" Grid.Column="2" Margin="5"/>
+      <DatePicker Grid.Row="1" Grid.Column="3" Width="150"/>
+
+      <TextBlock Text="Kategorie" Grid.Row="2" Grid.Column="0" Margin="5"/>
+      <TextBox Grid.Row="2" Grid.Column="1" Width="150"/>
+
+      <TextBlock Text="Zimmerart" Grid.Row="3" Grid.Column="0" Margin="5"/>
+      <TextBox Grid.Row="3" Grid.Column="1" Width="150"/>
+
+      <!-- Auftrag löschen Button -->
+      <Button Grid.Row="4" Grid.ColumnSpan="4" Content="Auftrag löschen" Margin="10" HorizontalAlignment="Center" Padding="5,2"/>
     </Grid>
+  </Grid>
 </Page>
