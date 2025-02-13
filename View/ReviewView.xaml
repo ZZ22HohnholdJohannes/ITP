@@ -4,10 +4,14 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Reserve_iT.View"
+      xmlns:conv="clr-namespace:Reserve_iT.Converter"
       mc:Ignorable="d" 
       d:DesignHeight="550" d:DesignWidth="1000"
       Title="ReviewView">
 
+  <Page.Resources>
+    <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+  </Page.Resources>
   <Grid Margin="10">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"/>
@@ -20,8 +24,8 @@
     <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="5">
       <TextBox Width="400" Height="50" Text="Bewertungen"/>
       <StackPanel Orientation="Vertical" Margin="5">
-        <Button Content="Y" Width="30" Height="30" Background="Orange"/>
-        <Button Content="N" Width="30" Height="30" Background="Orange"/>
+        <Button Content="Y" Width="30" Height="30" Background="Orange"  Visibility="{Binding isAdminLoggedIn, Converter={StaticResource BoolToVisibilityConverter}}"/>
+        <Button Content="N" Width="30" Height="30" Background="Orange"  Visibility="{Binding isAdminLoggedIn, Converter={StaticResource BoolToVisibilityConverter}}"/>
       </StackPanel>
     </StackPanel>
 
@@ -29,8 +33,8 @@
     <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5">
       <TextBox Width="400" Height="50" Text="Bewertungen"/>
       <StackPanel Orientation="Vertical" Margin="5">
-        <Button Content="Y" Width="30" Height="30" Background="Orange"/>
-        <Button Content="N" Width="30" Height="30" Background="Orange"/>
+        <Button Content="Y" Width="30" Height="30" Background="Orange" Visibility="{Binding isAdminLoggedIn, Converter={StaticResource BoolToVisibilityConverter}}"/>
+        <Button Content="N" Width="30" Height="30" Background="Orange" Visibility="{Binding isAdminLoggedIn, Converter={StaticResource BoolToVisibilityConverter}}"/>
       </StackPanel>
     </StackPanel>
 

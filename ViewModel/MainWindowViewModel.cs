@@ -112,6 +112,11 @@ namespace Reserve_iT.ViewModel
       //Booking Service
       CheckAvailabilityCommand = new RelayCommand(CheckAvailability);
       //Ab hier schreibe ich Commands, die noch implementiert werden müssen, aber noch nicht fertig sind
+      AcceptReviewCommand = new RelayCommand(AcceptReview);
+      DenyReviewCommand = new RelayCommand(DenyReview);
+      AddReviewCommand = new RelayCommand(AddReview);
+      BookOrderCommand = new RelayCommand(BookOrder);
+      DeleteOrderCommand = new RelayCommand(DeleteOrder);
     }
 
     //Login
@@ -133,6 +138,9 @@ namespace Reserve_iT.ViewModel
     //Ab hier schreibe ich Commands, die noch implementiert werden müssen, aber noch nicht fertig sind
     public ICommand AcceptReviewCommand { get; private set; }
     public ICommand DenyReviewCommand { get; private set; }
+    public ICommand AddReviewCommand { get; private set; }
+    public ICommand BookOrderCommand { get; private set; }
+    public ICommand DeleteOrderCommand { get; private set; }
 
     #endregion Commands
 
@@ -145,7 +153,7 @@ namespace Reserve_iT.ViewModel
     private void NavigateToBookingConfirmationView() => MainFrame?.Navigate(new BookingConfirmationView(){ DataContext = this }); //Navigation von BookingSearchView zu BookingConfirmationView
     private void NavigateToBookingPaymentView() => MainFrame?.Navigate(new BookingPaymentView());
     //Navigation zu Bewertung
-    private void NavigateToReviewView() => MainFrame?.Navigate(new ReviewView());
+    private void NavigateToReviewView() => MainFrame?.Navigate(new ReviewView() { DataContext = this});
     //Navigation zur Administation
     private void NavigateToAdminView() => MainFrame?.Navigate(new AdminView());
     //Navigation zurück
@@ -202,6 +210,31 @@ namespace Reserve_iT.ViewModel
       {
         MessageBox.Show("Es ist kein Zimmer verfügbar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
       }
+    }
+
+    public void AcceptReview()
+    {
+
+    }
+
+    public void DenyReview()
+    {
+
+    }
+
+    public void AddReview()
+    {
+
+    }
+
+    public void BookOrder()
+    {
+
+    }
+
+    public void DeleteOrder()
+    {
+
     }
     
     #endregion Methods
