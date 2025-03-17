@@ -9,7 +9,7 @@ namespace Reserve_iT.Services
 {
   public class BookingService
   {
-    public bool CheckAvailability(DateTime startDate, DateTime endDate, bool standard, bool premium, bool luxury, bool singleRoom, bool doubleRoom)
+    public DataTable CheckAvailability(DateTime startDate, DateTime endDate, bool standard, bool premium, bool luxury, bool singleRoom, bool doubleRoom)
     {
       int category = -1;
       if (standard)
@@ -34,8 +34,7 @@ namespace Reserve_iT.Services
             };
 
       DataTable dt = DatabaseService.ExecuteSP("checkAvailability", parameters);
-
-      return dt.Rows.Count > 0;
+      return dt;
     }
   }
 }

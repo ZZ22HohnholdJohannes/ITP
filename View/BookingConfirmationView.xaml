@@ -114,29 +114,29 @@
 
               <TextBlock Text="Anreise:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"
                          Style="{StaticResource RoundedTextBlockStyle}"/>
-              <TextBox Text="TT.MM.JJJJ" Grid.Row="0" Grid.Column="1" Margin="5" Width="200"
+              <TextBox Text="{Binding StartDate, StringFormat={}{0:dd.MM.yyyy}}" Grid.Row="0" Grid.Column="1" Margin="5" Width="200"
                        Style="{StaticResource RoundedTextBoxStyle}"/>
               <TextBlock Text="Preis pro Nacht:" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center"
                          Style="{StaticResource RoundedTextBlockStyle}"/>
-              <TextBox Text="XXX €" Grid.Row="0" Grid.Column="3" Margin="5" Width="200"
+              <TextBox Text="{Binding CostPerNight, StringFormat={}{0:C}, ConverterCulture=de-DE}" Grid.Row="0" Grid.Column="3" Margin="5" Width="200"
                        Style="{StaticResource RoundedTextBoxStyle}"/>
 
               <TextBlock Text="Abreise:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"
                          Style="{StaticResource RoundedTextBlockStyle}"/>
-              <TextBox Text="TT.MM.JJJJ" Grid.Row="1" Grid.Column="1" Margin="5" Width="200"
+              <TextBox Text="{Binding EndDate, StringFormat={}{0:dd.MM.yyyy}}" Grid.Row="1" Grid.Column="1" Margin="5" Width="200"
                        Style="{StaticResource RoundedTextBoxStyle}"/>
               <TextBlock Text="Preis gesamt:" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center"
                          Style="{StaticResource RoundedTextBlockStyle}"/>
-              <TextBox Text="XXX €" Grid.Row="1" Grid.Column="3" Margin="5" Width="200"
+              <TextBox Text="{Binding TotalCost, StringFormat={}{0:C}, ConverterCulture=de-DE}" Grid.Row="1" Grid.Column="3" Margin="5" Width="200"
                        Style="{StaticResource RoundedTextBoxStyle}"/>
 
               <TextBlock Text="Kategorie:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"
                          Style="{StaticResource RoundedTextBlockStyle}"/>
-              <TextBox Text="Standard" Grid.Row="2" Grid.Column="1" Margin="5" Width="200"
+              <TextBox Text="{Binding RoomCategory}" Grid.Row="2" Grid.Column="1" Margin="5" Width="200"
                        Style="{StaticResource RoundedTextBoxStyle}"/>
               <TextBlock Text="Zimmerart:" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center"
                          Style="{StaticResource RoundedTextBlockStyle}"/>
-              <TextBox Text="Einzelzimmer" Grid.Row="2" Grid.Column="3" Margin="5" Width="200"
+              <TextBox Text="{Binding RoomType}" Grid.Row="2" Grid.Column="3" Margin="5" Width="200"
                        Style="{StaticResource RoundedTextBoxStyle}"/>
             </Grid>
 
