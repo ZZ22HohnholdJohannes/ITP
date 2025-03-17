@@ -310,12 +310,12 @@ VALUES
 USE reserve_it;
 
 DELIMITER //
-CREATE PROCEDURE reviewFreigeben (IN bewertung_id_in INT)
+CREATE PROCEDURE reviewFreigeben (IN auftrag_id_in INT)
 BEGIN
 
 	UPDATE bewertung
 	SET istFreigegeben = 'true'
-	WHERE bewertung_ID = bewertung_id_int;
+	WHERE auftrag_ID = auftrag_id_int;
 	
 END//
 DELIMITER ;
@@ -326,12 +326,12 @@ DELIMITER ;
 USE reserve_it;
 
 DELIMITER //
-CREATE PROCEDURE reviewLoeschen (IN bewertung_id_in INT)
+CREATE PROCEDURE reviewLoeschen (IN auftrag_id_in INT)
 BEGIN
 
 	DELETE
-	FROM bewertung
-	WHERE bewerung_ID = bewertung_id_in;
+	FROM auftrag
+	WHERE auftrag_ID = auftrag_id_in;
 
 END//
 DELIMITER ;
