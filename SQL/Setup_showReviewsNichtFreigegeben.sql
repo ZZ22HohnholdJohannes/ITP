@@ -6,7 +6,7 @@ BEGIN
 	
 	SELECT *
 	FROM bewertung
-	WHERE istFreigegeben = 'false';
+	WHERE istFreigegeben = 0;
 	
 END//
 DELIMITER ;

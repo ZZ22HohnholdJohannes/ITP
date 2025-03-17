@@ -252,7 +252,7 @@ VALUES
 (3, 'Luxus');
 
 -- Art (Zimmertyp) Daten (Die IDs werden automatisch vergeben)
-INSERT INTO art (art_ID, art_beschreibung)
+INSERT INTO art (art_ID, art_besshowReviewsFreigegebenchreibung)
 VALUES
 (1, 'Einzelzimmer'),
 (2, 'Doppelzimmer');
@@ -262,8 +262,8 @@ INSERT INTO preis (preis_ID, kategorie_ID, art_ID, preis_num)
 VALUES
 (1, 1, 1, 80.00),
 (2, 1, 2, 120.00),
-(3, 2, 1, 250.00),
-(4, 2, 2, 180.00),
+(3, 2, 1, 180.00),
+(4, 2, 2, 250.00),
 (5, 3, 1, 500.00),
 (6, 3, 2, 600.00);
 
@@ -409,34 +409,19 @@ DELIMITER ;
 
 # Setup_showBookings
 
-USE reserve_it;
+USE reserve_it
 
 DELIMITER //
 
-CREATE PROCEDURE showBookings(IN vorname_in NVARCHAR(200), IN nachname_in NVARCHAR(200), IN startDatum_in DATE, IN endDatum DATE, IN kategorie_in INT, IN art_in INT)
-BEGIN
-
-	SELECT a.auftrag_ID AS auftrag_ID
-			,g.vorname AS vorname
-			,g.nachname AS nachname
-			,p.kategorie_ID AS kategorie_ID
-			,p.art_ID AS art_ID
-			,a.startdatum AS startdatum
-			,a.enddatum AS enddatum
-	FROM auftrag a
-	JOIN gast g ON a.gast_ID = g.gast_ID
-	JOIN buchung b ON a.auftrag_ID = b.auftrag_ID
-	JOIN hotelzimmer h ON b.hotelzimmer_ID = h.hotelzimmer_ID
-	JOIN preis p ON h.preis_ID = p.preis_ID
-	WHERE (g.vorname = vorname_in OR vorname_in IS NULL)
-	AND (g.nachname = nachname_in OR nachname_in IS NULL)
-	AND (a.startdatum = startDatum_in OR startDatum_in IS NULL)
-	AND (a.enddatum = endDatum_in OR endDatum_in IS NULL)
-	AND (p.kategorie_ID = kategorie_in OR kategorie_in IS NULL)
-	AND (p.art_ID = art_in OR art_in IS NULL);
+CREATE PROCEDURE showBookings(IN auftrag_id_in INT)
+BEGIN 
+	
+	SELECT *
+	FROM buchung b
+	JOIN auftrag a ON b.auftrag_ID = a.auftrag_ID
+	WHERE a.auftrag_ID = auftrag_id_in;
 	
 END//
-
 DELIMITER ;
 
 
@@ -450,7 +435,7 @@ BEGIN
 	
 	SELECT *
 	FROM bewertung
-	WHERE istFreigegeben = 'true';
+	WHERE istFreigegeben = 1;
 	
 END//
 DELIMITER ;
@@ -466,7 +451,7 @@ BEGIN
 	
 	SELECT *
 	FROM bewertung
-	WHERE istFreigegeben = 'false';
+	WHERE istFreigegeben = 0;
 	
 END//
 DELIMITER ;
@@ -477,21 +462,25 @@ DELIMITER ;
 USE reserve_it;
 
 DELIMITER //
-CREATE PROCEDURE submitReview(IN auftrag_id_in int)
+CREATE PROCEDURE submitReview(IN auftrag_id_in INT, IN rezension_in NVARCHAR(500))
 BEGIN
 
 	DECLARE auftrag_id_vorhanden int;
+	DECLARE auftrag_id_gueltig INT;
 	
 	SELECT COUNT(*) INTO auftrag_id_vorhanden
 	FROM bewertung
 	WHERE auftrag_ID = auftrag_id_in;
 	
-	if auftrag_id_vorhanden = 0 THEN
+	SELECT COUNT(*) INTO auftrag_id_gueltig
+	FROM auftrag
+	WHERE auftrag_ID = auftrag_id_in
+	
+	if auftrag_id_vorhanden = 0 AND auftrag_id_gueltig > 0 THEN
 	
 		INSERT INTO bewertung(auftrag_ID, istFreigegeben, rezension)
 		values
-		(auftrag_id_in, 'false', bewertung_in);
-		
+		(auftrag_id_in, 'false', rezension_in);
 	END if;
 	
 END//

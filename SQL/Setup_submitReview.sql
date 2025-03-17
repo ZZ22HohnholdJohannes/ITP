@@ -1,17 +1,17 @@
-USE reserve_it;
-
-DELIMITER //
-DROP PROCEDURE submitReview;
-CREATE PROCEDURE submitReview(IN auftrag_id_in int)
 BEGIN
 
 	DECLARE auftrag_id_vorhanden int;
+	DECLARE auftrag_id_gueltig INT;
 	
 	SELECT COUNT(*) INTO auftrag_id_vorhanden
 	FROM bewertung
 	WHERE auftrag_ID = auftrag_id_in;
 	
-	if auftrag_id_vorhanden = 0 THEN
+	SELECT COUNT(*) INTO auftrag_id_gueltig
+	FROM auftrag
+	WHERE auftrag_ID = auftrag_id_in;
+	
+	if auftrag_id_vorhanden = 0 AND auftrag_id_gueltig > 0 THEN
 	
 		INSERT INTO bewertung(auftrag_ID, istFreigegeben, rezension)
 		values
@@ -19,5 +19,4 @@ BEGIN
 		
 	END if;
 	
-END//
-DELIMITER ;
+END
