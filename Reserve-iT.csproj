@@ -15,6 +15,7 @@
     <None Remove="Images\hotel_outside.jpg" />
     <None Remove="Images\Logo_Dark.png" />
     <None Remove="Images\Logo_Light.png" />
+    <None Remove="Images\review.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,6 +24,7 @@
     <Resource Include="Images\hotel_outside.jpg" />
     <Resource Include="Images\Logo_Dark.png" />
     <Resource Include="Images\Logo_Light.png" />
+    <Resource Include="Images\review.jpg" />
   </ItemGroup>
 
   <ItemGroup>

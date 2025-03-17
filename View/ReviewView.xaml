@@ -89,6 +89,8 @@
         </Trigger>
       </Style.Triggers>
     </Style>
+    
+    <!-- Start Style für Custom Scroll Bar -->
     <Style x:Key="ScrollBarButtonStyle" TargetType="RepeatButton">
       <Setter Property="Background" Value="Transparent"/>
       <Setter Property="BorderBrush" Value="Transparent"/>
@@ -106,19 +108,19 @@
       <Setter Property="Template">
         <Setter.Value>
           <ControlTemplate TargetType="Thumb">
-            <Border Background="#4e4f50" BorderBrush="Gray" BorderThickness="1" CornerRadius="5"/>
+            <Border Background="#b5b5b5" BorderBrush="#b5b5b5" BorderThickness="1" CornerRadius="4"/>
           </ControlTemplate>
         </Setter.Value>
       </Setter>
     </Style>
     <Style x:Key="CustomScrollBar" TargetType="ScrollBar">
       <Setter Property="Background" Value="Transparent"/>
-      <Setter Property="Width" Value="10"/>
+      <Setter Property="Width" Value="1"/>
       <Setter Property="Template">
         <Setter.Value>
           <ControlTemplate TargetType="ScrollBar">
             <Grid>
-              <Track Name="PART_Track" IsDirectionReversed="true">
+              <Track Name="PART_Track" IsDirectionReversed="true" Width="9" Height="270">
                 <Track.DecreaseRepeatButton>
                   <RepeatButton Command="ScrollBar.LineUpCommand" Style="{StaticResource ScrollBarButtonStyle}" />
                 </Track.DecreaseRepeatButton>
@@ -134,20 +136,29 @@
         </Setter.Value>
       </Setter>
     </Style>
+    <!-- Ende Style für Custom Scroll Bar-->
+    
   </Page.Resources>
-  <Grid Margin="10">
+  <Grid>
     <Grid.RowDefinitions>
       <RowDefinition Height="3*"/>
       <RowDefinition Height="*"/>
     </Grid.RowDefinitions>
-    <Grid>
+    <Grid Grid.RowSpan="2">
+      <Grid.Background>
+        <ImageBrush ImageSource="pack://application:,,,/Images/review.jpg" Stretch="UniformToFill"/>
+      </Grid.Background>
+      <Grid.Effect>
+        <BlurEffect Radius="10"/>
+      </Grid.Effect>
+    </Grid>
+    <Grid Margin="10">
       <Border Background="White" HorizontalAlignment="Center" VerticalAlignment="Center" Width="700" Height="300" CornerRadius="20">
         <Border.Effect>
           <DropShadowEffect Color="Black" BlurRadius="20" ShadowDepth="0" Opacity="0.5"/>
         </Border.Effect>
       </Border>
       <Border Background="White" Width="700" Height="300" CornerRadius="20" VerticalAlignment="Center">
-        <!-- Datenbankverbindung Anfang-->
         <ListView ItemsSource="{Binding Reviews}"  VerticalAlignment="Center" BorderThickness="0" Background="Transparent" 
                   ItemContainerStyle="{StaticResource TransparentListViewItemStyle}">
           <ListView.Resources>
@@ -164,7 +175,6 @@
                   <Border.Effect>
                     <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="0" Opacity="0.5"/>
                   </Border.Effect>
-                  <!-- Inhalt der anderen Border, nur damit die Höhe von der passt -->
                   <StackPanel Orientation="Vertical" Margin="10" Grid.Column="1" VerticalAlignment="Center">
                     <TextBlock Text="Review ID:" FontWeight="Bold" 
                                Visibility="{Binding DataContext.isAdminLoggedIn, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource BoolToVisibilityConverter}}"
@@ -238,13 +248,50 @@
         </ListView>
       </Border>
     </Grid>
-
-    <!-- Datenbankverbindung Ende -->
-
-    <!-- Dritte Bewertungsbox -->
-    <TextBox Grid.Row="1" Width="400" Height="50" Margin="5"/>
-
-    <!-- Bewerten Button -->
-    <Button Grid.Row="1" Content="Bewerten" Width="100" Height="30" Margin="10" HorizontalAlignment="Right"/>
+    
+    <!-- TextBox und Bewerten Button -->
+    <TextBox Grid.Row="1" Width="570" Height="70" Margin="5,5,120,5"
+             Style="{StaticResource RoundedTextBoxStyle}"/>
+    <Button Grid.Row="1" Content="Bewerten" Width="100" Height="30" Margin="5,30,100,10" HorizontalAlignment="Right" VerticalAlignment="Top"
+            Style="{StaticResource RoundedButtonStyle}"/>
+    <TextBox x:Name="BookingNumberTextBox" Grid.Row="1" Width="100" Height="Auto" Margin="5,10,100,30" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+             Style="{StaticResource RoundedTextBoxStyle}"/>
+    
+    <!-- Standardwert als Overlay für TextBox; Verschwindet wenn Text in TextBox eingetragen wird -->
+    <TextBlock Text="Booking ID" 
+               Foreground="Gray" Grid.Row="1" Width="100" Height="Auto" Margin="5,0,90,40" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+               IsHitTestVisible="False">
+      <TextBlock.Style>
+        <Style TargetType="TextBlock">
+          <Setter Property="Visibility" Value="Visible"/>
+          <Style.Triggers>
+            <DataTrigger Binding="{Binding Text, ElementName=BookingNumberTextBox}" Value="">
+              <Setter Property="Visibility" Value="Visible"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Text.Length, ElementName=BookingNumberTextBox}" Value="0">
+              <Setter Property="Visibility" Value="Visible"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Text.Length, ElementName=BookingNumberTextBox}" Value="1">
+              <Setter Property="Visibility" Value="Collapsed"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Text.Length, ElementName=BookingNumberTextBox}" Value="2">
+              <Setter Property="Visibility" Value="Collapsed"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Text.Length, ElementName=BookingNumberTextBox}" Value="3">
+              <Setter Property="Visibility" Value="Collapsed"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Text.Length, ElementName=BookingNumberTextBox}" Value="4">
+              <Setter Property="Visibility" Value="Collapsed"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Text.Length, ElementName=BookingNumberTextBox}" Value="5">
+              <Setter Property="Visibility" Value="Collapsed"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Text.Length, ElementName=BookingNumberTextBox}" Value="6">
+              <Setter Property="Visibility" Value="Collapsed"/>
+            </DataTrigger>
+          </Style.Triggers>
+        </Style>
+      </TextBlock.Style>
+    </TextBlock>
   </Grid>
 </Page>
