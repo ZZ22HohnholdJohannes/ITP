@@ -252,7 +252,7 @@ VALUES
 (3, 'Luxus');
 
 -- Art (Zimmertyp) Daten (Die IDs werden automatisch vergeben)
-INSERT INTO art (art_ID, art_besshowReviewsFreigegebenchreibung)
+INSERT INTO art (art_ID, art_beschreibung)
 VALUES
 (1, 'Einzelzimmer'),
 (2, 'Doppelzimmer');
