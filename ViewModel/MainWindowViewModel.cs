@@ -17,6 +17,7 @@ using Reserve_iT.Essentials;
 using Reserve_iT.Services;
 using Reserve_iT.View;
 using Reserve_iT.Model;
+using System.Data;
 
 namespace Reserve_iT.ViewModel
 {
@@ -70,6 +71,31 @@ namespace Reserve_iT.ViewModel
       get => Get<bool>();
       set => Set(value);
     }
+
+    public string RoomType
+    {
+      get => Get<string>();
+      set => Set(value);
+    }
+
+    public string RoomCategory
+    {
+      get => Get<string>();
+      set => Set(value);
+    }
+
+    public decimal CostPerNight
+    {
+      get => Get<decimal>();
+      set => Set(value);
+    }
+
+    public decimal TotalCost
+    {
+      get => Get<decimal>();
+      set => Set(value);
+    }
+
     //AdminLogin
     public bool isAdminLoggedIn
     {
@@ -208,10 +234,16 @@ namespace Reserve_iT.ViewModel
       }
 
       var bookingService = new BookingService();
-      bool isAvailable = bookingService.CheckAvailability(StartDate, EndDate, Standard, Premium, Luxury, SingleRoom, DoubleRoom);
-      //bool isAvailable = true; TODO: Ist zum Testen da, kann später entfernt werden
-      if (isAvailable)
+      DataTable dt = bookingService.CheckAvailability(StartDate, EndDate, Standard, Premium, Luxury, SingleRoom, DoubleRoom);
+
+      if (dt.Rows.Count > 0)
       {
+        var row = dt.Rows[0];
+        RoomType = row["zimmerart"].ToString();
+        RoomCategory = row["kategorie"].ToString();
+        CostPerNight = Convert.ToDecimal(row["preis_pro_nacht"]);
+        TotalCost = CalculateTotalCost(StartDate, EndDate, CostPerNight);
+
         MessageBox.Show("Zimmer verfügbar", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
         NavigateToBookingConfirmationView();
       }
@@ -220,6 +252,13 @@ namespace Reserve_iT.ViewModel
         MessageBox.Show("Es ist kein Zimmer verfügbar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
       }
     }
+    //TODO: Berechnung ausreichend testen
+    private decimal CalculateTotalCost(DateTime startDate, DateTime endDate, decimal costPerNight)
+    {
+      int numberOfDays = (endDate.Date - startDate.Date).Days;
+      return numberOfDays * costPerNight;
+    }
+
 
     public void LoadReviews()
     {
