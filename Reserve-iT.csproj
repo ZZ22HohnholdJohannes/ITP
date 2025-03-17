@@ -15,7 +15,13 @@
     <None Remove="Images\hotel_outside.jpg" />
     <None Remove="Images\Logo_Dark.png" />
     <None Remove="Images\Logo_Light.png" />
+    <None Remove="Images\luxus_double.png" />
+    <None Remove="Images\luxus_single.png" />
+    <None Remove="Images\premium_double.png" />
+    <None Remove="Images\premium_einzel.png" />
     <None Remove="Images\review.jpg" />
+    <None Remove="Images\standard_double.png" />
+    <None Remove="Images\standard_einzel.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,7 +30,13 @@
     <Resource Include="Images\hotel_outside.jpg" />
     <Resource Include="Images\Logo_Dark.png" />
     <Resource Include="Images\Logo_Light.png" />
+    <Resource Include="Images\luxus_double.png" />
+    <Resource Include="Images\luxus_single.png" />
+    <Resource Include="Images\premium_double.png" />
+    <Resource Include="Images\premium_einzel.png" />
     <Resource Include="Images\review.jpg" />
+    <Resource Include="Images\standard_double.png" />
+    <Resource Include="Images\standard_einzel.png" />
   </ItemGroup>
 
   <ItemGroup>
