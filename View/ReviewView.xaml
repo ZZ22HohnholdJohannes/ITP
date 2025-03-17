@@ -248,19 +248,22 @@
         </ListView>
       </Border>
     </Grid>
-    
+
     <!-- TextBox und Bewerten Button -->
     <TextBox Grid.Row="1" Width="570" Height="70" Margin="5,5,120,5"
-             Style="{StaticResource RoundedTextBoxStyle}"/>
+          Text="{Binding ReviewText, UpdateSourceTrigger=PropertyChanged}"
+          Style="{StaticResource RoundedTextBoxStyle}"/>
     <Button Grid.Row="1" Content="Bewerten" Width="100" Height="30" Margin="5,30,100,10" HorizontalAlignment="Right" VerticalAlignment="Top"
-            Style="{StaticResource RoundedButtonStyle}"/>
+         Command="{Binding AddReviewCommand}"
+         Style="{StaticResource RoundedButtonStyle}"/>
     <TextBox x:Name="BookingNumberTextBox" Grid.Row="1" Width="100" Height="Auto" Margin="5,10,100,30" HorizontalAlignment="Right" VerticalAlignment="Bottom"
-             Style="{StaticResource RoundedTextBoxStyle}"/>
-    
+          Text="{Binding ReviewOrderId, UpdateSourceTrigger=PropertyChanged}"
+          Style="{StaticResource RoundedTextBoxStyle}"/>
+
     <!-- Standardwert als Overlay für TextBox; Verschwindet wenn Text in TextBox eingetragen wird -->
     <TextBlock Text="Booking ID" 
-               Foreground="Gray" Grid.Row="1" Width="100" Height="Auto" Margin="5,0,90,40" HorizontalAlignment="Right" VerticalAlignment="Bottom"
-               IsHitTestVisible="False">
+            Foreground="Gray" Grid.Row="1" Width="100" Height="Auto" Margin="5,0,90,40" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+            IsHitTestVisible="False">
       <TextBlock.Style>
         <Style TargetType="TextBlock">
           <Setter Property="Visibility" Value="Visible"/>

@@ -35,10 +35,10 @@ namespace Reserve_iT.Services
     public void AddReview(int orderId, string reviewText)
     {
       var parameters = new Dictionary<string, object>
-      {
-        { "auftrag_ID", orderId },
-        { "rezension_in", reviewText }
-      };
+    {
+      { "auftrag_id_in", orderId },
+      { "rezension_in", reviewText }
+    };
 
       DatabaseService.ExecuteSP("submitReview", parameters);
     }
