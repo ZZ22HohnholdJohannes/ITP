@@ -113,6 +113,18 @@ namespace Reserve_iT.ViewModel
       get => Get<ObservableCollection<ReviewModel>>();
       set => Set(value);
     }
+
+    public int ReviewOrderId
+    {
+      get => Get<int>();
+      set => Set(value);
+    }
+
+    public string ReviewText
+    {
+      get => Get<string>();
+      set => Set(value);
+    }
     #endregion Properties
 
     #region Constructors
@@ -263,7 +275,7 @@ namespace Reserve_iT.ViewModel
     public void LoadReviews()
     {
       var reviewService = new ReviewService();
-      Reviews = reviewService.LoadReviews(); // Hier wird die ObservableCollection<ReviewModel> in der ViewModel-Property aktualisiert.
+      Reviews = reviewService.LoadReviews(isAdminLoggedIn); // Hier wird die ObservableCollection<ReviewModel> in der ViewModel-Property aktualisiert.
       NavigateToReviewView();
     }
     public void AcceptReview()
@@ -279,7 +291,10 @@ namespace Reserve_iT.ViewModel
 
     public void AddReview()
     {
-
+      var reviewService = new ReviewService();
+      reviewService.AddReview(ReviewOrderId, ReviewText);
+      MessageBox.Show("Bewertung erfolgreich übermittelt", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+      LoadReviews();
     }
 
     public void BookOrder()

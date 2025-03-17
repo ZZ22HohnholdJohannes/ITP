@@ -9,11 +9,12 @@ namespace Reserve_iT.Services
 {
   public class ReviewService
   {
-    public ObservableCollection<ReviewModel> LoadReviews()
+    public ObservableCollection<ReviewModel> LoadReviews(bool isAdminLoggedIn)
     {
       var reviews = new ObservableCollection<ReviewModel>();
 
-      DataTable dt = DatabaseService.ExecuteSP("showReviewsFreigegeben");
+      string storedProcedure = isAdminLoggedIn ? "showReviewsNichtFreigegeben" : "showReviewsFreigegeben";
+      DataTable dt = DatabaseService.ExecuteSP(storedProcedure);
 
       foreach (DataRow row in dt.Rows)
       {
@@ -29,6 +30,17 @@ namespace Reserve_iT.Services
       }
 
       return reviews;
+    }
+
+    public void AddReview(int orderId, string reviewText)
+    {
+      var parameters = new Dictionary<string, object>
+      {
+        { "auftrag_ID", orderId },
+        { "rezension_in", reviewText }
+      };
+
+      DatabaseService.ExecuteSP("submitReview", parameters);
     }
   }
 }
