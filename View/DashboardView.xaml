@@ -118,7 +118,7 @@
               <Button Content="Zimmer buchen" Command="{Binding NavigateToBookingSearchViewCommand}" 
                     Width="200" Height="80" Margin="20,100,20,10"
                     Style="{StaticResource RoundedButtonStyle}"/>
-              <Button Content="Bewertungen" Command="{Binding LoadReviewsCommand}"
+              <Button Content="Bewertungen" Command="{Binding NavigateToReviewViewCommand}"
                     Width="200" Height="80" Margin="20,100,20,10" Grid.Column="2"
                     Style="{StaticResource RoundedButtonStyle}"/>
             </Grid>
