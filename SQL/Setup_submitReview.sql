@@ -25,7 +25,7 @@ BEGIN
 	
 	if auftrag_id_vorhanden > 0 OR auftrag_id_gueltig = 0 THEN
 		
-		SELECT 0;
+		SELECT 0 AS Result;
 		
 	END if;
 	
