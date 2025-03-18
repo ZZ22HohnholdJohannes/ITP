@@ -56,8 +56,13 @@ namespace Reserve_iT.Services
 
     public void AddReview(int orderId, string reviewText)
     {
+      if (string.IsNullOrEmpty(reviewText))
+      {
+        MessageBox.Show("Bitte geben Sie eine Bewertung ein", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        return;
+      }
       var parameters = new Dictionary<string, object>
-    {
+      {
       { "auftrag_id_in", orderId },
       { "rezension_in", reviewText }
     };
@@ -68,10 +73,6 @@ namespace Reserve_iT.Services
         if (result == 0)
         {
           MessageBox.Show("Bitte gültige Auftragsnummer eingeben", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-        }
-        else if(string.IsNullOrEmpty(reviewText))
-        {
-          MessageBox.Show("Bitte geben Sie eine Bewertung ein", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
         else if (result == 1)
         {
