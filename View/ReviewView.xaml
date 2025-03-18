@@ -243,7 +243,7 @@
         Visibility="{Binding DataContext.isAdminLoggedIn, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource BoolToVisibilityConverter}}"/>
                   <Button Content="N" Width="30" Height="30"
         Style="{StaticResource RoundedButtonStyle}"
-        Command="{Binding DenyReviewCommand, RelativeSource={RelativeSource AncestorType=Page}}"
+        Command="{Binding Data.DenyReviewCommand, Source={StaticResource BindingProxy}}" CommandParameter="{Binding}"
         Visibility="{Binding DataContext.isAdminLoggedIn, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource BoolToVisibilityConverter}}"/>
 
                 </StackPanel>

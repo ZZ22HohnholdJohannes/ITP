@@ -36,7 +36,7 @@ namespace Reserve_iT.Services
     {
       var parameters = new Dictionary<string, object>
     {
-      { "bewertung_id_int", reviewId }
+      { "bewertung_id_in", reviewId }
     };
 
       DatabaseService.ExecuteSP("reviewFreigeben", parameters);

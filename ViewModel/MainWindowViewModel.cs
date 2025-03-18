@@ -293,19 +293,20 @@ namespace Reserve_iT.ViewModel
       {
         var reviewService = new ReviewService();
         reviewService.AcceptReview(reviewModel.ReviewID);
-        MessageBox.Show("Bewertung erfolgreich freigegeben", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
         LoadReviews();
+        MessageBox.Show("Bewertung erfolgreich freigegeben", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+        
       }
     }
 
-    public void DenyReview(object review)
+    public void DenyReview(object? review)
     {
-      if (review is ReviewModel reviewModel)
+      if (review is not null && review is ReviewModel reviewModel)
       {
         var reviewService = new ReviewService();
         reviewService.DenyReview(reviewModel.ReviewID);
-        MessageBox.Show("Bewertung erfolgreich gelöscht", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
         LoadReviews();
+        MessageBox.Show("Bewertung erfolgreich gelöscht", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
       }
     }
 
