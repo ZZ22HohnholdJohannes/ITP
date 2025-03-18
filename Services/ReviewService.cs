@@ -64,12 +64,17 @@ namespace Reserve_iT.Services
       var dt = DatabaseService.ExecuteSP("submitReview", parameters);
       foreach (DataRow row in dt.Rows)
       {
-        var result = Convert.ToInt32(row["Result"]);
-        if (result == 0)
+        var orderIdResult = Convert.ToInt32(row["orderIdResult"]);
+        var reviewTextResult = Convert.ToInt32(row["reviewTextResult"]);
+        if (orderIdResult == 0)
         {
           MessageBox.Show("Bitte gültige Auftragsnummer eingeben", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         }
-        else if (result == 1)
+        else if(reviewTextResult == 0)
+        {
+          MessageBox.Show("Bitte geben Sie eine Bewertung ein", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+        else if (orderIdResult == 1 && reviewTextResult == 1)
         {
           MessageBox.Show("Bewertung erfolgreich übermittelt", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
         }
