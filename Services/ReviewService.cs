@@ -32,6 +32,26 @@ namespace Reserve_iT.Services
       return reviews;
     }
 
+    public void AcceptReview(int reviewId)
+    {
+      var parameters = new Dictionary<string, object>
+    {
+      { "bewertung_id_int", reviewId }
+    };
+
+      DatabaseService.ExecuteSP("reviewFreigeben", parameters);
+    }
+
+    public void DenyReview(int reviewId)
+    {
+      var parameters = new Dictionary<string, object>
+    {
+      { "bewertung_id_in", reviewId }
+    };
+
+      DatabaseService.ExecuteSP("reviewLoeschen", parameters);
+    }
+
     public void AddReview(int orderId, string reviewText)
     {
       var parameters = new Dictionary<string, object>

@@ -18,6 +18,8 @@ using Reserve_iT.Services;
 using Reserve_iT.View;
 using Reserve_iT.Model;
 using System.Data;
+using CommunityToolkit.Mvvm.Input;
+using Org.BouncyCastle.Security;
 
 namespace Reserve_iT.ViewModel
 {
@@ -163,8 +165,8 @@ namespace Reserve_iT.ViewModel
       //Booking Service
       CheckAvailabilityCommand = new RelayCommand(CheckAvailability);
       //Ab hier schreibe ich Commands, die noch implementiert werden müssen, aber noch nicht fertig sind
-      AcceptReviewCommand = new RelayCommand(AcceptReview);
-      DenyReviewCommand = new RelayCommand(DenyReview);
+      AcceptReviewCommand = new RelayCommand<ReviewModel>(AcceptReview);
+      DenyReviewCommand = new RelayCommand<ReviewModel>(DenyReview);
       AddReviewCommand = new RelayCommand(AddReview);
       BookOrderCommand = new RelayCommand(BookOrder);
       DeleteOrderCommand = new RelayCommand(DeleteOrder);
@@ -285,15 +287,26 @@ namespace Reserve_iT.ViewModel
       Reviews = reviewService.LoadReviews(isAdminLoggedIn); // Hier wird die ObservableCollection<ReviewModel> in der ViewModel-Property aktualisiert.
       NavigateToReviewView();
     }
-    public void AcceptReview()
+    public void AcceptReview(object? review)
     {
-
-
+      if (review is not null && review is ReviewModel reviewModel)
+      {
+        var reviewService = new ReviewService();
+        reviewService.AcceptReview(reviewModel.ReviewID);
+        MessageBox.Show("Bewertung erfolgreich freigegeben", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+        LoadReviews();
+      }
     }
 
-    public void DenyReview()
+    public void DenyReview(object review)
     {
-
+      if (review is ReviewModel reviewModel)
+      {
+        var reviewService = new ReviewService();
+        reviewService.DenyReview(reviewModel.ReviewID);
+        MessageBox.Show("Bewertung erfolgreich gelöscht", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+        LoadReviews();
+      }
     }
 
     public void AddReview()
