@@ -488,6 +488,8 @@ BEGIN
 		values
 		(auftrag_id_in, 'false', rezension_in);
 		
+		SELECT 1 AS Result;
+		
 	END if;
 	
 	if auftrag_id_vorhanden > 0 OR auftrag_id_gueltig = 0 THEN
