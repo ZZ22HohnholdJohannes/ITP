@@ -422,9 +422,19 @@ DELIMITER //
 CREATE PROCEDURE showBookings(IN auftrag_id_in INT)
 BEGIN 
 	
-	SELECT *
+	SELECT g.vorname AS vorname
+			,g.nachname AS nachname
+			,a.startdatum AS startdatum
+			,a.enddatum AS enddatum
+			,ar.art_beschreibung AS zimmerart
+			,k.kategorie_beschreibung AS kategorie
 	FROM buchung b
 	JOIN auftrag a ON b.auftrag_ID = a.auftrag_ID
+	JOIN gast g ON g.gast_ID = a.gast_ID
+	JOIN hotelzimmer hz ON hz.hotelzimmer_ID = b.hotelzimmer_ID
+	JOIN preis p ON p.preis_ID = hz.preis_ID
+	JOIN kategorie k ON k.kategorie_ID = p.kategorie_ID
+	JOIN art ar ON ar.art_ID = p.art_ID
 	WHERE a.auftrag_ID = auftrag_id_in;
 	
 END//
@@ -455,8 +465,13 @@ DELIMITER //
 CREATE PROCEDURE showReviewsNichtFreigegeben()
 BEGIN 
 	
-	SELECT *
-	FROM bewertung
+	SELECT b.bewertung_ID
+			,a.auftrag_ID
+			,g.vorname
+			,g.nachname
+	FROM bewertung b
+	JOIN auftrag a ON a.auftrag_ID = b.auftrag_ID
+	JOIN gast g ON g.gast_ID = a.gast_ID
 	WHERE istFreigegeben = 0;
 	
 END//
@@ -473,6 +488,7 @@ BEGIN
 
 	DECLARE auftrag_id_vorhanden int;
 	DECLARE auftrag_id_gueltig INT;
+	DECLARE rezension_vorhanden NVARCHAR(500)
 	
 	SELECT COUNT(*) INTO auftrag_id_vorhanden
 	FROM bewertung
@@ -482,20 +498,34 @@ BEGIN
 	FROM auftrag
 	WHERE auftrag_ID = auftrag_id_in;
 	
+	SELECT CHAR_LENGTH(rezension_in) INTO rezension_vorhanden;
+	
 	if auftrag_id_vorhanden = 0 AND auftrag_id_gueltig > 0 THEN
 	
 		INSERT INTO bewertung(auftrag_ID, istFreigegeben, rezension)
 		values
 		(auftrag_id_in, 'false', rezension_in);
 		
-		SELECT 1 AS Result;
+		SELECT 1 AS orderIdResult;
 		
 	END if;
 	
 	if auftrag_id_vorhanden > 0 OR auftrag_id_gueltig = 0 THEN
 		
-		SELECT 0 AS Result;
+		SELECT 0 AS orderIdResult;
 		
+	END if;
+	
+	if rezension_vorhanden > 0 THEN
+	
+		SELECT 1 AS reviewTextResult;
+	
+	END if;
+	
+	if rezension_vorhanden = 0 THEN
+	
+		SELECT 0 AS reviewTextResult;
+	
 	END if;
 	
 END//
