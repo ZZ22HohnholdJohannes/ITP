@@ -8,86 +8,7 @@
       d:DesignHeight="550" d:DesignWidth="1000"
       Title="AdminView">
   <Page.Resources>
-    <Style x:Key="RoundedButtonStyle" TargetType="Button">
-      <Setter Property="Background" Value="#4e4f50"/>
-      <Setter Property="Foreground" Value="White"/>
-      <Setter Property="Padding" Value="10,5"/>
-      <Setter Property="FontSize" Value="16"/>
-      <Setter Property="BorderThickness" Value="0"/>
-      <Setter Property="FontFamily" Value="Consolas"/>
-      <Setter Property="Template">
-        <Setter.Value>
-          <ControlTemplate TargetType="Button">
-            <Grid>
-              <Border Background="{TemplateBinding Background}" 
-              CornerRadius="10" 
-              BorderThickness="{TemplateBinding BorderThickness}" 
-              BorderBrush="{TemplateBinding BorderBrush}">
-                <Border.Effect>
-                  <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="0" Opacity="0.5"/>
-                </Border.Effect>
-              </Border>
-              <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            </Grid>
-          </ControlTemplate>
-        </Setter.Value>
-      </Setter>
-      <Style.Triggers>
-        <Trigger Property="IsMouseOver" Value="True">
-          <Setter Property="Background" Value="#746c70"/>
-        </Trigger>
-      </Style.Triggers>
-    </Style>
-    <Style x:Key="RoundedTextBoxStyle" TargetType="TextBox">
-      <Setter Property="Background" Value="#dbd9d9"/>
-      <Setter Property="Foreground" Value="Black"/>
-      <Setter Property="Padding" Value="5"/>
-      <Setter Property="FontSize" Value="12"/>
-      <Setter Property="BorderThickness" Value="1"/>
-      <Setter Property="BorderBrush" Value="#746c70"/>
-      <Setter Property="IsReadOnly" Value="True"/>
-      <Setter Property="IsHitTestVisible" Value="False"/>
-      <Setter Property="Template">
-        <Setter.Value>
-          <ControlTemplate TargetType="TextBox">
-            <Border Background="{TemplateBinding Background}" 
-            CornerRadius="5" 
-            BorderThickness="{TemplateBinding BorderThickness}" 
-            BorderBrush="{TemplateBinding BorderBrush}">
-              <ScrollViewer x:Name="PART_ContentHost"/>
-            </Border>
-          </ControlTemplate>
-        </Setter.Value>
-      </Setter>
-    </Style>
-    <Style x:Key="RoundedTextBlockStyle" TargetType="TextBlock">
-      <Setter Property="Background" Value="Transparent"/>
-      <Setter Property="Foreground" Value="#4e4f50"/>
-      <Setter Property="FontFamily" Value="Consolas"/>
-    </Style>
-    <Style x:Key="DatePickerStyle" TargetType="DatePicker">
-      <Setter Property="FontFamily" Value="Consolas"/>
-      <Setter Property="Foreground" Value="#4e4f50"/>
-      <Setter Property="Template">
-        <Setter.Value>
-          <ControlTemplate TargetType="DatePicker">
-            <Grid>
-              <Border Background="White" CornerRadius="5" BorderThickness="1" BorderBrush="#746c70" Height="30">
-                <Grid>
-                  <DatePickerTextBox x:Name="PART_TextBox" Background="Transparent" Foreground="{TemplateBinding Foreground}" FontFamily="{TemplateBinding FontFamily}" VerticalContentAlignment="Center" Padding="1,0,0,0"/>
-                  <Button x:Name="PART_Button" Content="▼" Width="20" HorizontalAlignment="Right" VerticalAlignment="Center" Background="Transparent" BorderThickness="0"/>
-                </Grid>
-              </Border>
-              <Popup x:Name="PART_Popup" Placement="Bottom" IsOpen="{TemplateBinding IsDropDownOpen}" StaysOpen="False" AllowsTransparency="True">
-                <Border Background="White" BorderBrush="#746c70" BorderThickness="1" CornerRadius="5">
-                  <Calendar x:Name="PART_Calendar" Background="White" Foreground="#4e4f50" FontFamily="Consolas" BorderBrush="#746c70" BorderThickness="1"/>
-                </Border>
-              </Popup>
-            </Grid>
-          </ControlTemplate>
-        </Setter.Value>
-      </Setter>
-    </Style>
+    <ResourceDictionary Source="../../Resources/ResourceDictionary.xaml"/>
   </Page.Resources>
 
   <Grid>
@@ -142,32 +63,38 @@
             <TextBlock Text="Vorname" Grid.Row="0" Grid.Column="0" Margin="5"
                        Style="{StaticResource RoundedTextBlockStyle}"/>
             <TextBox Text="{Binding adminModel.FirstName}" Grid.Row="0" Grid.Column="1" Width="150"
-                     Style="{StaticResource RoundedTextBoxStyle}"/>
+                     Style="{StaticResource RoundedTextBoxStyle}"
+                     IsReadOnly="True" IsHitTestVisible="False" Background="#dbd9d9"/>
 
             <TextBlock Text="Nachname" Grid.Row="0" Grid.Column="2" Margin="5"
                        Style="{StaticResource RoundedTextBlockStyle}"/>
-            <TextBox  Text="{Binding adminModel.Surname}" Grid.Row="0" Grid.Column="3" Width="150"
-                     Style="{StaticResource RoundedTextBoxStyle}"/>
+            <TextBox Text="{Binding adminModel.Surname}" Grid.Row="0" Grid.Column="3" Width="150"
+                     Style="{StaticResource RoundedTextBoxStyle}"
+                     IsReadOnly="True" IsHitTestVisible="False" Background="#dbd9d9"/>
 
             <TextBlock Text="Start" Grid.Row="1" Grid.Column="0" Margin="5"
                        Style="{StaticResource RoundedTextBlockStyle}"/>
             <TextBox Text="{Binding adminModel.StartDate, StringFormat={}{0:dd.MM.yyyy}}" Grid.Row="1" Grid.Column="1" Width="150"
-                        Style="{StaticResource RoundedTextBoxStyle}"/>
+                     Style="{StaticResource RoundedTextBoxStyle}"
+                     IsReadOnly="True" IsHitTestVisible="False" Background="#dbd9d9"/>
 
             <TextBlock Text="Ende" Grid.Row="1" Grid.Column="2" Margin="5"
                        Style="{StaticResource RoundedTextBlockStyle}"/>
             <TextBox Text="{Binding adminModel.EndDate, StringFormat={}{0:dd.MM.yyyy}}" Grid.Row="1" Grid.Column="3" Width="150"
-                        Style="{StaticResource RoundedTextBoxStyle}"/>
+                     Style="{StaticResource RoundedTextBoxStyle}"
+                     IsReadOnly="True" IsHitTestVisible="False" Background="#dbd9d9"/>
 
             <TextBlock Text="Kategorie" Grid.Row="2" Grid.Column="0" Margin="5"
                        Style="{StaticResource RoundedTextBlockStyle}"/>
             <TextBox Text="{Binding adminModel.Category}" Grid.Row="2" Grid.Column="1" Width="150"
-                     Style="{StaticResource RoundedTextBoxStyle}"/>
+                     Style="{StaticResource RoundedTextBoxStyle}"
+                     IsReadOnly="True" IsHitTestVisible="False" Background="#dbd9d9"/>
 
             <TextBlock Text="Zimmerart" Grid.Row="3" Grid.Column="0" Margin="5"
                        Style="{StaticResource RoundedTextBlockStyle}"/>
             <TextBox Text="{Binding adminModel.Type}"  Grid.Row="3" Grid.Column="1" Width="150"
-                     Style="{StaticResource RoundedTextBoxStyle}"/>
+                     Style="{StaticResource RoundedTextBoxStyle}"
+                     IsReadOnly="True" IsHitTestVisible="False" Background="#dbd9d9"/>
 
             <!-- Auftrag löschen Button -->
             <Button Grid.Row="4" Grid.ColumnSpan="4" Content="Auftrag löschen" Margin="10,60,10,10" HorizontalAlignment="Center" Padding="5,2"

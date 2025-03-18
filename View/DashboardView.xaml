@@ -10,57 +10,7 @@
       Title="DashboardView">
 
   <Page.Resources>
-    <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-    <Style x:Key="RoundedButtonStyle" TargetType="Button">
-      <Setter Property="Background" Value="#4e4f50"/>
-      <Setter Property="Foreground" Value="White"/>
-      <Setter Property="Padding" Value="10,5"/>
-      <Setter Property="FontSize" Value="16"/>
-      <Setter Property="BorderThickness" Value="0"/>
-      <Setter Property="FontFamily" Value="Consolas"/>
-      <Setter Property="Template">
-        <Setter.Value>
-          <ControlTemplate TargetType="Button">
-            <Grid>
-              <Border Background="{TemplateBinding Background}" 
-                  CornerRadius="10" 
-                  BorderThickness="{TemplateBinding BorderThickness}" 
-                  BorderBrush="{TemplateBinding BorderBrush}">
-                <Border.Effect>
-                  <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="0" Opacity="0.5"/>
-                </Border.Effect>
-              </Border>
-              <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            </Grid>
-          </ControlTemplate>
-        </Setter.Value>
-      </Setter>
-      <Style.Triggers>
-        <Trigger Property="IsMouseOver" Value="True">
-          <Setter Property="Background" Value="#746c70"/>
-        </Trigger>
-      </Style.Triggers>
-    </Style>
-    <Style x:Key="RoundedTextBoxStyle" TargetType="TextBox">
-      <Setter Property="Background" Value="White"/>
-      <Setter Property="Foreground" Value="Black"/>
-      <Setter Property="Padding" Value="8"/>
-      <Setter Property="FontSize" Value="12"/>
-      <Setter Property="BorderThickness" Value="1"/>
-      <Setter Property="BorderBrush" Value="#746c70"/>
-      <Setter Property="Template">
-        <Setter.Value>
-          <ControlTemplate TargetType="TextBox">
-            <Border Background="{TemplateBinding Background}" 
-                CornerRadius="5" 
-                BorderThickness="{TemplateBinding BorderThickness}" 
-                BorderBrush="{TemplateBinding BorderBrush}">
-              <ScrollViewer x:Name="PART_ContentHost"/>
-            </Border>
-          </ControlTemplate>
-        </Setter.Value>
-      </Setter>
-    </Style>
+    <ResourceDictionary Source="../../Resources/ResourceDictionary.xaml"/>
   </Page.Resources>
 
   <Grid>
@@ -77,7 +27,7 @@
         <Border.Effect>
           <DropShadowEffect Color="Black" BlurRadius="20" ShadowDepth="0" Opacity="0.5"/>
         </Border.Effect>
-        <TextBlock Text="Willkommen bei FunRest" FontSize="40" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10" FontFamily="Consolas" Foreground="#4e4f50"/>
+        <TextBlock Text="Willkommen bei FUNREST" FontSize="40" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10" FontFamily="Consolas" Foreground="#4e4f50"/>
       </Border>
 
       <Border Background="White" HorizontalAlignment="Center" VerticalAlignment="Center" Width="700" Height="300" CornerRadius="20">
