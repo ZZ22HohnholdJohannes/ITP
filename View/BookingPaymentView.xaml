@@ -45,6 +45,7 @@
       <Setter Property="FontSize" Value="12"/>
       <Setter Property="BorderThickness" Value="1"/>
       <Setter Property="BorderBrush" Value="#746c70"/>
+      <Setter Property="FontFamily" Value="Consolas"/>
       <Setter Property="Template">
         <Setter.Value>
           <ControlTemplate TargetType="TextBox">
@@ -52,7 +53,10 @@
               CornerRadius="5" 
               BorderThickness="{TemplateBinding BorderThickness}" 
               BorderBrush="{TemplateBinding BorderBrush}">
-              <ScrollViewer x:Name="PART_ContentHost"/>
+              <ScrollViewer x:Name="PART_ContentHost"
+                            FontFamily="{TemplateBinding FontFamily}" 
+                            FontSize="{TemplateBinding FontSize}"
+                            Foreground="{TemplateBinding Foreground}"/>
             </Border>
           </ControlTemplate>
         </Setter.Value>
