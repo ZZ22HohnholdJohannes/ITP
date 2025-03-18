@@ -257,7 +257,7 @@ namespace Reserve_iT.ViewModel
       }
       else
       {
-        isAdminLoggedIn = true;
+        isAdminLoggedIn = false;
       }
     }
     #endregion Dashboard
