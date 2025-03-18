@@ -469,6 +469,7 @@ BEGIN
 			,a.auftrag_ID
 			,g.vorname
 			,g.nachname
+			,b.rezension
 	FROM bewertung b
 	JOIN auftrag a ON a.auftrag_ID = b.auftrag_ID
 	JOIN gast g ON g.gast_ID = a.gast_ID
