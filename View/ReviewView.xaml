@@ -184,26 +184,30 @@
                     <TextBlock Text="{Binding ReviewID}" 
                                Visibility="{Binding DataContext.isAdminLoggedIn, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource BoolToVisibilityConverter}}"
                                Style="{StaticResource RoundedTextBlockStyle}"/>
-
                     <TextBlock Text="Order ID:" FontWeight="Bold" Margin="0,5,0,0" 
                                Visibility="{Binding DataContext.isAdminLoggedIn, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource BoolToVisibilityConverter}}"
                                Style="{StaticResource RoundedTextBlockStyle}"/>
                     <TextBlock Text="{Binding OrderID}" 
                                Visibility="{Binding DataContext.isAdminLoggedIn, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource BoolToVisibilityConverter}}"
                                Style="{StaticResource RoundedTextBlockStyle}"/>
-
+                    <TextBlock Text="Vorname:" FontWeight="Bold" Margin="0,5,0,0" 
+                               Visibility="{Binding DataContext.isAdminLoggedIn, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource BoolToVisibilityConverter}}"
+                               Style="{StaticResource RoundedTextBlockStyle}"/>
+                    <TextBlock Text="{Binding Vorname}" 
+                               Visibility="{Binding DataContext.isAdminLoggedIn, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource BoolToVisibilityConverter}}"
+                               Style="{StaticResource RoundedTextBlockStyle}"/>
+                    <TextBlock Text="Nachname:" FontWeight="Bold" Margin="0,5,0,0" 
+                               Visibility="{Binding DataContext.isAdminLoggedIn, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource BoolToVisibilityConverter}}"
+                               Style="{StaticResource RoundedTextBlockStyle}"/>
+                    <TextBlock Text="{Binding Nachname}" 
+                               Visibility="{Binding DataContext.isAdminLoggedIn, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource BoolToVisibilityConverter}}"
+                               Style="{StaticResource RoundedTextBlockStyle}"/>
                     <TextBlock Text="Review Text:" FontWeight="Bold" Margin="0,5,0,0" 
                                Visibility="{Binding DataContext.isAdminLoggedIn, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource BoolToVisibilityConverter}}"
                                Style="{StaticResource RoundedTextBlockStyle}"/>
                     <TextBlock Text="{Binding ReviewText}" TextWrapping="Wrap"
                                Style="{StaticResource RoundedTextBlockStyle}"/>
 
-                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                      <TextBlock Text="Published:" FontWeight="Bold" 
-                                 Visibility="{Binding DataContext.isAdminLoggedIn, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource BoolToVisibilityConverter}}"
-                                 Style="{StaticResource RoundedTextBlockStyle}"/>
-                      <CheckBox IsChecked="{Binding Published}" IsEnabled="False" Margin="5,0,0,0" Visibility="{Binding DataContext.isAdminLoggedIn, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource BoolToVisibilityConverter}}"/>
-                    </StackPanel>
                   </StackPanel>
                 </Border>
                 <Border Background="White" Width="650" Height="Auto" BorderBrush="Gray" CornerRadius="20" VerticalAlignment="Center">
@@ -214,37 +218,40 @@
                     <TextBlock Text="{Binding ReviewID}" 
                            Visibility="{Binding DataContext.isAdminLoggedIn, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource BoolToVisibilityConverter}}"
                            Style="{StaticResource RoundedTextBlockStyle}"/>
-
                     <TextBlock Text="Order ID:" FontWeight="Bold" Margin="0,5,0,0" 
                            Visibility="{Binding DataContext.isAdminLoggedIn, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource BoolToVisibilityConverter}}"
                            Style="{StaticResource RoundedTextBlockStyle}"/>
                     <TextBlock Text="{Binding OrderID}" 
                            Visibility="{Binding DataContext.isAdminLoggedIn, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource BoolToVisibilityConverter}}"
                            Style="{StaticResource RoundedTextBlockStyle}"/>
-
+                    <TextBlock Text="Vorname:" FontWeight="Bold" Margin="0,5,0,0" 
+                               Visibility="{Binding DataContext.isAdminLoggedIn, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource BoolToVisibilityConverter}}"
+                               Style="{StaticResource RoundedTextBlockStyle}"/>
+                    <TextBlock Text="{Binding Vorname}" 
+                               Visibility="{Binding DataContext.isAdminLoggedIn, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource BoolToVisibilityConverter}}"
+                               Style="{StaticResource RoundedTextBlockStyle}"/>
+                    <TextBlock Text="Nachname:" FontWeight="Bold" Margin="0,5,0,0" 
+                               Visibility="{Binding DataContext.isAdminLoggedIn, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource BoolToVisibilityConverter}}"
+                               Style="{StaticResource RoundedTextBlockStyle}"/>
+                    <TextBlock Text="{Binding Nachname}" 
+                               Visibility="{Binding DataContext.isAdminLoggedIn, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource BoolToVisibilityConverter}}"
+                               Style="{StaticResource RoundedTextBlockStyle}"/>
                     <TextBlock Text="Review Text:" FontWeight="Bold" Margin="0,5,0,0" 
                            Visibility="{Binding DataContext.isAdminLoggedIn, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource BoolToVisibilityConverter}}"
                            Style="{StaticResource RoundedTextBlockStyle}"/>
                     <TextBlock Text="{Binding ReviewText}" TextWrapping="Wrap"
                            Style="{StaticResource RoundedTextBlockStyle}"/>
-
-                    <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                      <TextBlock Text="Published:" FontWeight="Bold" 
-                             Visibility="{Binding DataContext.isAdminLoggedIn, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource BoolToVisibilityConverter}}"
-                             Style="{StaticResource RoundedTextBlockStyle}"/>
-                      <CheckBox IsChecked="{Binding Published}" IsEnabled="False" Margin="5,0,0,0" Visibility="{Binding DataContext.isAdminLoggedIn, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource BoolToVisibilityConverter}}"/>
-                    </StackPanel>
                   </StackPanel>
                 </Border>
                 <StackPanel Orientation="Vertical" Grid.Column="0" HorizontalAlignment="Right" Margin="0,15,35,0">
                   <Button Content="Y" Width="30" Height="30" Margin="0,0,0,10"
-        Style="{StaticResource RoundedButtonStyle}"
-        Command="{Binding Data.AcceptReviewCommand, Source={StaticResource BindingProxy}}" CommandParameter="{Binding}"
-        Visibility="{Binding DataContext.isAdminLoggedIn, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                          Style="{StaticResource RoundedButtonStyle}"
+                          Command="{Binding Data.AcceptReviewCommand, Source={StaticResource BindingProxy}}" CommandParameter="{Binding}"
+                          Visibility="{Binding DataContext.isAdminLoggedIn, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource BoolToVisibilityConverter}}"/>
                   <Button Content="N" Width="30" Height="30"
-        Style="{StaticResource RoundedButtonStyle}"
-        Command="{Binding Data.DenyReviewCommand, Source={StaticResource BindingProxy}}" CommandParameter="{Binding}"
-        Visibility="{Binding DataContext.isAdminLoggedIn, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                          Style="{StaticResource RoundedButtonStyle}"
+                          Command="{Binding Data.DenyReviewCommand, Source={StaticResource BindingProxy}}" CommandParameter="{Binding}"
+                          Visibility="{Binding DataContext.isAdminLoggedIn, RelativeSource={RelativeSource AncestorType=Page}, Converter={StaticResource BoolToVisibilityConverter}}"/>
 
                 </StackPanel>
               </Grid>
