@@ -11,17 +11,17 @@ namespace Reserve_iT.Services
 {
   public class AdminService
   {
-    public void ShowBooking(int orderID)
+    public AdminModel ShowBooking(int orderID)
     {
       var parameters = new Dictionary<string, object>
-      {
-        { "orderID", orderID }
-      };
+    {
+        { "auftrag_id_in", orderID }
+    };
       DataTable dt = DatabaseService.ExecuteSP("showBookings", parameters);
-      var admins = new ObservableCollection<AdminModel>();
 
-      foreach (DataRow row in dt.Rows)
+      if (dt.Rows.Count > 0)
       {
+        DataRow row = dt.Rows[0];
         var admin = new AdminModel
         {
           FirstName = Convert.ToString(row["vorname"]),
@@ -29,12 +29,16 @@ namespace Reserve_iT.Services
           Category = Convert.ToString(row["kategorie"]),
           Type = Convert.ToString(row["zimmerart"]),
           StartDate = Convert.ToDateTime(row["startdatum"]),
-          EndDate = Convert.ToDateTime(row["enddatum"]),
+          EndDate = Convert.ToDateTime(row["enddatum"])
         };
-        admins.Add(admin);
+        return admin;
       }
-      //showBookings
-      //deleteBooking
+      else
+      {
+        return null;
+      }
     }
+    //showBookings
+    //deleteBooking
   }
 }

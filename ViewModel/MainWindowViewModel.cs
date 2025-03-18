@@ -20,6 +20,7 @@ using Reserve_iT.Model;
 using System.Data;
 using CommunityToolkit.Mvvm.Input;
 using Org.BouncyCastle.Security;
+using Mysqlx.Crud;
 
 namespace Reserve_iT.ViewModel
 {
@@ -29,6 +30,19 @@ namespace Reserve_iT.ViewModel
     public Frame MainFrame
     {
       get => Get<Frame>();
+      set => Set(value);
+    }
+
+    //Administration
+    public int OrderID
+    {
+      get => Get<int>();
+      set => Set(value);
+    }
+
+    public AdminModel adminModel
+    {
+      get => Get<AdminModel>();
       set => Set(value);
     }
     //Für Booking Service
@@ -224,7 +238,7 @@ namespace Reserve_iT.ViewModel
     }
 
     //Navigation zur Administation
-    private void NavigateToAdminView() => MainFrame?.Navigate(new AdminView());
+    private void NavigateToAdminView() => MainFrame?.Navigate(new AdminView() { DataContext = this});
     //Navigation zurück
     private void NavigateBack()
     {
@@ -243,7 +257,7 @@ namespace Reserve_iT.ViewModel
       }
       else
       {
-        isAdminLoggedIn = false;
+        isAdminLoggedIn = true;
       }
     }
     #endregion Dashboard
@@ -337,7 +351,19 @@ namespace Reserve_iT.ViewModel
     #region Admin
     public void ShowBooking()
     {
+      var adminService = new AdminService();
+      // Verwende hier die OrderID, die im Suchfeld eingegeben wurde
+      var result = adminService.ShowBooking(OrderID);
 
+      if (result != null)
+      {
+        // Speichere das Ergebnis in der Property, die in der View gebunden wird
+        adminModel = result;
+      }
+      else
+      {
+        MessageBox.Show("Kein Auftrag gefunden", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+      }
     }
 
     public void DeleteBooking()
@@ -348,7 +374,7 @@ namespace Reserve_iT.ViewModel
     #endregion Admin
 
     #endregion Methods
-
+    //Noch nicht implementiert
     public void CreateBooking()
     {
 
