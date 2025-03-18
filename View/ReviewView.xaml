@@ -255,51 +255,22 @@
     </Grid>
 
     <!-- TextBox und Bewerten Button -->
-    <TextBox Grid.Row="1" Width="570" Height="70" Margin="5,5,120,5"
+    <Grid Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto"/>
+        <ColumnDefinition Width="Auto"/>
+      </Grid.ColumnDefinitions>
+      <TextBox Width="570" Height="70" Margin="5,5,10,5"
           Text="{Binding ReviewText, UpdateSourceTrigger=PropertyChanged}"
           Style="{StaticResource RoundedTextBoxStyle}"/>
-    <Button Grid.Row="1" Content="Bewerten" Width="100" Height="30" Margin="5,30,100,10" HorizontalAlignment="Right" VerticalAlignment="Top"
-         Command="{Binding AddReviewCommand}"
-         Style="{StaticResource RoundedButtonStyle}"/>
-    <TextBox x:Name="BookingNumberTextBox" Grid.Row="1" Width="100" Height="Auto" Margin="5,10,100,30" HorizontalAlignment="Right" VerticalAlignment="Bottom"
-          Text="{Binding ReviewOrderId, UpdateSourceTrigger=PropertyChanged}"
-          Style="{StaticResource RoundedTextBoxStyle}"/>
-
-    <!-- Standardwert als Overlay für TextBox; Verschwindet wenn Text in TextBox eingetragen wird -->
-    <TextBlock Text="Booking ID" 
-            Foreground="Gray" Grid.Row="1" Width="100" Height="Auto" Margin="5,0,90,40" HorizontalAlignment="Right" VerticalAlignment="Bottom"
-            IsHitTestVisible="False">
-      <TextBlock.Style>
-        <Style TargetType="TextBlock">
-          <Setter Property="Visibility" Value="Visible"/>
-          <Style.Triggers>
-            <DataTrigger Binding="{Binding Text, ElementName=BookingNumberTextBox}" Value="">
-              <Setter Property="Visibility" Value="Visible"/>
-            </DataTrigger>
-            <DataTrigger Binding="{Binding Text.Length, ElementName=BookingNumberTextBox}" Value="0">
-              <Setter Property="Visibility" Value="Visible"/>
-            </DataTrigger>
-            <DataTrigger Binding="{Binding Text.Length, ElementName=BookingNumberTextBox}" Value="1">
-              <Setter Property="Visibility" Value="Collapsed"/>
-            </DataTrigger>
-            <DataTrigger Binding="{Binding Text.Length, ElementName=BookingNumberTextBox}" Value="2">
-              <Setter Property="Visibility" Value="Collapsed"/>
-            </DataTrigger>
-            <DataTrigger Binding="{Binding Text.Length, ElementName=BookingNumberTextBox}" Value="3">
-              <Setter Property="Visibility" Value="Collapsed"/>
-            </DataTrigger>
-            <DataTrigger Binding="{Binding Text.Length, ElementName=BookingNumberTextBox}" Value="4">
-              <Setter Property="Visibility" Value="Collapsed"/>
-            </DataTrigger>
-            <DataTrigger Binding="{Binding Text.Length, ElementName=BookingNumberTextBox}" Value="5">
-              <Setter Property="Visibility" Value="Collapsed"/>
-            </DataTrigger>
-            <DataTrigger Binding="{Binding Text.Length, ElementName=BookingNumberTextBox}" Value="6">
-              <Setter Property="Visibility" Value="Collapsed"/>
-            </DataTrigger>
-          </Style.Triggers>
-        </Style>
-      </TextBlock.Style>
-    </TextBlock>
+      <StackPanel Orientation="Vertical" Grid.Column="1" Margin="10,0,0,0">
+        <Button Content="Bewerten" Width="100" Height="30" Margin="0,5,0,5" VerticalAlignment="Top"
+           Command="{Binding AddReviewCommand}"
+           Style="{StaticResource RoundedButtonStyle}"/>
+        <TextBox x:Name="BookingNumberTextBox" Width="100" Height="Auto" Margin="0,0,0,0" VerticalAlignment="Bottom"
+            Text="{Binding ReviewOrderId, UpdateSourceTrigger=PropertyChanged}"
+            Style="{StaticResource RoundedTextBoxStyle}"/>
+      </StackPanel>
+    </Grid>
   </Grid>
 </Page>
