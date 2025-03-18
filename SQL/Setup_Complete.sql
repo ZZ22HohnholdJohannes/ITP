@@ -284,7 +284,10 @@ VALUES
 (2, '2024-03-10', '2024-03-15'),
 (3, '2024-04-01', '2024-04-07'),
 (4, '2024-05-01', '2024-05-05'),
-(5, '2024-06-01', '2024-06-05');
+(5, '2024-06-01', '2024-06-05'),
+(1, '2024-09-12', '2024-12-12'),
+(2, '2024-10-01', '2024-10-11'),
+(3, '2024-10-24', '2024-11-02');
 
 -- Buchung-Daten (Die IDs werden automatisch vergeben)
 INSERT INTO buchung (auftrag_ID, hotelzimmer_ID)
@@ -293,7 +296,10 @@ VALUES
 (2, 2),
 (3, 3),
 (4, 4),
-(5, 5);
+(5, 5),
+(6, 1),
+(7, 2),
+(8, 3);
 
 -- Bewertung-Daten (Die IDs werden automatisch vergeben)
 INSERT INTO bewertung (auftrag_ID, istfreigegeben, rezension)
