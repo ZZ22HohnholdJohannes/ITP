@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.Data;
 using Reserve_iT.Services;
 using Reserve_iT.Model;
+using System.Windows;
+using MySqlX.XDevAPI.Common;
 
 namespace Reserve_iT.Services
 {
@@ -59,8 +61,19 @@ namespace Reserve_iT.Services
       { "auftrag_id_in", orderId },
       { "rezension_in", reviewText }
     };
-
-      DatabaseService.ExecuteSP("submitReview", parameters);
+      var dt = DatabaseService.ExecuteSP("submitReview", parameters);
+      foreach (DataRow row in dt.Rows)
+      {
+        var result = Convert.ToInt32(row["Result"]);
+        if (result == 0)
+        {
+          MessageBox.Show("Bitte gültige Auftragsnummer eingeben", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+        else if (result == 1)
+        {
+          MessageBox.Show("Bewertung erfolgreich übermittelt", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+      }
     }
   }
 }

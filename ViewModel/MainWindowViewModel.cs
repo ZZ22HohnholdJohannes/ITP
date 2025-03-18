@@ -318,8 +318,6 @@ namespace Reserve_iT.ViewModel
     {
       var reviewService = new ReviewService();
       reviewService.AddReview(ReviewOrderId, ReviewText);
-      MessageBox.Show("Bewertung erfolgreich übermittelt", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-      LoadReviews();
     }
 
     public void BookOrder()
