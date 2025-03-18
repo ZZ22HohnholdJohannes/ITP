@@ -332,12 +332,12 @@ DELIMITER ;
 USE reserve_it;
 
 DELIMITER //
-CREATE PROCEDURE reviewLoeschen (IN auftrag_id_in INT)
+CREATE PROCEDURE reviewLoeschen (IN bewertung_id_in INT)
 BEGIN
 
 	DELETE
-	FROM auftrag
-	WHERE auftrag_ID = auftrag_id_in;
+	FROM bewertung
+	WHERE bewertung_ID = bewertung_id_in;
 
 END//
 DELIMITER ;
