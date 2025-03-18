@@ -34,10 +34,5 @@ namespace Reserve_iT.Model
       set => Set(value);
     }
 
-    /*public ObservableCollection<ReviewModel> Reviews
-    {
-      get => Get<ObservableCollection<ReviewModel>>();
-      set => Set(value);
-    }*/ 
   }
 }
