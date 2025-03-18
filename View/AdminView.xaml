@@ -113,7 +113,8 @@
           </Grid.RowDefinitions>
 
           <!-- Suchfeld -->
-          <TextBox Grid.Row="0" Height="30" Margin="10" Text="Suchfeld (Auftrag_ID)"
+          <TextBox Grid.Row="0" Height="30" Margin="10" 
+                   Text="{Binding OrderID, UpdateSourceTrigger=PropertyChanged}"
                    Style="{StaticResource RoundedTextBoxStyle}"
                    IsReadOnly="False" IsHitTestVisible="True"
                    Background="White"/>
@@ -136,37 +137,37 @@
             <!-- Labels und Eingabefelder -->
             <TextBlock Text="Vorname" Grid.Row="0" Grid.Column="0" Margin="5"
                        Style="{StaticResource RoundedTextBlockStyle}"/>
-            <TextBox Grid.Row="0" Grid.Column="1" Width="150"
+            <TextBox Text="{Binding FirstName}" Grid.Row="0" Grid.Column="1" Width="150"
                      Style="{StaticResource RoundedTextBoxStyle}"/>
 
             <TextBlock Text="Nachname" Grid.Row="0" Grid.Column="2" Margin="5"
                        Style="{StaticResource RoundedTextBlockStyle}"/>
-            <TextBox Grid.Row="0" Grid.Column="3" Width="150"
+            <TextBox  Text="{Binding Surname}" Grid.Row="0" Grid.Column="3" Width="150"
                      Style="{StaticResource RoundedTextBoxStyle}"/>
 
             <TextBlock Text="Start" Grid.Row="1" Grid.Column="0" Margin="5"
                        Style="{StaticResource RoundedTextBlockStyle}"/>
-            <TextBox Grid.Row="1" Grid.Column="1" Width="150"
+            <TextBox Text="{Binding StartDate, StringFormat={}{0:dd.MM.yyyy}}" Grid.Row="1" Grid.Column="1" Width="150"
                         Style="{StaticResource RoundedTextBoxStyle}"/>
 
             <TextBlock Text="Ende" Grid.Row="1" Grid.Column="2" Margin="5"
                        Style="{StaticResource RoundedTextBlockStyle}"/>
-            <TextBox Grid.Row="1" Grid.Column="3" Width="150"
+            <TextBox Text="{Binding StartDate, StringFormat={}{0:dd.MM.yyyy}}" Grid.Row="1" Grid.Column="3" Width="150"
                         Style="{StaticResource RoundedTextBoxStyle}"/>
 
             <TextBlock Text="Kategorie" Grid.Row="2" Grid.Column="0" Margin="5"
                        Style="{StaticResource RoundedTextBlockStyle}"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Width="150"
+            <TextBox Text="{Binding Category}" Grid.Row="2" Grid.Column="1" Width="150"
                      Style="{StaticResource RoundedTextBoxStyle}"/>
 
             <TextBlock Text="Zimmerart" Grid.Row="3" Grid.Column="0" Margin="5"
                        Style="{StaticResource RoundedTextBlockStyle}"/>
-            <TextBox Grid.Row="3" Grid.Column="1" Width="150"
+            <TextBox Text="{Binding Type}"  Grid.Row="3" Grid.Column="1" Width="150"
                      Style="{StaticResource RoundedTextBoxStyle}"/>
 
             <!-- Auftrag löschen Button -->
             <Button Grid.Row="4" Grid.ColumnSpan="4" Content="Auftrag löschen" Margin="10,60,10,10" HorizontalAlignment="Center" Padding="5,2"
-                    Height="30" Width="150" Style="{StaticResource RoundedButtonStyle}"/>
+                    Height="30" Width="150" Command="{Binding DeleteBookingCommand}"  Style="{StaticResource RoundedButtonStyle}"/>
           </Grid>
         </Grid>
       </Border>

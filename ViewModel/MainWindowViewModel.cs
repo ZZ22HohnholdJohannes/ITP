@@ -164,13 +164,17 @@ namespace Reserve_iT.ViewModel
       NavigateBackCommand = new RelayCommand(NavigateBack);
       //Booking Service
       CheckAvailabilityCommand = new RelayCommand(CheckAvailability);
-      //Ab hier schreibe ich Commands, die noch implementiert werden müssen, aber noch nicht fertig sind
+      //Bewertung
       AcceptReviewCommand = new RelayCommand<ReviewModel>(AcceptReview);
       DenyReviewCommand = new RelayCommand<ReviewModel>(DenyReview);
       AddReviewCommand = new RelayCommand(AddReview);
-      BookOrderCommand = new RelayCommand(BookOrder);
-      DeleteOrderCommand = new RelayCommand(DeleteOrder);
       LoadReviewsCommand = new RelayCommand(LoadReviews);
+      //Administration
+      ShowBookingCommand = new RelayCommand(ShowBooking);
+      DeleteBookingCommand = new RelayCommand(DeleteBooking);
+      //Ab hier schreibe ich Commands, die noch implementiert werden müssen, aber noch nicht fertig sind
+      CreateBookingCommand = new RelayCommand(CreateBooking);
+      SaveGuestDataCommand = new RelayCommand(SaveGuestData);
     }
 
     //Login
@@ -189,13 +193,18 @@ namespace Reserve_iT.ViewModel
     public ICommand NavigateBackCommand { get; private set; }
     //Booking Service
     public ICommand CheckAvailabilityCommand { get; private set; }
-    //Ab hier schreibe ich Commands, die noch implementiert werden müssen, aber noch nicht fertig sind
+    //Bewertung
     public ICommand AcceptReviewCommand { get; private set; }
     public ICommand DenyReviewCommand { get; private set; }
     public ICommand AddReviewCommand { get; private set; }
-    public ICommand BookOrderCommand { get; private set; }
-    public ICommand DeleteOrderCommand { get; private set; }
     public ICommand LoadReviewsCommand { get; private set; }
+    //Administration
+    public ICommand ShowBookingCommand { get; private set; }
+    public ICommand DeleteBookingCommand { get; private set; }
+    //Ab hier schreibe ich Commands, die noch implementiert werden müssen, aber noch nicht fertig sind (Gehören zur PaymentView)
+    public ICommand CreateBookingCommand { get; private set; }
+    public ICommand SaveGuestDataCommand { get; private set; }
+
 
     #endregion Commands
 
@@ -225,6 +234,7 @@ namespace Reserve_iT.ViewModel
 
     #endregion Navigation
 
+    #region Dashboard
     public void Login()
     {
       if (AdminPassword == "Admin")
@@ -236,7 +246,9 @@ namespace Reserve_iT.ViewModel
         isAdminLoggedIn = false;
       }
     }
+    #endregion Dashboard
 
+    #region Booking
     public void CheckAvailability()
     {
       if (StartDate >= EndDate)
@@ -284,8 +296,9 @@ namespace Reserve_iT.ViewModel
       int numberOfDays = (endDate.Date - startDate.Date).Days;
       return numberOfDays * costPerNight;
     }
+    #endregion Booking
 
-
+    #region Reviews
     public void LoadReviews()
     {
       var reviewService = new ReviewService();
@@ -319,18 +332,31 @@ namespace Reserve_iT.ViewModel
       var reviewService = new ReviewService();
       reviewService.AddReview(ReviewOrderId, ReviewText);
     }
+    #endregion Review
 
-    public void BookOrder()
+    #region Admin
+    public void ShowBooking()
     {
 
     }
 
-    public void DeleteOrder()
+    public void DeleteBooking()
     {
 
     }
+
+    #endregion Admin
 
     #endregion Methods
 
+    public void CreateBooking()
+    {
+
+    }
+
+    public void SaveGuestData()
+    {
+
+    }
   }
 }
