@@ -208,7 +208,12 @@ namespace Reserve_iT.ViewModel
     private void NavigateToBookingConfirmationView() => MainFrame?.Navigate(new BookingConfirmationView() { DataContext = this }); //Navigation von BookingSearchView zu BookingConfirmationView
     private void NavigateToBookingPaymentView() => MainFrame?.Navigate(new BookingPaymentView());
     //Navigation zu Bewertung
-    private void NavigateToReviewView() => MainFrame?.Navigate(new ReviewView() { DataContext = this } );
+    private void NavigateToReviewView()
+    {
+      MainFrame?.Navigate(new ReviewView() { DataContext = this });
+      LoadReviews();
+    }
+
     //Navigation zur Administation
     private void NavigateToAdminView() => MainFrame?.Navigate(new AdminView());
     //Navigation zurück
@@ -285,7 +290,6 @@ namespace Reserve_iT.ViewModel
     {
       var reviewService = new ReviewService();
       Reviews = reviewService.LoadReviews(isAdminLoggedIn); // Hier wird die ObservableCollection<ReviewModel> in der ViewModel-Property aktualisiert.
-      NavigateToReviewView();
     }
     public void AcceptReview(object? review)
     {
