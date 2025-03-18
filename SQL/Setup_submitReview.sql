@@ -40,7 +40,7 @@ BEGIN
 	
 	END if;
 	
-	if rezension_vorhanden = 0 THEN
+	if rezension_vorhanden <= 0 THEN
 	
 		SELECT 0 AS reviewTextResult;
 	
