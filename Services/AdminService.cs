@@ -38,7 +38,14 @@ namespace Reserve_iT.Services
         return null;
       }
     }
-    //showBookings
-    //deleteBooking
+
+    public void DeleteBooking(int orderID)
+    {
+      var parameters = new Dictionary<string, object>
+    {
+        { "auftrag_id_in", orderID }
+    };
+      DatabaseService.ExecuteSP("deleteBooking", parameters);
+    }
   }
 }

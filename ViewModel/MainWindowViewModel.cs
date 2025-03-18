@@ -45,6 +45,13 @@ namespace Reserve_iT.ViewModel
       get => Get<AdminModel>();
       set => Set(value);
     }
+
+    public bool IsBookingFound
+    {
+      get => Get<bool>();
+      set => Set(value);
+    }
+
     //Für Booking Service
     public DateTime StartDate
     {
@@ -352,23 +359,38 @@ namespace Reserve_iT.ViewModel
     public void ShowBooking()
     {
       var adminService = new AdminService();
-      // Verwende hier die OrderID, die im Suchfeld eingegeben wurde
       var result = adminService.ShowBooking(OrderID);
 
       if (result != null)
       {
-        // Speichere das Ergebnis in der Property, die in der View gebunden wird
         adminModel = result;
+        adminModel.OrderID = OrderID;
+        IsBookingFound = true;
       }
       else
       {
-        MessageBox.Show("Kein Auftrag gefunden", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+        MessageBox.Show("Kein Auftrag gefunden", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        adminModel = null;
+        IsBookingFound = false;
       }
     }
 
     public void DeleteBooking()
     {
+      if (adminModel == null)
+      {
+        MessageBox.Show("Kein Auftrag zum Löschen ausgewählt.", "Error",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
+        return;
+      }
 
+      var adminService = new AdminService();
+      adminService.DeleteBooking(adminModel.OrderID);
+
+      MessageBox.Show("Auftrag erfolgreich gelöscht.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+      adminModel = null;
+      IsBookingFound = false;
+      OrderID = 0; //Suchfeld wird geleert
     }
 
     #endregion Admin
