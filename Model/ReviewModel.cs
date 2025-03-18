@@ -33,6 +33,5 @@ namespace Reserve_iT.Model
       get => Get<string>();
       set => Set(value);
     }
-
   }
 }
