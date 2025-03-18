@@ -6,7 +6,7 @@ BEGIN
 
 	DECLARE auftrag_id_vorhanden int;
 	DECLARE auftrag_id_gueltig INT;
-	DECLARE rezension_vorhanden NVARCHAR(500)
+	DECLARE rezension_vorhanden NVARCHAR(500);
 	
 	SELECT COUNT(*) INTO auftrag_id_vorhanden
 	FROM bewertung
