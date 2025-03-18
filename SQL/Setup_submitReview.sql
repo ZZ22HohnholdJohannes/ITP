@@ -1,3 +1,7 @@
+USE reserve_it;
+DELIMITER //
+
+CREATE PROCEDURE submitReview(IN auftrag_id_in INT, IN bewertung_in NVARCHAR(500))
 BEGIN
 
 	DECLARE auftrag_id_vorhanden int;
@@ -19,4 +23,12 @@ BEGIN
 		
 	END if;
 	
-END
+	if auftrag_id_vorhanden > 0 OR auftrag_id_gueltig = 0 THEN
+		
+		SELECT 0;
+		
+	END if;
+	
+END//
+
+DELIMITER ;
