@@ -24,13 +24,13 @@
     <Resource Include="Images\hotel_outside.jpg" />
     <Resource Include="Images\Logo_Dark.png" />
     <Resource Include="Images\Logo_Light.png" />
-    <Resource Include="Images\Luxus_Doppelzimer.png" />
-    <Resource Include="Images\Luxus_Einzelzimer.png" />
-    <Resource Include="Images\Premium_Doppelzimmer.png" />
-    <Resource Include="Images\Premium_Einzelzimmer.png" />
+    <Resource Include="Images\luxus_doppelzimmer.png" />
+    <Resource Include="Images\luxus_einzelzimer.png" />
+    <Resource Include="Images\premium_doppelzimmer.png" />
+    <Resource Include="Images\premium_einzelzimmer.png" />
     <Resource Include="Images\review.jpg" />
-    <Resource Include="Images\Standard_Doppelzimmer.png" />
-    <Resource Include="Images\Standard_Einzelzimmer.png" />
+    <Resource Include="Images\standard_doppelzimmer.png" />
+    <Resource Include="Images\standard_einzelzimmer.png" />
   </ItemGroup>
 
   <ItemGroup>

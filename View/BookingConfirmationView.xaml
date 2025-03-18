@@ -93,7 +93,9 @@
         <Grid>
           <StackPanel Orientation="Vertical" Margin="20">
             <Border BorderThickness="1" BorderBrush="Black" Height="200" VerticalAlignment="Top" Margin="0,0,0,20">
-              <TextBlock Text="Bild von Zimmer" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
+              <Border.Background>
+                <ImageBrush ImageSource="{Binding PictureRoom}" Stretch="UniformToFill"/>
+              </Border.Background>
             </Border>
 
             <Grid Margin="10" HorizontalAlignment="Stretch">

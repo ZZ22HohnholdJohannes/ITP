@@ -96,6 +96,12 @@ namespace Reserve_iT.ViewModel
       set => Set(value);
     }
 
+    public string PictureRoom
+    {
+      get => Get<string>();
+      set => Set(value);
+    }
+
     //AdminLogin
     public bool isAdminLoggedIn
     {
@@ -255,6 +261,7 @@ namespace Reserve_iT.ViewModel
         RoomCategory = row["kategorie"].ToString();
         CostPerNight = Convert.ToDecimal(row["preis_pro_nacht"]);
         TotalCost = CalculateTotalCost(StartDate, EndDate, CostPerNight);
+        PictureRoom = "pack://application:,,,/Images/" + RoomCategory + "_" + RoomType + ".png";
 
         MessageBox.Show("Zimmer verfügbar", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
         NavigateToBookingConfirmationView();
