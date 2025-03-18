@@ -22,12 +22,18 @@ namespace Reserve_iT.Model
       set => Set(value);
     }
 
-    public bool Published
+    public string Vorname
     {
-      get => Get<bool>();
+      get => Get<string>();
       set => Set(value);
     }
-    
+
+    public string Nachname
+    {
+      get => Get<string>();
+      set => Set(value);
+    }
+
     public string ReviewText
     {
       get => Get<string>();

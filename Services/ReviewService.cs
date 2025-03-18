@@ -24,7 +24,8 @@ namespace Reserve_iT.Services
         {
           ReviewID = Convert.ToInt32(row["bewertung_ID"]),
           OrderID = Convert.ToInt32(row["auftrag_ID"]),
-          Published = Convert.ToBoolean(row["istFreigegeben"]),
+          Vorname = row["Vorname"].ToString(),
+          Nachname = row["Nachname"].ToString(),
           ReviewText = row["rezension"].ToString()
         };
 
