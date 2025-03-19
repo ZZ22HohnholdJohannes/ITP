@@ -323,7 +323,6 @@ namespace Reserve_iT.ViewModel
     #region Payment
     private bool CanCreateBooking()
     {
-      // Hier kannst du prüfen, ob alle erforderlichen Felder gesetzt sind.
       return true;
     }
 
@@ -331,10 +330,10 @@ namespace Reserve_iT.ViewModel
     {
       var paymentService = new PaymentService();
 
-      DateTime startDate = DateTime.Now;
-      DateTime endDate = DateTime.Now.AddDays(1);
-      string category = "Standard";
-      string type = "Doppelzimmer";
+      DateTime startDate = StartDate;
+      DateTime endDate = EndDate;
+      string category = RoomCategory;
+      string type = RoomType;
 
       paymentService.CreateBooking(Payment, startDate, endDate, category, type);
     }
