@@ -138,7 +138,11 @@ namespace Reserve_iT.ViewModel
       set => Set(value);
     }
     //Alles für Payment
-    public PaymentModel Payment { get; set; } = new PaymentModel();
+    public PaymentModel paymentModel
+    {
+      get => Get<PaymentModel>();
+      set => Set(value);
+    }
     //Alles für Review
     public ObservableCollection<ReviewModel> Reviews
     {
@@ -329,13 +333,13 @@ namespace Reserve_iT.ViewModel
     public void CreateBooking()
     {
       var paymentService = new PaymentService();
-
+      paymentModel = new PaymentModel();
       DateTime startDate = StartDate;
       DateTime endDate = EndDate;
       string category = RoomCategory;
       string type = RoomType;
 
-      paymentService.CreateBooking(Payment, startDate, endDate, category, type);
+      paymentService.CreateBooking(paymentModel, startDate, endDate, category, type);
     }
     #endregion Payment
 

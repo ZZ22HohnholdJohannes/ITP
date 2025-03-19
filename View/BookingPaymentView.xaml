@@ -49,61 +49,61 @@
               <TextBlock Text="Geschlecht:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="5"
                          Style="{StaticResource RoundedTextBlockStyle}"/>
               <RadioButton Grid.Row="0" Grid.Column="1" Content="Männlich" Margin="5" HorizontalAlignment="Center"
-                           IsChecked="{Binding Payment.Male, UpdateSourceTrigger=PropertyChanged}"
+                           IsChecked="{Binding paymentModel.Male, UpdateSourceTrigger=PropertyChanged}"
                            Style="{StaticResource RadioButtonStyle}"/>
               <RadioButton Grid.Row="0" Grid.Column="2" Content="Weiblich" Margin="5"
-                           IsChecked="{Binding Payment.Female, UpdateSourceTrigger=PropertyChanged}"
+                           IsChecked="{Binding paymentModel.Female, UpdateSourceTrigger=PropertyChanged}"
                            Style="{StaticResource RadioButtonStyle}"/>
               <RadioButton Grid.Row="0" Grid.Column="3" Content="Divers" Margin="5" HorizontalAlignment="Center"
-                            IsChecked="{Binding Payment.Diverse, UpdateSourceTrigger=PropertyChanged}"
+                            IsChecked="{Binding paymentModel.Diverse, UpdateSourceTrigger=PropertyChanged}"
                            Style="{StaticResource RadioButtonStyle}"/>
 
               <TextBlock Text="Nachname:" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" Margin="5"
                          Style="{StaticResource RoundedTextBlockStyle}"/>
               <TextBox Grid.Row="2" Grid.Column="3" Margin="5" Width="200"
-                       Text="{Binding Payment.Sirname, UpdateSourceTrigger=PropertyChanged}"
+                       Text="{Binding paymentModel.Sirname, UpdateSourceTrigger=PropertyChanged}"
                        Style="{StaticResource RoundedTextBoxStyle}"/>
 
               <TextBlock Text="Geburtsdatum:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="5"
                          Style="{StaticResource RoundedTextBlockStyle}"/>
               <DatePicker Grid.Row="1" Grid.Column="1" Margin="5" Width="200"
-                          Text="{Binding Payment.BirthDate, UpdateSourceTrigger=PropertyChanged}"
+                          Text="{Binding paymentModel.BirthDate, UpdateSourceTrigger=PropertyChanged}"
                           Style="{StaticResource DatePickerStyle}"/>
 
               <TextBlock Text="Hausnummer:" Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" Margin="5"
                          Style="{StaticResource RoundedTextBlockStyle}"/>
               <TextBox Grid.Row="3" Grid.Column="3" Margin="5" Width="200"
-                       Text="{Binding Payment.HouseNumber, UpdateSourceTrigger=PropertyChanged}"
+                       Text="{Binding paymentModel.HouseNumber, UpdateSourceTrigger=PropertyChanged}"
                        Style="{StaticResource RoundedTextBoxStyle}"/>
 
               <TextBlock Text="Vorname:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Margin="5"
                          Style="{StaticResource RoundedTextBlockStyle}"/>
               <TextBox Grid.Row="2" Grid.Column="1" Margin="5" Width="200"
-                       Text="{Binding Payment.FirstName, UpdateSourceTrigger=PropertyChanged}"
+                       Text="{Binding paymentModel.FirstName, UpdateSourceTrigger=PropertyChanged}"
                        Style="{StaticResource RoundedTextBoxStyle}"/>
 
               <TextBlock Text="PLZ:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Margin="5"
                          Style="{StaticResource RoundedTextBlockStyle}"/>
               <TextBox Grid.Row="4" Grid.Column="1" Margin="5" Width="200"
-                       Text="{Binding Payment.ZipCode, UpdateSourceTrigger=PropertyChanged}"
+                       Text="{Binding paymentModel.ZipCode, UpdateSourceTrigger=PropertyChanged}"
                        Style="{StaticResource RoundedTextBoxStyle}"/>
 
               <TextBlock Text="Straße:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Margin="5"
                          Style="{StaticResource RoundedTextBlockStyle}"/>
               <TextBox Grid.Row="3" Grid.Column="1" Margin="5" Width="200"
-                        Text="{Binding Payment.Street, UpdateSourceTrigger=PropertyChanged}"
+                        Text="{Binding paymentModel.Street, UpdateSourceTrigger=PropertyChanged}"
                        Style="{StaticResource RoundedTextBoxStyle}"/>
 
               <TextBlock Text="Ort:" Grid.Row="4" Grid.Column="2" VerticalAlignment="Center" Margin="5"
                          Style="{StaticResource RoundedTextBlockStyle}"/>
               <TextBox Grid.Row="4" Grid.Column="3" Margin="5" Width="200"
-                        Text="{Binding Payment.City, UpdateSourceTrigger=PropertyChanged}"
+                        Text="{Binding paymentModel.City, UpdateSourceTrigger=PropertyChanged}"
                        Style="{StaticResource RoundedTextBoxStyle}"/>
 
               <TextBlock Text="Land:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Margin="5"
                          Style="{StaticResource RoundedTextBlockStyle}"/>
               <TextBox Grid.Row="5" Grid.Column="1" Margin="5" Width="200"
-                        Text="{Binding Payment.Country, UpdateSourceTrigger=PropertyChanged}"
+                        Text="{Binding paymentModel.Country, UpdateSourceTrigger=PropertyChanged}"
                        Style="{StaticResource RoundedTextBoxStyle}"/>
             </Grid>
           </Border>
