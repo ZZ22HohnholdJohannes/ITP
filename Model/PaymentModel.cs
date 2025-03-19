@@ -9,9 +9,27 @@ namespace Reserve_iT.Model
 {
   public class PaymentModel : NotifyObject
   {
-    public string Gender
+    public bool Male
     {
-      get => Get<string>();
+      get => Get<bool>();
+      set => Set(value);
+    }
+
+    public bool Female
+    {
+      get => Get<bool>();
+      set => Set(value);
+    }
+
+    public bool Diverse
+    {
+      get => Get<bool>();
+      set => Set(value);
+    }
+
+    public DateTime BirthDate
+    {
+      get => Get<DateTime>();
       set => Set(value);
     }
 
@@ -55,7 +73,5 @@ namespace Reserve_iT.Model
       get => Get<string>();
       set => Set(value);
     }
-
-
   }
 }
