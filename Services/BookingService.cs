@@ -36,8 +36,5 @@ namespace Reserve_iT.Services
       DataTable dt = DatabaseService.ExecuteSP("checkAvailability", parameters);
       return dt;
     }
-
-    //createBooking
-    //saveGuestData
   }
 }

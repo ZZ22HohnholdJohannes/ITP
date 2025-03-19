@@ -183,19 +183,19 @@ namespace Reserve_iT.ViewModel
       NavigateToAdminViewCommand = new RelayCommand(NavigateToAdminView);
       //Navigation zurück
       NavigateBackCommand = new RelayCommand(NavigateBack);
-      //Booking Service
+      //Booking
       CheckAvailabilityCommand = new RelayCommand(CheckAvailability);
-      //Bewertung
+      //Payment
+      CreateBookingCommand = new RelayCommand(CreateBooking);
+      SaveGuestDataCommand = new RelayCommand(SaveGuestData);
+      //Review
       AcceptReviewCommand = new RelayCommand<ReviewModel>(AcceptReview);
       DenyReviewCommand = new RelayCommand<ReviewModel>(DenyReview);
       AddReviewCommand = new RelayCommand(AddReview);
       LoadReviewsCommand = new RelayCommand(LoadReviews);
-      //Administration
+      //Admin
       ShowBookingCommand = new RelayCommand(ShowBooking);
       DeleteBookingCommand = new RelayCommand(DeleteBooking);
-      //Ab hier schreibe ich Commands, die noch implementiert werden müssen, aber noch nicht fertig sind
-      CreateBookingCommand = new RelayCommand(CreateBooking);
-      SaveGuestDataCommand = new RelayCommand(SaveGuestData);
     }
 
     //Login
@@ -212,19 +212,19 @@ namespace Reserve_iT.ViewModel
     public ICommand NavigateToAdminViewCommand { get; private set; }
     //Navigation zurück
     public ICommand NavigateBackCommand { get; private set; }
-    //Booking Service
+    //Booking
     public ICommand CheckAvailabilityCommand { get; private set; }
-    //Bewertung
+    //Payment
+    public ICommand CreateBookingCommand { get; private set; }
+    public ICommand SaveGuestDataCommand { get; private set; }
+    //Review
     public ICommand AcceptReviewCommand { get; private set; }
     public ICommand DenyReviewCommand { get; private set; }
     public ICommand AddReviewCommand { get; private set; }
     public ICommand LoadReviewsCommand { get; private set; }
-    //Administration
+    //Admin
     public ICommand ShowBookingCommand { get; private set; }
     public ICommand DeleteBookingCommand { get; private set; }
-    //Ab hier schreibe ich Commands, die noch implementiert werden müssen, aber noch nicht fertig sind (Gehören zur PaymentView)
-    public ICommand CreateBookingCommand { get; private set; }
-    public ICommand SaveGuestDataCommand { get; private set; }
 
 
     #endregion Commands
@@ -236,9 +236,9 @@ namespace Reserve_iT.ViewModel
     private void NavigateToDashboardView() => MainFrame?.Navigate(new DashboardView()); //Initiales Laden der Anwendung
     private void NavigateToBookingSearchView() => MainFrame?.Navigate(new BookingSearchView() { DataContext = this }); //Naviagation nach Button Zimmer buchen
     private void NavigateToBookingConfirmationView() => MainFrame?.Navigate(new BookingConfirmationView() { DataContext = this }); //Navigation von BookingSearchView zu BookingConfirmationView
-    private void NavigateToBookingPaymentView() => MainFrame?.Navigate(new BookingPaymentView());
+    private void NavigateToBookingPaymentView() => MainFrame?.Navigate(new BookingPaymentView() { DataContext = this }); //Navigation von BookingConfirmationView zu BookingPaymentView
     //Navigation zu Bewertung
-    private void NavigateToReviewView()
+    private void NavigateToReviewView() //Navigation von DashboardView zu ReviewView
     {
       MainFrame?.Navigate(new ReviewView() { DataContext = this });
       LoadReviews();
@@ -319,6 +319,18 @@ namespace Reserve_iT.ViewModel
     }
     #endregion Booking
 
+    #region Payment
+    public void CreateBooking()
+    {
+
+    }
+
+    public void SaveGuestData()
+    {
+
+    }
+    #endregion Payment
+
     #region Reviews
     public void LoadReviews()
     {
@@ -396,15 +408,5 @@ namespace Reserve_iT.ViewModel
     #endregion Admin
 
     #endregion Methods
-    //Noch nicht implementiert
-    public void CreateBooking()
-    {
-
-    }
-
-    public void SaveGuestData()
-    {
-
-    }
   }
 }
