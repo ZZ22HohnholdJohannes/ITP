@@ -21,6 +21,7 @@ using System.Data;
 using CommunityToolkit.Mvvm.Input;
 using Org.BouncyCastle.Security;
 using Mysqlx.Crud;
+using System.Dynamic;
 
 namespace Reserve_iT.ViewModel
 {
@@ -136,6 +137,8 @@ namespace Reserve_iT.ViewModel
       get => Get<string>();
       set => Set(value);
     }
+    //Alles für Payment
+    public PaymentModel Payment { get; set; } = new PaymentModel();
     //Alles für Review
     public ObservableCollection<ReviewModel> Reviews
     {
@@ -318,10 +321,22 @@ namespace Reserve_iT.ViewModel
     #endregion Booking
 
     #region Payment
+    private bool CanCreateBooking()
+    {
+      // Hier kannst du prüfen, ob alle erforderlichen Felder gesetzt sind.
+      return true;
+    }
+
     public void CreateBooking()
     {
       var paymentService = new PaymentService();
-      paymentService.CreateBooking();
+
+      DateTime startDate = DateTime.Now;
+      DateTime endDate = DateTime.Now.AddDays(1);
+      string category = "Standard";
+      string type = "Doppelzimmer";
+
+      paymentService.CreateBooking(Payment, startDate, endDate, category, type);
     }
     #endregion Payment
 
