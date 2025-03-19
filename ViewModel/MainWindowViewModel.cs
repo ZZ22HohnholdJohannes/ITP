@@ -187,7 +187,6 @@ namespace Reserve_iT.ViewModel
       CheckAvailabilityCommand = new RelayCommand(CheckAvailability);
       //Payment
       CreateBookingCommand = new RelayCommand(CreateBooking);
-      SaveGuestDataCommand = new RelayCommand(SaveGuestData);
       //Review
       AcceptReviewCommand = new RelayCommand<ReviewModel>(AcceptReview);
       DenyReviewCommand = new RelayCommand<ReviewModel>(DenyReview);
@@ -216,7 +215,6 @@ namespace Reserve_iT.ViewModel
     public ICommand CheckAvailabilityCommand { get; private set; }
     //Payment
     public ICommand CreateBookingCommand { get; private set; }
-    public ICommand SaveGuestDataCommand { get; private set; }
     //Review
     public ICommand AcceptReviewCommand { get; private set; }
     public ICommand DenyReviewCommand { get; private set; }
@@ -322,12 +320,8 @@ namespace Reserve_iT.ViewModel
     #region Payment
     public void CreateBooking()
     {
-
-    }
-
-    public void SaveGuestData()
-    {
-
+      var paymentService = new PaymentService();
+      paymentService.CreateBooking();
     }
     #endregion Payment
 
@@ -337,6 +331,7 @@ namespace Reserve_iT.ViewModel
       var reviewService = new ReviewService();
       Reviews = reviewService.LoadReviews(isAdminLoggedIn); // Hier wird die ObservableCollection<ReviewModel> in der ViewModel-Property aktualisiert.
     }
+
     public void AcceptReview(object? review)
     {
       if (review is not null && review is ReviewModel reviewModel)
