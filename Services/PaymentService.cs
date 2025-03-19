@@ -10,38 +10,38 @@ namespace Reserve_iT.Services
 {
   public class PaymentService
   {
-    public void CreateBooking(bool male, bool female, bool diverse, DateTime birthDate, string firstName, string surname, string street, string houseNumber, string zipCode, string city, string country, DateTime startDate, DateTime endDate, string category, string type)
+    public void CreateBooking(PaymentModel payment, DateTime startDate, DateTime endDate, string category, string type)
     {
-      var payment = new PaymentModel();
       var gender = "";
-      if (male == true)
+      if (payment.Male)
       {
         gender = "M";
       }
-      else if (female == true)
+      else if (payment.Female)
       {
         gender = "W";
       }
-      else if (diverse == true)
+      else if (payment.Diverse)
       {
         gender = "D";
       }
+
       var parameters = new Dictionary<string, object>
     {
-        { "geschlecht_in", gender },
-        { "geburtsdatum_in", birthDate },
-        { "vorname_in", firstName },
-        { "nachname_in", surname },
-        { "straße_in", street },
-        { "hausnummer_in", houseNumber },
-        { "plz_in", zipCode },
-        { "ort_in", city },
-        { "land_in", country },
-        { "startdatum_in", startDate },
-        { "enddatum_in", endDate },
-        { "kategorie_in", category },
-        { "art_in", type },
-        };
+      { "geschlecht_in", gender },
+      { "geburtsdatum_in", payment.BirthDate },
+      { "vorname_in", payment.FirstName },
+      { "nachname_in", payment.Surname },
+      { "straße_in", payment.Street },
+      { "hausnummer_in", payment.HouseNumber },
+      { "plz_in", payment.ZipCode },
+      { "ort_in", payment.City },
+      { "land_in", payment.Country },
+      { "startdatum_in", startDate },
+      { "enddatum_in", endDate },
+      { "kategorie_in", category },
+      { "art_in", type },
+    };
       DataTable dt = DatabaseService.ExecuteSP("createBooking", parameters);
     }
   }
