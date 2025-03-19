@@ -457,7 +457,7 @@ BEGIN
 	FROM bewertung b
 	JOIN auftrag a ON a.auftrag_ID = b.auftrag_ID
 	JOIN gast g ON g.gast_ID = a.gast_ID
-	WHERE istFreigegeben = 0;
+	WHERE istFreigegeben = 1;
 	
 END//
 DELIMITER ;
@@ -465,7 +465,7 @@ DELIMITER ;
 
 # Setup_showReviewsNichtFreigegeben
 
-USE reserve_it;
+USE reserve_it
 
 DELIMITER //
 CREATE PROCEDURE showReviewsNichtFreigegeben()
@@ -479,7 +479,7 @@ BEGIN
 	FROM bewertung b
 	JOIN auftrag a ON a.auftrag_ID = b.auftrag_ID
 	JOIN gast g ON g.gast_ID = a.gast_ID
-	WHERE istFreigegeben = 1;
+	WHERE istFreigegeben = 0;
 	
 END//
 DELIMITER ;
