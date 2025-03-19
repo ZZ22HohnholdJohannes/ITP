@@ -335,6 +335,8 @@ namespace Reserve_iT.ViewModel
       string type = RoomType;
 
       paymentService.CreateBooking(Payment, startDate, endDate, category, type);
+      MessageBox.Show("Vielen Dank für Ihre Bestellung", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+      
     }
     #endregion Payment
 
