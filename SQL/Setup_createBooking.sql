@@ -6,7 +6,7 @@ CREATE PROCEDURE createBooking(IN geschlecht_in NVARCHAR(1)
 									 	,IN nachname_in NVARCHAR(200)
 									 	,IN geburtsdatum_in date
 									 	,IN straße_in NVARCHAR(200)
-									 	,IN hausnumer_in NVARCHAR(200)
+									 	,IN hausnummer_in NVARCHAR(200)
 									 	,IN plz_in NVARCHAR(5)
 									 	,IN ort_in NVARCHAR(200)
 									 	,IN land_in NVARCHAR(200)
