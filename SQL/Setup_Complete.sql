@@ -144,6 +144,7 @@ BEGIN
 	DECLARE anschrift_id INT;
 	DECLARE hotelzimmer_id INT;
 	DECLARE auftrag_id INT;
+   DECLARE gast_count INT;
 	
 	SELECT a.anschrift_id INTO anschrift_id						# ID von der Anschrift der Person die die Buchung gemacht hat holen und in Variable speichern
 	FROM anschrift a
@@ -171,6 +172,32 @@ BEGIN
      		AND k.kategorie_ID = kategorie_in
      		AND a.art_ID = art_in
    LIMIT 1;
+   
+   -- Falls Gast nicht existiert, einfügen
+   IF gast_id IS NULL THEN
+       INSERT INTO gast (vorname, nachname, geburtsdatum, geschlecht, istStammgast)
+       VALUES (vorname_in, nachname_in, geburtsdatum_in, geschlecht_in, 0);
+       SET gast_id = LAST_INSERT_ID();
+	END IF;
+   
+   IF anschrift_id IS NULL THEN
+        INSERT INTO anschrift (strasse, hausnummer, ort, postleitzahl, land)
+        VALUES (straße_in, hausnummer_in, ort_in, plz_in, land_in);
+        SET anschrift_id = LAST_INSERT_ID();
+   END IF;
+
+    -- 3 Prüfen, ob der Gast bereits mit der gleichen Anschrift existiert
+   SELECT COUNT(*) INTO gast_count
+   FROM gast
+   WHERE gast_ID = gast_id
+     AND anschrift_ID = anschrift_id;
+
+    -- Falls der Gast nicht existiert, Adresse zu Gast zuordnen
+   IF gast_count = 0 THEN
+       UPDATE gast
+       SET anschrift_ID = anschrift_id
+       WHERE gast_ID = gast_id;
+   END IF;
    
    INSERT INTO auftrag (gast_ID, startdatum, enddatum)		# Neuen Auftrag in Tabelle Auftrag anlegen
    values
