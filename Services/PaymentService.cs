@@ -10,8 +10,17 @@ namespace Reserve_iT.Services
 {
   public class PaymentService
   {
+    /// <summary>
+    /// Creates a booking based on the provided payment and booking details.
+    /// </summary>
+    /// <param name="payment">The payment details.</param>
+    /// <param name="startDate">The start date of the booking.</param>
+    /// <param name="endDate">The end date of the booking.</param>
+    /// <param name="category">The category of the room.</param>
+    /// <param name="type">The type of the room.</param>
     public void CreateBooking(PaymentModel payment, DateTime startDate, DateTime endDate, string category, string type)
     {
+      // Determine gender based on the payment details
       var gender = "";
       if (payment.Male)
       {
@@ -26,6 +35,7 @@ namespace Reserve_iT.Services
         gender = "D";
       }
 
+      // Determine category number based on the room category
       var category_num = 0;
       if (category == "Standard")
       {
@@ -50,6 +60,7 @@ namespace Reserve_iT.Services
         type_num = 2;
       }
 
+      // Determine type number based on the room type
       var parameters = new Dictionary<string, object>
     {
       { "geschlecht_in", gender },
