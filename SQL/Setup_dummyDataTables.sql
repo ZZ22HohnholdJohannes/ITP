@@ -1,6 +1,5 @@
 USE reserve_it;
 
--- Anschrift-Daten (Die IDs werden automatisch vergeben)
 INSERT INTO anschrift (strasse, hausnummer, ort, postleitzahl, land)
 VALUES
 ('Hauptstraße', '10', 'Berlin', '10115', 'Deutschland'),
@@ -9,7 +8,6 @@ VALUES
 ('Bergstraße', '7', 'Köln', '50733', 'Deutschland'),
 ('Seestraße', '21', 'Berlin', '13407', 'Deutschland');
 
--- Gast-Daten (Die IDs werden automatisch vergeben)
 INSERT INTO gast (vorname, nachname, geburtsdatum, geschlecht, anschrift_ID, iststammgast)
 VALUES
 ('Max', 'Mustermann', '1985-06-15', 'M', 1, 1),
@@ -18,7 +16,6 @@ VALUES
 ('Anna', 'Schmidt', '1988-07-30', 'W', 4, 1),
 ('Paul', 'Weber', '1992-11-12', 'M', 5, 0);
 
--- Hotel-Daten (Die IDs werden automatisch vergeben)
 INSERT INTO hotel (anschrift_ID)
 VALUES
 (1),
@@ -27,21 +24,18 @@ VALUES
 (4),
 (5);
 
--- Kategorie-Daten (Die IDs werden automatisch vergeben)
 INSERT INTO kategorie (kategorie_ID, kategorie_beschreibung)
 VALUES
 (1, 'Standard'),
 (2, 'Premium'),
 (3, 'Luxus');
 
--- Art (Zimmertyp) Daten (Die IDs werden automatisch vergeben)
 INSERT INTO art (art_ID, art_beschreibung)
 VALUES
 (1, 'Einzelzimmer'),
 (2, 'Doppelzimmer');
 
--- Preis-Daten (Die IDs werden automatisch vergeben)
-INSERT INTO preis (preis_ID, kategorie_ID, art_ID, preis)
+INSERT INTO preis (preis_ID, kategorie_ID, art_ID, preis_num)
 VALUES
 (1, 1, 1, 80.00),
 (2, 1, 2, 120.00),
@@ -50,7 +44,6 @@ VALUES
 (5, 3, 1, 500.00),
 (6, 3, 2, 600.00);
 
--- Hotelzimmer-Daten (Die IDs werden automatisch vergeben)
 INSERT INTO hotelzimmer (preis_ID, hotel_ID, zimmernummer)
 VALUES
 (1, 1, '101'),
@@ -60,7 +53,6 @@ VALUES
 (5, 4, '401'),
 (6, 4, '403');
 
--- Auftrag-Daten (Die IDs werden automatisch vergeben)
 INSERT INTO auftrag (gast_ID, startdatum, enddatum)
 VALUES
 (1, '2024-03-01', '2024-03-05'),
@@ -72,7 +64,6 @@ VALUES
 (2, '2024-10-01', '2024-10-11'),
 (3, '2024-10-24', '2024-11-02');
 
--- Buchung-Daten (Die IDs werden automatisch vergeben)
 INSERT INTO buchung (auftrag_ID, hotelzimmer_ID)
 VALUES
 (1, 1),
@@ -84,7 +75,6 @@ VALUES
 (7, 2),
 (8, 3);
 
--- Bewertung-Daten (Die IDs werden automatisch vergeben)
 INSERT INTO bewertung (auftrag_ID, istfreigegeben, rezension)
 VALUES
 (1, 1, 'Super Aufenthalt!'),

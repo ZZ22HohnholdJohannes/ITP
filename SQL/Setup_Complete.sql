@@ -94,6 +94,97 @@ CREATE TABLE buchung
 ,	FOREIGN KEY (hotelzimmer_ID) REFERENCES hotelzimmer(hotelzimmer_ID)
 );
 
+
+-- ENTER DATA INTO TABLES --
+
+# Setup_dummyDataTables
+
+USE reserve_it;
+
+INSERT INTO anschrift (strasse, hausnummer, ort, postleitzahl, land)
+VALUES
+('Hauptstraße', '10', 'Berlin', '10115', 'Deutschland'),
+('Musterweg', '5', 'Hamburg', '20095', 'Deutschland'),
+('Parkstraße', '14', 'München', '80331', 'Deutschland'),
+('Bergstraße', '7', 'Köln', '50733', 'Deutschland'),
+('Seestraße', '21', 'Berlin', '13407', 'Deutschland');
+
+INSERT INTO gast (vorname, nachname, geburtsdatum, geschlecht, anschrift_ID, iststammgast)
+VALUES
+('Max', 'Mustermann', '1985-06-15', 'M', 1, 1),
+('Erika', 'Musterfrau', '1990-09-20', 'W', 2, 0),
+('Luca', 'Müller', '1995-03-25', 'M', 3, 0),
+('Anna', 'Schmidt', '1988-07-30', 'W', 4, 1),
+('Paul', 'Weber', '1992-11-12', 'M', 5, 0);
+
+INSERT INTO hotel (anschrift_ID)
+VALUES
+(1),
+(2),
+(3),
+(4),
+(5);
+
+INSERT INTO kategorie (kategorie_ID, kategorie_beschreibung)
+VALUES
+(1, 'Standard'),
+(2, 'Premium'),
+(3, 'Luxus');
+
+INSERT INTO art (art_ID, art_beschreibung)
+VALUES
+(1, 'Einzelzimmer'),
+(2, 'Doppelzimmer');
+
+INSERT INTO preis (preis_ID, kategorie_ID, art_ID, preis_num)
+VALUES
+(1, 1, 1, 80.00),
+(2, 1, 2, 120.00),
+(3, 2, 1, 180.00),
+(4, 2, 2, 250.00),
+(5, 3, 1, 500.00),
+(6, 3, 2, 600.00);
+
+INSERT INTO hotelzimmer (preis_ID, hotel_ID, zimmernummer)
+VALUES
+(1, 1, '101'),
+(2, 1, '102'),
+(3, 2, '201'),
+(4, 3, '301'),
+(5, 4, '401'),
+(6, 4, '403');
+
+INSERT INTO auftrag (gast_ID, startdatum, enddatum)
+VALUES
+(1, '2024-03-01', '2024-03-05'),
+(2, '2024-03-10', '2024-03-15'),
+(3, '2024-04-01', '2024-04-07'),
+(4, '2024-05-01', '2024-05-05'),
+(5, '2024-06-01', '2024-06-05'),
+(1, '2024-09-12', '2024-12-12'),
+(2, '2024-10-01', '2024-10-11'),
+(3, '2024-10-24', '2024-11-02');
+
+INSERT INTO buchung (auftrag_ID, hotelzimmer_ID)
+VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5),
+(6, 1),
+(7, 2),
+(8, 3);
+
+INSERT INTO bewertung (auftrag_ID, istfreigegeben, rezension)
+VALUES
+(1, 1, 'Super Aufenthalt!'),
+(2, 0, 'Sehr gut, aber kleines Bad.'),
+(3, 1, 'Alles war perfekt, sehr zufrieden!'),
+(4, 1, 'Gutes Hotel, jedoch etwas zu teuer.'),
+(5, 0, 'Nett, aber die Lage ist nicht ideal.');
+
+
 -- CREATE SPs --
 
 # Setup_checkAvailability
@@ -104,7 +195,7 @@ DELIMITER //
 CREATE PROCEDURE checkAvailability(IN startDate date, IN endDate DATE, IN kategorieZimmer INT, IN artZimmer INT) 
 BEGIN
 
-# Gebe alle Zimmer aus, die die angegebene Kategorie und Art haben und deren gebuchter Zeitraum nicht mit dem angegebenen Zeitraum überschneidet
+# Returns the first room matching the category and type the user entered if it is available for the duration of the stay
 
     SELECT k.kategorie_beschreibung AS kategorie,
            a.art_beschreibung AS zimmerart,
@@ -146,13 +237,16 @@ CREATE PROCEDURE createBooking(IN geschlecht_in NVARCHAR(1)
 									 	,IN kategorie_in int
 									 	,IN art_in int)
 BEGIN
+
+# Creates new entries in the tables anschrift (if it doesn't exist) gast (if it doesn't exist) buchung and auftrag
+
 	DECLARE gast_id INT;
 	DECLARE anschrift_id INT;
 	DECLARE zimmer_id INT;
 	DECLARE auftrag_id INT;
    DECLARE gast_count INT;
 	
-	SELECT a.anschrift_id INTO anschrift_id						# ID von der Anschrift der Person die die Buchung gemacht hat holen und in Variable speichern
+	SELECT a.anschrift_id INTO anschrift_id						# ID of the address that was put in by the user is saved into a variable (doesn't exist = NULL entry)
 	FROM anschrift a
 	WHERE a.strasse = straße_in
 	AND a.hausnummer = hausnummer_in
@@ -160,14 +254,14 @@ BEGIN
 	AND a.postleitzahl = plz_in
 	AND a.land = land_in;
 	
-	SELECT g.gast_id INTO gast_id										# Aus beiden IDs kann jetzt die Gast ID herausgefunden werden
+	SELECT g.gast_id INTO gast_id										# ID of the guest that made the booking is saved into a variable (no address/no guest = NULL entry)
 	FROM gast g
 	WHERE g.anschrift_ID = anschrift_id
 	AND g.vorname = vorname_in
 	AND g.nachname = nachname_in
 	AND g.geschlecht = geschlecht_in;
 	
-	SELECT hz.hotelzimmer_ID INTO zimmer_id					# Für die Tabelle Buchung ist die Hotelzimmer ID noch wichtig, deswegen den Code aus Setup_checkAvailability verwenden
+	SELECT hz.hotelzimmer_ID INTO zimmer_id					  # ID of the room the guest wants to book is saved into variable using the same query as checkAvailability
 	FROM hotelzimmer hz
   	left JOIN buchung b ON hz.hotelzimmer_ID = b.hotelzimmer_ID
   	left JOIN auftrag auf ON b.auftrag_ID = auf.auftrag_ID
@@ -179,45 +273,40 @@ BEGIN
    		AND a.art_ID = art_in
 	LIMIT 1;  
    
-   IF anschrift_id IS NULL THEN
-        INSERT INTO anschrift (strasse, hausnummer, ort, postleitzahl, land)
-        VALUES (straße_in, hausnummer_in, ort_in, plz_in, land_in);
-        SET anschrift_id = LAST_INSERT_ID();
+   IF anschrift_id IS NULL THEN                            # If the variable with the address is NULL then the new address will be added to the table anschrift
+      INSERT INTO anschrift (strasse, hausnummer, ort, postleitzahl, land)
+      VALUES (straße_in, hausnummer_in, ort_in, plz_in, land_in);
+      SET anschrift_id = LAST_INSERT_ID();
    END IF;
    
-   -- Falls Gast nicht existiert, einfügen
-IF gast_id IS NULL THEN
-    INSERT INTO gast (vorname, nachname, geburtsdatum, geschlecht, istStammgast, anschrift_ID)
-    VALUES (vorname_in, nachname_in, geburtsdatum_in, geschlecht_in, 0, anschrift_id);
-    SET gast_id = LAST_INSERT_ID();
-END IF;
+	IF gast_id IS NULL THEN´                                # If the variable with the guest is NULL then the new guest will be added to the table anschrift
+    	INSERT INTO gast (vorname, nachname, geburtsdatum, geschlecht, istStammgast, anschrift_ID)
+    	VALUES (vorname_in, nachname_in, geburtsdatum_in, geschlecht_in, 0, anschrift_id);
+    	SET gast_id = LAST_INSERT_ID();
+	END IF;
 
-    -- 3 Prüfen, ob der Gast bereits mit der gleichen Anschrift existiert
-   SELECT COUNT(*) INTO gast_count
+   SELECT COUNT(*) INTO gast_count	                       # Counts the guests that are saved with the anschrift_ID saved in the variable
    FROM gast
    WHERE gast_ID = gast_id
      AND anschrift_ID = anschrift_id;
 
-    -- Falls der Gast nicht existiert, Adresse zu Gast zuordnen
-   IF gast_count = 0 THEN
+   IF gast_count = 0 THEN											  # If there are no guests that have that anschrift_ID then you update the one who made the booking
        UPDATE gast
        SET anschrift_ID = anschrift_id
        WHERE gast_ID = gast_id;
    END IF;
    
-   INSERT INTO auftrag (gast_ID, startdatum, enddatum)		# Neuen Auftrag in Tabelle Auftrag anlegen
+   INSERT INTO auftrag (gast_ID, startdatum, enddatum)	  # Creates a new entry for this booking in the table auftrag
    values
    (gast_id, startdatum_in, enddatum_in);
    
-   SELECT auf.auftrag_id INTO auftrag_id							# ID von dem gerade angelegten Auftrag in eine Variable speichern
+   SELECT auf.auftrag_id INTO auftrag_id							# ID of the new entry in the table auftrag is saved into a variable
    FROM auftrag auf
    WHERE auf.gast_ID = gast_id
    AND auf.startdatum = startdatum_in
    AND auf.enddatum = enddatum_in;
    
-   SELECT kategorie_in, art_in;
-   
-   INSERT INTO buchung (auftrag_ID, hotelzimmer_ID)			# Mit der Hotelzimmer ID und der neuen Auftrag ID kann eine Buchung erstellt werden
+   INSERT INTO buchung (auftrag_ID, hotelzimmer_ID)			# With the saved auftrag_ID and hotelzimmer_ID a new entry in the table buchung is made
    values
    (auftrag_id, zimmer_id);
 
@@ -234,6 +323,8 @@ DELIMITER //
 
 CREATE PROCEDURE deleteBooking(IN auftrag_id_in INT)
 BEGIN
+
+# Deletes entry with the auftrag_ID of a specific order in the tables buchung, bewertung and auftrag
 	
 	DELETE FROM buchung 
 	WHERE auftrag_ID = auftrag_id_in;
@@ -246,105 +337,6 @@ BEGIN
 	
 END//
 DELIMITER ;
-
-
-# Setup_dummyDataTables
-
-USE reserve_it;
-
--- Anschrift-Daten (Die IDs werden automatisch vergeben)
-INSERT INTO anschrift (strasse, hausnummer, ort, postleitzahl, land)
-VALUES
-('Hauptstraße', '10', 'Berlin', '10115', 'Deutschland'),
-('Musterweg', '5', 'Hamburg', '20095', 'Deutschland'),
-('Parkstraße', '14', 'München', '80331', 'Deutschland'),
-('Bergstraße', '7', 'Köln', '50733', 'Deutschland'),
-('Seestraße', '21', 'Berlin', '13407', 'Deutschland');
-
--- Gast-Daten (Die IDs werden automatisch vergeben)
-INSERT INTO gast (vorname, nachname, geburtsdatum, geschlecht, anschrift_ID, iststammgast)
-VALUES
-('Max', 'Mustermann', '1985-06-15', 'M', 1, 1),
-('Erika', 'Musterfrau', '1990-09-20', 'W', 2, 0),
-('Luca', 'Müller', '1995-03-25', 'M', 3, 0),
-('Anna', 'Schmidt', '1988-07-30', 'W', 4, 1),
-('Paul', 'Weber', '1992-11-12', 'M', 5, 0);
-
--- Hotel-Daten (Die IDs werden automatisch vergeben)
-INSERT INTO hotel (anschrift_ID)
-VALUES
-(1),
-(2),
-(3),
-(4),
-(5);
-
--- Kategorie-Daten (Die IDs werden automatisch vergeben)
-INSERT INTO kategorie (kategorie_ID, kategorie_beschreibung)
-VALUES
-(1, 'Standard'),
-(2, 'Premium'),
-(3, 'Luxus');
-
--- Art (Zimmertyp) Daten (Die IDs werden automatisch vergeben)
-INSERT INTO art (art_ID, art_beschreibung)
-VALUES
-(1, 'Einzelzimmer'),
-(2, 'Doppelzimmer');
-
--- Preis-Daten (Die IDs werden automatisch vergeben)
-INSERT INTO preis (preis_ID, kategorie_ID, art_ID, preis_num)
-VALUES
-(1, 1, 1, 80.00),
-(2, 1, 2, 120.00),
-(3, 2, 1, 180.00),
-(4, 2, 2, 250.00),
-(5, 3, 1, 500.00),
-(6, 3, 2, 600.00);
-
--- Hotelzimmer-Daten (Die IDs werden automatisch vergeben)
-INSERT INTO hotelzimmer (preis_ID, hotel_ID, zimmernummer)
-VALUES
-(1, 1, '101'),
-(2, 1, '102'),
-(3, 2, '201'),
-(4, 3, '301'),
-(5, 4, '401'),
-(6, 4, '403');
-
--- Auftrag-Daten (Die IDs werden automatisch vergeben)
-INSERT INTO auftrag (gast_ID, startdatum, enddatum)
-VALUES
-(1, '2024-03-01', '2024-03-05'),
-(2, '2024-03-10', '2024-03-15'),
-(3, '2024-04-01', '2024-04-07'),
-(4, '2024-05-01', '2024-05-05'),
-(5, '2024-06-01', '2024-06-05'),
-(1, '2024-09-12', '2024-12-12'),
-(2, '2024-10-01', '2024-10-11'),
-(3, '2024-10-24', '2024-11-02');
-
--- Buchung-Daten (Die IDs werden automatisch vergeben)
-INSERT INTO buchung (auftrag_ID, hotelzimmer_ID)
-VALUES
-(1, 1),
-(2, 2),
-(3, 3),
-(4, 4),
-(5, 5),
-(6, 1),
-(7, 2),
-(8, 3);
-
--- Bewertung-Daten (Die IDs werden automatisch vergeben)
-INSERT INTO bewertung (auftrag_ID, istfreigegeben, rezension)
-VALUES
-(1, 1, 'Super Aufenthalt!'),
-(2, 0, 'Sehr gut, aber kleines Bad.'),
-(3, 1, 'Alles war perfekt, sehr zufrieden!'),
-(4, 1, 'Gutes Hotel, jedoch etwas zu teuer.'),
-(5, 0, 'Nett, aber die Lage ist nicht ideal.');
-
 
 # Setup_reviewFreigeben
 
@@ -386,6 +378,8 @@ DELIMITER //
 CREATE PROCEDURE showBookings(IN auftrag_id_in INT)
 BEGIN 
 	
+# Returns values that are just used to display the owner of a booking in the AdminView
+
 	SELECT g.vorname AS vorname
 			,g.nachname AS nachname
 			,a.startdatum AS startdatum
@@ -412,6 +406,8 @@ USE reserve_it;
 DELIMITER //
 CREATE PROCEDURE showReviewsFreigegeben()
 BEGIN 
+
+# User view of the ReviewView
 	
 	SELECT b.bewertung_ID AS bewertung_ID
 			,a.auftrag_ID AS auftrag_ID
@@ -435,6 +431,8 @@ DELIMITER //
 CREATE PROCEDURE showReviewsNichtFreigegeben()
 BEGIN 
 	
+# Admin view of the ReviewView
+	
 	SELECT b.bewertung_ID AS bewertung_ID
 			,a.auftrag_ID AS auftrag_ID
 			,g.vorname AS Vorname
@@ -457,29 +455,31 @@ DELIMITER //
 CREATE PROCEDURE submitReview(IN auftrag_id_in INT, IN rezension_in NVARCHAR(500))
 BEGIN
 
+# Adds a new review to the table bewertung and returns 1 if successful
+
 	DECLARE auftrag_id_vorhanden int;
 	DECLARE auftrag_id_gueltig INT;
 	
-	SELECT COUNT(*) INTO auftrag_id_vorhanden
+	SELECT COUNT(*) INTO auftrag_id_vorhanden                  # Counts how many reviews are in the table bewertung with the entered auftrag_ID and saves it into a variable
 	FROM bewertung
 	WHERE auftrag_ID = auftrag_id_in;
 	
-	SELECT COUNT(*) INTO auftrag_id_gueltig
+	SELECT COUNT(*) INTO auftrag_id_gueltig                    # Checks if the entered auftrag_ID exists in the table auftrag
 	FROM auftrag
 	WHERE auftrag_ID = auftrag_id_in;
 	
-	if auftrag_id_vorhanden = 0 AND auftrag_id_gueltig > 0 THEN
-	
-		INSERT INTO bewertung(auftrag_ID, istFreigegeben, rezension)
-		values
+	if auftrag_id_vorhanden = 0 AND auftrag_id_gueltig > 0 THEN      # If there's no reviews using the entered auftrag_ID
+	                                                                 # And the auftrag_ID exists in the table auftrag
+		INSERT INTO bewertung(auftrag_ID, istFreigegeben, rezension)  # A new review is added to bewertung with the entered values for auftrag_ID and rezension
+		VALUES                                                        # The value istFreigegeben is set to false so it has to be cleared by a admin
 		(auftrag_id_in, 'false', rezension_in);
 		
-		SELECT 1 AS Result;
+		SELECT 1 AS Result;                                           # 1 is returned because the review was added successfully
 		
 	END if;
 	
-	if auftrag_id_vorhanden > 0 OR auftrag_id_gueltig = 0 THEN
-		
+	if auftrag_id_vorhanden > 0 OR auftrag_id_gueltig = 0 THEN       # If one of the conditions from the first if-statement is not true
+																						  # 0 is returned and the user gets a MessageBox
 		SELECT 0 AS Result;
 		
 	END if;

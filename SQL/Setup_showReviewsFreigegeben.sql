@@ -3,6 +3,8 @@ USE reserve_it;
 DELIMITER //
 CREATE PROCEDURE showReviewsFreigegeben()
 BEGIN 
+
+# User view of the ReviewView
 	
 	SELECT b.bewertung_ID AS bewertung_ID
 			,a.auftrag_ID AS auftrag_ID

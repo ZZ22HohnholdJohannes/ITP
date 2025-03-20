@@ -5,6 +5,8 @@ DELIMITER //
 CREATE PROCEDURE showBookings(IN auftrag_id_in INT)
 BEGIN 
 	
+# Returns values that are just used to display the owner of a booking in the AdminView
+
 	SELECT g.vorname AS vorname
 			,g.nachname AS nachname
 			,a.startdatum AS startdatum

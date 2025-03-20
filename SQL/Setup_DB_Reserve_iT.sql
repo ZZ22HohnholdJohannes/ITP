@@ -69,7 +69,7 @@ CREATE TABLE preis
 ,  art_ID INT 
 ,	FOREIGN KEY (kategorie_ID) REFERENCES kategorie(kategorie_ID)
 ,	FOREIGN KEY (art_ID) REFERENCES art(art_ID)
-,	preis INT
+,	preis_num INT
 );
 
 CREATE TABLE hotelzimmer

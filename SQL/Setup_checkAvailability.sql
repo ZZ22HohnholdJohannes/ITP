@@ -4,7 +4,7 @@ DELIMITER //
 CREATE PROCEDURE checkAvailability(IN startDate date, IN endDate DATE, IN kategorieZimmer INT, IN artZimmer INT) 
 BEGIN
 
-# Gebe alle Zimmer aus, die die angegebene Kategorie und Art haben und deren gebuchter Zeitraum nicht mit dem angegebenen Zeitraum überschneidet
+# Returns the first room matching the category and type the user entered if it is available for the duration of the stay
 
     SELECT k.kategorie_beschreibung AS kategorie,
            a.art_beschreibung AS zimmerart,
