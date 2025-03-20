@@ -323,7 +323,8 @@ namespace Reserve_iT.ViewModel
 
       paymentService.CreateBooking(Payment, startDate, endDate, category, type);
       MessageBox.Show("Vielen Dank für Ihre Bestellung", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-
+      NavigateBack();
+      NavigateBack();
     }
     #endregion Payment
 
