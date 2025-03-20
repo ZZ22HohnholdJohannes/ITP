@@ -25,7 +25,7 @@
     <Resource Include="Images\Logo_Dark.png" />
     <Resource Include="Images\Logo_Light.png" />
     <Resource Include="Images\luxus_doppelzimmer.png" />
-    <Resource Include="Images\luxus_einzelzimer.png" />
+    <Resource Include="Images\luxus_einzelzimmer.png" />
     <Resource Include="Images\premium_doppelzimmer.png" />
     <Resource Include="Images\premium_einzelzimmer.png" />
     <Resource Include="Images\review.jpg" />

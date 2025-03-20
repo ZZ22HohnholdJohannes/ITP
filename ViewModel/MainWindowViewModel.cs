@@ -308,10 +308,6 @@ namespace Reserve_iT.ViewModel
     #endregion Booking
 
     #region Payment
-    private bool CanCreateBooking()
-    {
-      return true;
-    }
     //Create a booking with the BookingProperties and the PaymentProperties
     public void CreateBooking()
     {
