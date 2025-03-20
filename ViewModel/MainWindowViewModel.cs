@@ -329,7 +329,7 @@ namespace Reserve_iT.ViewModel
     public void LoadReviews()
     {
       var reviewService = new ReviewService();
-      Reviews = reviewService.LoadReviews(isAdminLoggedIn); // Hier wird die ObservableCollection<ReviewModel> in der ViewModel-Property aktualisiert.
+      Reviews = reviewService.LoadReviews(isAdminLoggedIn); //Update ObservableCollection<ReviewModel> in ViewModel-Property
     }
 
     public void AcceptReview(object? review)
@@ -397,7 +397,7 @@ namespace Reserve_iT.ViewModel
       MessageBox.Show("Auftrag erfolgreich gelöscht.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
       adminModel = null;
       IsBookingFound = false;
-      OrderID = 0; //Suchfeld wird geleert
+      OrderID = 0; //Searchbox will be emptied
     }
 
     #endregion Admin
