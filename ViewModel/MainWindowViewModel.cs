@@ -34,7 +34,13 @@ namespace Reserve_iT.ViewModel
       set => Set(value);
     }
 
-    //Administration
+    public bool isAdminLoggedIn
+    {
+      get => Get<bool>();
+      set => Set(value);
+    }
+
+    //Admin
     public int OrderID
     {
       get => Get<int>();
@@ -53,7 +59,7 @@ namespace Reserve_iT.ViewModel
       set => Set(value);
     }
 
-    //Für Booking Service
+    //Booking
     public DateTime StartDate
     {
       get => Get<DateTime>();
@@ -126,20 +132,15 @@ namespace Reserve_iT.ViewModel
       set => Set(value);
     }
 
-    //AdminLogin
-    public bool isAdminLoggedIn
-    {
-      get => Get<bool>();
-      set => Set(value);
-    }
     public string AdminPassword
     {
       get => Get<string>();
       set => Set(value);
     }
-    //Alles für Payment
+    //Payment
     public PaymentModel Payment { get; set; } = new PaymentModel();
-    //Alles für Review
+    
+    //Review
     public ObservableCollection<ReviewModel> Reviews
     {
       get => Get<ObservableCollection<ReviewModel>>();
@@ -172,19 +173,14 @@ namespace Reserve_iT.ViewModel
     #region Commands
     private void CreateCommands()
     {
-      //Login
       LoginCommand = new RelayCommand(Login);
       //Navigation
-      //Navigation zur Buchung
       NavigateToDashboardViewCommand = new RelayCommand(NavigateToDashboardView);
       NavigateToBookingSearchViewCommand = new RelayCommand(NavigateToBookingSearchView);
       NavigateToBookingConfirmationViewCommand = new RelayCommand(NavigateToBookingConfirmationView);
       NavigateToBookingPaymentViewCommand = new RelayCommand(NavigateToBookingPaymentView);
-      //Navigation zu Bewertung
       NavigateToReviewViewCommand = new RelayCommand(NavigateToReviewView);
-      //Navigation zur Administation
       NavigateToAdminViewCommand = new RelayCommand(NavigateToAdminView);
-      //Navigation zurück
       NavigateBackCommand = new RelayCommand(NavigateBack);
       //Booking
       CheckAvailabilityCommand = new RelayCommand(CheckAvailability);
@@ -200,19 +196,14 @@ namespace Reserve_iT.ViewModel
       DeleteBookingCommand = new RelayCommand(DeleteBooking);
     }
 
-    //Login
     public ICommand LoginCommand { get; private set; }
     //Navigation
-    //Navigation zur Buchung
     public ICommand NavigateToDashboardViewCommand { get; private set; }
     public ICommand NavigateToBookingSearchViewCommand { get; private set; }
     public ICommand NavigateToBookingConfirmationViewCommand { get; private set; }
     public ICommand NavigateToBookingPaymentViewCommand { get; private set; }
-    //Navigation zu Bewertung
     public ICommand NavigateToReviewViewCommand { get; private set; }
-    //Navigation zur Administation
     public ICommand NavigateToAdminViewCommand { get; private set; }
-    //Navigation zurück
     public ICommand NavigateBackCommand { get; private set; }
     //Booking
     public ICommand CheckAvailabilityCommand { get; private set; }
@@ -233,22 +224,17 @@ namespace Reserve_iT.ViewModel
     #region Methods
 
     #region Navigation
-    //Navigation zur Buchung
-    private void NavigateToDashboardView() => MainFrame?.Navigate(new DashboardView()); //Initiales Laden der Anwendung
-    private void NavigateToBookingSearchView() => MainFrame?.Navigate(new BookingSearchView() { DataContext = this }); //Naviagation nach Button Zimmer buchen
-    private void NavigateToBookingConfirmationView() => MainFrame?.Navigate(new BookingConfirmationView() { DataContext = this }); //Navigation von BookingSearchView zu BookingConfirmationView
-    private void NavigateToBookingPaymentView() => MainFrame?.Navigate(new BookingPaymentView() { DataContext = this }); //Navigation von BookingConfirmationView zu BookingPaymentView
-    //Navigation zu Bewertung
+    private void NavigateToDashboardView() => MainFrame?.Navigate(new DashboardView()); //Initial loading
+    private void NavigateToBookingSearchView() => MainFrame?.Navigate(new BookingSearchView() { DataContext = this }); //Naviagation from DashboardView to BookingSearchView
+    private void NavigateToBookingConfirmationView() => MainFrame?.Navigate(new BookingConfirmationView() { DataContext = this }); //Navigation from BookingSearchView to BookingConfirmationView
+    private void NavigateToBookingPaymentView() => MainFrame?.Navigate(new BookingPaymentView() { DataContext = this }); //Navigation from BookingConfirmationView to BookingPaymentView
     private void NavigateToReviewView() //Navigation von DashboardView zu ReviewView
     {
       MainFrame?.Navigate(new ReviewView() { DataContext = this });
       LoadReviews();
     }
-
-    //Navigation zur Administation
-    private void NavigateToAdminView() => MainFrame?.Navigate(new AdminView() { DataContext = this});
-    //Navigation zurück
-    private void NavigateBack()
+    private void NavigateToAdminView() => MainFrame?.Navigate(new AdminView() { DataContext = this}); //Navigate from DashboardView to AdminView when Admin is logged in
+    private void NavigateBack() //Remember the current view and go back
     {
       if (MainFrame.NavigationService.CanGoBack)
         MainFrame.NavigationService.GoBack();
@@ -312,7 +298,6 @@ namespace Reserve_iT.ViewModel
         MessageBox.Show("Es ist kein Zimmer verfügbar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
       }
     }
-    //TODO: Berechnung ausreichend testen
     private decimal CalculateTotalCost(DateTime startDate, DateTime endDate, decimal costPerNight)
     {
       int numberOfDays = (endDate.Date - startDate.Date).Days;
@@ -340,7 +325,7 @@ namespace Reserve_iT.ViewModel
     }
     #endregion Payment
 
-    #region Reviews
+    #region Review
     public void LoadReviews()
     {
       var reviewService = new ReviewService();
