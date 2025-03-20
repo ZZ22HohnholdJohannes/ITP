@@ -50,6 +50,7 @@ namespace Reserve_iT.Services
         category_num = 3;
       }
 
+      // Determine type number based on the room type
       var type_num = 0;
       if (type == "Einzelzimmer")
       {
@@ -60,7 +61,6 @@ namespace Reserve_iT.Services
         type_num = 2;
       }
 
-      // Determine type number based on the room type
       var parameters = new Dictionary<string, object>
     {
       { "geschlecht_in", gender },
