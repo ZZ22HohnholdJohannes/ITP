@@ -7,6 +7,9 @@ using System.Windows;
 
 namespace Reserve_iT.Essentials
 {
+  /// <summary>
+  /// A proxy to enable binding to a value that is not a dependency property.
+  /// </summary>
   public class BindingProxy : Freezable
   {
     protected override Freezable CreateInstanceCore()
