@@ -11,6 +11,11 @@ namespace Reserve_iT.Services
 {
   public class AdminService
   {
+    /// <summary>
+    /// Retrieves booking information based on the provided order ID.
+    /// </summary>
+    /// <param name="orderID">The ID of the order to retrieve.</param>
+    /// <returns>An AdminModel object containing the booking information, or null if no booking is found.</returns>
     public AdminModel ShowBooking(int orderID)
     {
       var parameters = new Dictionary<string, object>
@@ -38,7 +43,10 @@ namespace Reserve_iT.Services
         return null;
       }
     }
-
+    /// <summary>
+    /// Deletes a booking based on the provided order ID.
+    /// </summary>
+    /// <param name="orderID">The ID of the order to delete.</param>
     public void DeleteBooking(int orderID)
     {
       var parameters = new Dictionary<string, object>

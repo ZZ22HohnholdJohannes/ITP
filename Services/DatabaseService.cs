@@ -13,6 +13,7 @@ namespace Reserve_iT.Services
 
     static DatabaseService()
     {
+      // Initialize the connection string for the MySQL database
       ConnectionString = new MySqlConnectionStringBuilder()
       {
         Server = "127.0.0.1",
@@ -23,6 +24,11 @@ namespace Reserve_iT.Services
       }.ConnectionString;
     }
 
+    /// <summary>
+    /// Executes a stored procedure without parameters and returns the result as a DataTable.
+    /// </summary>
+    /// <param name="sp">The name of the stored procedure to execute.</param>
+    /// <returns>A DataTable containing the result of the stored procedure.</returns>
     public static DataTable ExecuteSP(string sp)
     {
       DataTable tbl = new DataTable();
@@ -48,6 +54,12 @@ namespace Reserve_iT.Services
       return tbl;
     }
 
+    /// <summary>
+    /// Executes a stored procedure with parameters and returns the result as a DataTable.
+    /// </summary>
+    /// <param name="sp">The name of the stored procedure to execute.</param>
+    /// <param name="parameters">A dictionary of parameters to pass to the stored procedure.</param>
+    /// <returns>A DataTable containing the result of the stored procedure.</returns>
     public static DataTable ExecuteSP(string sp, Dictionary<string, object> parameters)
     {
       DataTable tbl = new DataTable();
@@ -67,7 +79,7 @@ namespace Reserve_iT.Services
           {
             adapter.Fill(tbl);
 
-            // Fehlermeldungen abfangen
+            // Catch error messages
             if (tbl is not null && tbl.Rows.Count == 1)
               if (tbl.Columns.Contains("Nachricht") && tbl.Rows[0]["Nachricht"] != DBNull.Value)
                 MessageBoxService.DisplayMessage(tbl.Rows[0]["Nachricht"].ToString() ?? "DB-Fehler", MessageBoxImage.Warning);
@@ -81,6 +93,12 @@ namespace Reserve_iT.Services
       return tbl;
     }
 
+    /// <summary>
+    /// Executes a stored procedure with parameters and returns the result as a DataSet.
+    /// </summary>
+    /// <param name="sp">The name of the stored procedure to execute.</param>
+    /// <param name="parameters">A dictionary of parameters to pass to the stored procedure.</param>
+    /// <returns>A DataSet containing the result of the stored procedure.</returns>
     public static DataSet ExecuteSPDataSet(string sp, Dictionary<string, object> parameters)
     {
       DataSet dataSet = new DataSet();
@@ -111,6 +129,11 @@ namespace Reserve_iT.Services
       return dataSet;
     }
 
+    /// <summary>
+    /// Executes a stored procedure without parameters and returns the result as a DataSet.
+    /// </summary>
+    /// <param name="sp">The name of the stored procedure to execute.</param>
+    /// <returns>A DataSet containing the result of the stored procedure.</returns>
     public static DataSet ExecuteSPDataSet(string sp)
     {
       DataSet dataSet = new DataSet();
