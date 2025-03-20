@@ -9,9 +9,21 @@ namespace Reserve_iT.Services
 {
   public class BookingService
   {
+    /// <summary>
+    /// Checks the availability of rooms based on the provided criteria.
+    /// </summary>
+    /// <param name="startDate">The start date of the booking.</param>
+    /// <param name="endDate">The end date of the booking.</param>
+    /// <param name="standard">Indicates if a standard room is requested.</param>
+    /// <param name="premium">Indicates if a premium room is requested.</param>
+    /// <param name="luxury">Indicates if a luxury room is requested.</param>
+    /// <param name="singleRoom">Indicates if a single room is requested.</param>
+    /// <param name="doubleRoom">Indicates if a double room is requested.</param>
+    /// <returns>A DataTable containing the available rooms that match the criteria.</returns>
     public DataTable CheckAvailability(DateTime startDate, DateTime endDate, bool standard, bool premium, bool luxury, bool singleRoom, bool doubleRoom)
     {
-      int category = -1;
+      // Determine the room category based on the provided criteria
+      var category = -1;
       if (standard)
         category = 1;
       else if (premium)
@@ -19,7 +31,8 @@ namespace Reserve_iT.Services
       else if (luxury)
         category = 3;
 
-      int type = -1;
+      // Determine the room type based on the provided criteria
+      var type = -1;
       if (singleRoom)
         type = 1;
       else if (doubleRoom)
