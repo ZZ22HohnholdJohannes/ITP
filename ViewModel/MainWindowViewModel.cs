@@ -22,6 +22,7 @@ using CommunityToolkit.Mvvm.Input;
 using Org.BouncyCastle.Security;
 using Mysqlx.Crud;
 using System.Dynamic;
+using System.Windows.Media.Animation;
 
 namespace Reserve_iT.ViewModel
 {
@@ -259,28 +260,28 @@ namespace Reserve_iT.ViewModel
     #region Booking
     public void CheckAvailability()
     {
-      if (StartDate >= EndDate)
+      //Check that the StartDate is before the Enddate and not the same
+      if (StartDate > EndDate)
       {
         MessageBox.Show("Das Anreisedatum muss vor dem Abreisedatum liegen", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         return;
       }
-
+      //Check if a room category is selected
       if (!(Standard || Premium || Luxury))
       {
         MessageBox.Show("Bitte wählen Sie eine Zimmerkategorie", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 
         return;
       }
-
+      //Check if a room type is selected
       if (!(SingleRoom || DoubleRoom))
       {
         MessageBox.Show("Bitte wählen Sie eine Zimmerart", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
         return;
       }
-
       var bookingService = new BookingService();
       DataTable dt = bookingService.CheckAvailability(StartDate, EndDate, Standard, Premium, Luxury, SingleRoom, DoubleRoom);
-
+      //Check if a room is available
       if (dt.Rows.Count > 0)
       {
         var row = dt.Rows[0];
@@ -298,6 +299,7 @@ namespace Reserve_iT.ViewModel
         MessageBox.Show("Es ist kein Zimmer verfügbar", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
       }
     }
+    //Calculate the total cost of the booking
     private decimal CalculateTotalCost(DateTime startDate, DateTime endDate, decimal costPerNight)
     {
       int numberOfDays = (endDate.Date - startDate.Date).Days;
@@ -310,7 +312,7 @@ namespace Reserve_iT.ViewModel
     {
       return true;
     }
-
+    //Create a booking with the BookingProperties and the PaymentProperties
     public void CreateBooking()
     {
       var paymentService = new PaymentService();
@@ -326,12 +328,13 @@ namespace Reserve_iT.ViewModel
     #endregion Payment
 
     #region Review
+    //Initial loading of the Reviews from database or after a review was accepted or denied
     public void LoadReviews()
     {
       var reviewService = new ReviewService();
       Reviews = reviewService.LoadReviews(isAdminLoggedIn); //Update ObservableCollection<ReviewModel> in ViewModel-Property
     }
-
+    //Set the "istFreigegeben" Parameter in the database to true and reload the reviews
     public void AcceptReview(object? review)
     {
       if (review is not null && review is ReviewModel reviewModel)
@@ -343,7 +346,7 @@ namespace Reserve_iT.ViewModel
 
       }
     }
-
+    //Delete the review from the database and reload the reviews
     public void DenyReview(object? review)
     {
       if (review is not null && review is ReviewModel reviewModel)
@@ -354,7 +357,7 @@ namespace Reserve_iT.ViewModel
         MessageBox.Show("Bewertung erfolgreich gelöscht", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
       }
     }
-
+    //Add a review with "istFreigegeben" Parameteter to false that can only be seen by the admin
     public void AddReview()
     {
       var reviewService = new ReviewService();
@@ -363,11 +366,12 @@ namespace Reserve_iT.ViewModel
     #endregion Review
 
     #region Admin
+    //Show the booking by searching with the OrderID
     public void ShowBooking()
     {
       var adminService = new AdminService();
       var result = adminService.ShowBooking(OrderID);
-
+      //Check if a booking was found
       if (result != null)
       {
         adminModel = result;
@@ -381,7 +385,7 @@ namespace Reserve_iT.ViewModel
         IsBookingFound = false;
       }
     }
-
+    //When a booking is found, delete the booking from the database
     public void DeleteBooking()
     {
       if (adminModel == null)
