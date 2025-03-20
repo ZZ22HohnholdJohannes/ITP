@@ -13,6 +13,7 @@
 
   <Grid>
     <Grid>
+      <!-- Background image with blur effect -->
       <Grid.Background>
         <ImageBrush ImageSource="pack://application:,,,/Images/hotel_bar.jpg" Stretch="UniformToFill"/>
       </Grid.Background>
@@ -21,6 +22,7 @@
       </Grid.Effect>
     </Grid>
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+      <!-- Main content border with shadow effect -->
       <Border Background="White" HorizontalAlignment="Center" VerticalAlignment="Center" Width="700" Height="300" CornerRadius="20">
         <Border.Effect>
           <DropShadowEffect Color="Black" BlurRadius="20" ShadowDepth="0" Opacity="0.5"/>
