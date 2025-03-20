@@ -320,9 +320,35 @@ namespace Reserve_iT.ViewModel
       DateTime endDate = EndDate;
       string category = RoomCategory;
       string type = RoomType;
+      string standardDate = "0001-01-01";
+
+      if (Payment.Male == false && Payment.Female == false && Payment.Diverse == false)
+      {
+        MessageBox.Show("Bite geben Sie ein Geschlecht an!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        return;
+      }
+
+      if ((String.Compare(Payment.BirthDate.ToString("yyyy-MM-dd"), standardDate)) == 0)
+      {
+        MessageBox.Show("Bitte geben Sie einen Geburtstag an!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        return;
+      }
+
+      if (string.IsNullOrEmpty(Payment.FirstName) || string.IsNullOrEmpty(Payment.Surname))
+      {
+        MessageBox.Show("Bitte geben Sie Ihren vollen Namen an!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        return;
+      }
+
+      if (string.IsNullOrEmpty(Payment.Street) || string.IsNullOrEmpty(Payment.HouseNumber) || string.IsNullOrEmpty(Payment.ZipCode) || string.IsNullOrEmpty(Payment.City) || string.IsNullOrEmpty(Payment.Country))
+      {
+        MessageBox.Show("Bitte geben Sie Ihre volle Adresse an!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        return;
+      }
 
       paymentService.CreateBooking(Payment, startDate, endDate, category, type);
       MessageBox.Show("Vielen Dank für Ihre Bestellung", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+      NavigateBack();
       NavigateBack();
       NavigateBack();
     }
