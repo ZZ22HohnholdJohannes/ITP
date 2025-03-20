@@ -67,7 +67,7 @@
               <TextBlock Text="Geburtsdatum:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Margin="5"
                          Style="{StaticResource RoundedTextBlockStyle}"/>
               <DatePicker Grid.Row="1" Grid.Column="1" Margin="5" Width="200"
-                          Text="{Binding Payment.BirthDate, UpdateSourceTrigger=PropertyChanged}"
+                          SelectedDate="{Binding Payment.BirthDate, UpdateSourceTrigger=PropertyChanged}"
                           Style="{StaticResource DatePickerStyle}"/>
 
               <TextBlock Text="Hausnummer:" Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" Margin="5"
