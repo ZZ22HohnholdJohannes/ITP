@@ -33,7 +33,7 @@
             <RowDefinition Height="*"/>
           </Grid.RowDefinitions>
 
-          <!-- Suchfeld -->
+          <!-- Searchbox -->
           <TextBox Grid.Row="0" Height="30" Margin="10" HorizontalAlignment="Left" Width="600"
                    Text="{Binding OrderID, UpdateSourceTrigger=PropertyChanged}"
                    Style="{StaticResource RoundedTextBoxStyle}"
@@ -59,7 +59,7 @@
               <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <!-- Labels und Eingabefelder -->
+            <!-- Labels and Inputs -->
             <TextBlock Text="Vorname" Grid.Row="0" Grid.Column="0" Margin="5"
                        Style="{StaticResource RoundedTextBlockStyle}"/>
             <TextBox Text="{Binding adminModel.FirstName}" Grid.Row="0" Grid.Column="1" Width="150"
@@ -96,7 +96,7 @@
                      Style="{StaticResource RoundedTextBoxStyle}"
                      IsReadOnly="True" IsHitTestVisible="False" Background="#dbd9d9"/>
 
-            <!-- Auftrag löschen Button -->
+            <!-- DeleteBooking Button -->
             <Button Grid.Row="4" Grid.ColumnSpan="4" Content="Auftrag löschen" Margin="10,60,10,10" HorizontalAlignment="Center" Padding="5,2"
                     Height="30" Width="150" Command="{Binding DeleteBookingCommand}"  Style="{StaticResource RoundedButtonStyle}" IsEnabled="{Binding IsBookingFound}"/>
           </Grid>

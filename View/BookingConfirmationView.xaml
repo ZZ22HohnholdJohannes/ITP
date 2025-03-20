@@ -52,6 +52,7 @@
                 <ColumnDefinition Width="3*"/>
               </Grid.ColumnDefinitions>
 
+              <!-- Booking details -->
               <TextBlock Text="Anreise:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Height="20"
                          Style="{StaticResource RoundedTextBlockStyle}"/>
               <TextBox Text="{Binding StartDate, StringFormat={}{0:dd.MM.yyyy}}" Grid.Row="0" Grid.Column="1" Margin="5" Width="200" Height="20" Padding="1"
@@ -85,7 +86,7 @@
                        Style="{StaticResource RoundedTextBoxStyle}"
                        IsReadOnly="True" IsHitTestVisible="False" Background="#dbd9d9"/>
             </Grid>
-
+            <!-- Navigate to payment button -->
             <Button Content="Weiter zur Bestellung" Command="{Binding NavigateToBookingPaymentViewCommand}" 
                     HorizontalAlignment="Right" Width="220" Height="40" Margin="20,10,0,0"
                     Style="{StaticResource RoundedButtonStyle}"/>

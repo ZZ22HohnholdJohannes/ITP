@@ -28,35 +28,29 @@
           <DropShadowEffect Color="Black" BlurRadius="20" ShadowDepth="0" Opacity="0.5"/>
         </Border.Effect>
       </Border>
-      <!-- Übergeordneter Grid: Zwei Zeilen -->
       <Border Background="White" Width="700" Height="300" CornerRadius="20">
         <Grid>
           <Grid.RowDefinitions>
-            <!-- Hauptinhalt (Zeile 0) -->
             <RowDefinition Height="*" />
-            <!-- Unterer Bereich (Zeile 1) -->
             <RowDefinition Height="Auto" />
           </Grid.RowDefinitions>
 
           <Grid.ColumnDefinitions>
-            <!-- Linke Spalte: Hauptinhalt -->
             <ColumnDefinition Width="*" />
-            <!-- Rechte Spalte: Logo und Zurück-Button -->
             <ColumnDefinition Width="*" />
           </Grid.ColumnDefinitions>
 
-          <!-- Hauptinhalt (Row 0, Column 0): Optionen -->
           <StackPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10">
-            <!-- Zeitraum-Abschnitt -->
+            <!-- StartDate and EndDate Seletion -->
             <StackPanel Orientation="Vertical" Margin="10,10,0,20">
               <TextBlock Text="Zeitraum:" FontWeight="Bold" FontSize="16" Margin="0,0,0,5" Style="{StaticResource RoundedTextBlockStyle}"/>
               <StackPanel Orientation="Horizontal">
-                <!-- Anreise -->
+
                 <StackPanel Orientation="Vertical" Margin="0,0,10,0">
                   <TextBlock Text="Anreise:" Style="{StaticResource RoundedTextBlockStyle}"/>
                   <DatePicker Width="120" SelectedDate="{Binding StartDate}" Style="{StaticResource DatePickerStyle}"/>
                 </StackPanel>
-                <!-- Abreise -->
+
                 <StackPanel Orientation="Vertical" Margin="40,0,0,0">
                   <TextBlock Text="Abreise:" Style="{StaticResource RoundedTextBlockStyle}"/>
                   <DatePicker Width="120" SelectedDate="{Binding EndDate}" Style="{StaticResource DatePickerStyle}"/>
@@ -64,7 +58,7 @@
               </StackPanel>
             </StackPanel>
 
-            <!-- Kategorie-Abschnitt -->
+            <!-- Category -->
             <StackPanel Orientation="Vertical" Margin="10,0,0,20">
               <TextBlock Text="Kategorie:" FontWeight="Bold" FontSize="16" Margin="0,0,0,5" Style="{StaticResource RoundedTextBlockStyle}"/>
               <StackPanel Orientation="Horizontal">
@@ -77,7 +71,7 @@
               </StackPanel>
             </StackPanel>
 
-            <!-- Zimmerart-Abschnitt -->
+            <!-- Type -->
             <StackPanel Orientation="Vertical" Margin="10,20,0,0">
               <TextBlock Text="Zimmerart:" FontWeight="Bold" FontSize="16" Margin="0,0,0,5" Style="{StaticResource RoundedTextBlockStyle}"/>
               <StackPanel Orientation="Horizontal">
@@ -89,7 +83,7 @@
             </StackPanel>
           </StackPanel>
 
-          <!-- Unterer Bereich (Row 1): Button "Verfügbarkeit prüfen" rechts ausgerichtet -->
+          <!-- CheckAvailability Button -->
           <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
             <Button Content="Verfügbarkeit prüfen" 
               Command="{Binding CheckAvailabilityCommand}"
