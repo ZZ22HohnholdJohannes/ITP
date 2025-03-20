@@ -139,7 +139,7 @@ namespace Reserve_iT.ViewModel
     }
     //Payment
     public PaymentModel Payment { get; set; } = new PaymentModel();
-    
+
     //Review
     public ObservableCollection<ReviewModel> Reviews
     {
@@ -233,7 +233,7 @@ namespace Reserve_iT.ViewModel
       MainFrame?.Navigate(new ReviewView() { DataContext = this });
       LoadReviews();
     }
-    private void NavigateToAdminView() => MainFrame?.Navigate(new AdminView() { DataContext = this}); //Navigate from DashboardView to AdminView when Admin is logged in
+    private void NavigateToAdminView() => MainFrame?.Navigate(new AdminView() { DataContext = this }); //Navigate from DashboardView to AdminView when Admin is logged in
     private void NavigateBack() //Remember the current view and go back
     {
       if (MainFrame.NavigationService.CanGoBack)
@@ -321,7 +321,7 @@ namespace Reserve_iT.ViewModel
 
       paymentService.CreateBooking(Payment, startDate, endDate, category, type);
       MessageBox.Show("Vielen Dank für Ihre Bestellung", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-      
+
     }
     #endregion Payment
 
@@ -340,7 +340,7 @@ namespace Reserve_iT.ViewModel
         reviewService.AcceptReview(reviewModel.ReviewID);
         LoadReviews();
         MessageBox.Show("Bewertung erfolgreich freigegeben", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-        
+
       }
     }
 

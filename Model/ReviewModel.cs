@@ -15,7 +15,7 @@ namespace Reserve_iT.Model
       get => Get<int>();
       set => Set(value);
     }
-    
+
     public int OrderID
     {
       get => Get<int>();
