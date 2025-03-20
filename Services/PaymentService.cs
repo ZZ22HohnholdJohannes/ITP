@@ -26,6 +26,30 @@ namespace Reserve_iT.Services
         gender = "D";
       }
 
+      var category_num = 0;
+      if (category == "Standard")
+      {
+        category_num = 1;
+      }
+      else if (category == "Premium")
+      {
+        category_num = 2;
+      }
+      else if (category == "Luxus")
+      {
+        category_num = 3;
+      }
+
+      var type_num = 0;
+      if (type == "Einzelzimmer")
+      {
+        type_num = 1;
+      }
+      else if (type == "Doppelzimmer")
+      {
+        type_num = 2;
+      }
+
       var parameters = new Dictionary<string, object>
     {
       { "geschlecht_in", gender },
@@ -39,8 +63,8 @@ namespace Reserve_iT.Services
       { "land_in", payment.Country },
       { "startdatum_in", startDate },
       { "enddatum_in", endDate },
-      { "kategorie_in", category },
-      { "art_in", type },
+      { "kategorie_in", category_num },
+      { "art_in", type_num },
     };
       DataTable dt = DatabaseService.ExecuteSP("createBooking", parameters);
     }
