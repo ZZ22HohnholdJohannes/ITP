@@ -279,7 +279,7 @@ BEGIN
       SET anschrift_id = LAST_INSERT_ID();
    END IF;
    
-	IF gast_id IS NULL THEN´                                # If the variable with the guest is NULL then the new guest will be added to the table anschrift
+	IF gast_id IS NULL THEN                                 # If the variable with the guest is NULL then the new guest will be added to the table anschrift
     	INSERT INTO gast (vorname, nachname, geburtsdatum, geschlecht, istStammgast, anschrift_ID)
     	VALUES (vorname_in, nachname_in, geburtsdatum_in, geschlecht_in, 0, anschrift_id);
     	SET gast_id = LAST_INSERT_ID();
