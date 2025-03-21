@@ -13,7 +13,7 @@
   <Grid>
     <Grid>
       <Grid.Background>
-        <ImageBrush ImageSource="pack://application:,,,/Images/hotel_bar.jpg" Stretch="UniformToFill"/>
+        <ImageBrush ImageSource="pack://application:,,,/Images/hotel_hallway.jpg" Stretch="UniformToFill"/>
       </Grid.Background>
       <Grid.Effect>
         <BlurEffect Radius="10"/>
